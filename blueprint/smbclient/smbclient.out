@@ -1,0 +1,49 @@
+$ smbclient -U '' -L \\\\10.10.242.12
+Enter WORKGROUP\'s password: 
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        ADMIN$          Disk      Remote Admin
+        C$              Disk      Default share
+        IPC$            IPC       Remote IPC
+        Users           Disk      
+        Windows         Disk      
+SMB1 disabled -- no workgroup available
+
+$ smbclient -U '' \\\\10.10.242.12\\Users
+Enter WORKGROUP\'s password: 
+Try "help" to get a list of possible commands.
+smb: \> dir
+  .                                  DR        0  Fri Apr 12 00:36:40 2019
+  ..                                 DR        0  Fri Apr 12 00:36:40 2019
+  Default                           DHR        0  Tue Jul 14 09:17:20 2009
+  desktop.ini                       AHS      174  Tue Jul 14 06:41:57 2009
+  Public                             DR        0  Tue Jul 14 06:41:57 2009
+
+                7863807 blocks of size 4096. 4761744 blocks available
+mb: \> cd Default
+smb: \Default\> dir
+  .                                 DHR        0  Tue Jul 14 09:17:20 2009
+  ..                                DHR        0  Tue Jul 14 09:17:20 2009
+  AppData                           DHn        0  Tue Jul 14 04:37:05 2009
+  Desktop                            DR        0  Tue Jul 14 04:04:25 2009
+  Documents                          DR        0  Tue Jul 14 06:53:55 2009
+  Downloads                          DR        0  Tue Jul 14 04:04:25 2009
+  Favorites                          DR        0  Tue Jul 14 04:04:25 2009
+  Links                              DR        0  Tue Jul 14 04:04:25 2009
+  Music                              DR        0  Tue Jul 14 04:04:25 2009
+  NTUSER.DAT                       AHSn   262144  Sun Jan 15 23:39:21 2017
+  NTUSER.DAT.LOG                     AH     1024  Tue Apr 12 04:28:04 2011
+  NTUSER.DAT.LOG1                    AH   197632  Fri Apr 12 00:49:06 2019
+  NTUSER.DAT.LOG2                    AH        0  Tue Jul 14 04:03:40 2009
+  NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TM.blf    AHS    65536  Tue Jul 14 06:34:22 2009
+  NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TMContainer00000000000000000001.regtrans-ms    AHS   524288  Tue Jul 14 06:34:22 2009
+  NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TMContainer00000000000000000002.regtrans-ms    AHS   524288  Tue Jul 14 06:34:22 2009
+  Pictures                           DR        0  Tue Jul 14 04:04:25 2009
+  Saved Games                        Dn        0  Tue Jul 14 04:04:25 2009
+  Videos                             DR        0  Tue Jul 14 04:04:25 2009
+
+                7863807 blocks of size 4096. 4761744 blocks available
+smb: \Default\> 
+
+
