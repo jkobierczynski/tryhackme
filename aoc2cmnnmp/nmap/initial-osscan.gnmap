@@ -1,0 +1,4 @@
+# Nmap 7.91 scan initiated Sun Dec 13 19:41:16 2020 as: nmap -sV -sC -O -Pn --traceroute -oA nmap/initial-osscan 10.10.157.18
+Host: 10.10.157.18 ()	Status: Up
+Host: 10.10.157.18 ()	Ports: 80/open/tcp//http//Apache httpd 2.4.29 ((Ubuntu))/, 2222/open/tcp//ssh//OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)/, 3389/open/tcp//ms-wbt-server//xrdp/	Ignored State: closed (997)	Seq Index: 260	IP ID Seq: All zeros
+# Nmap done at Sun Dec 13 19:41:42 2020 -- 1 IP address (1 host up) scanned in 26.27 seconds
