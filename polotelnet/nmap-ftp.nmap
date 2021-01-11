@@ -1,0 +1,9 @@
+# Nmap 7.80 scan initiated Tue May 26 19:38:34 2020 as: nmap -v -oA nmap-ftp 10.10.145.21
+Nmap scan report for 10.10.145.21
+Host is up (0.044s latency).
+Not shown: 999 closed ports
+PORT   STATE SERVICE
+21/tcp open  ftp
+
+Read data files from: /usr/bin/../share/nmap
+# Nmap done at Tue May 26 19:38:37 2020 -- 1 IP address (1 host up) scanned in 2.24 seconds
