@@ -1,0 +1,25 @@
+# Nmap 7.80 scan initiated Sat May  9 16:17:36 2020 as: nmap -vv -sC -sV -Pn -oA nmap 10.10.89.26
+Nmap scan report for 10.10.89.26
+Host is up, received user-set (0.046s latency).
+Scanned at 2020-05-09 16:17:37 CEST for 38s
+Not shown: 997 filtered ports
+Reason: 997 no-responses
+PORT     STATE SERVICE            REASON  VERSION
+80/tcp   open  http               syn-ack Microsoft IIS httpd 7.5
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: Site doesn't have a title (text/html).
+3389/tcp open  ssl/ms-wbt-server? syn-ack
+8080/tcp open  http               syn-ack Jetty 9.4.z-SNAPSHOT
+|_http-favicon: Unknown favicon MD5: 23E8C7BD78E8CD826C5A6073B15068B1
+| http-robots.txt: 1 disallowed entry 
+|_/
+|_http-server-header: Jetty(9.4.z-SNAPSHOT)
+|_http-title: Site doesn't have a title (text/html;charset=utf-8).
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat May  9 16:18:15 2020 -- 1 IP address (1 host up) scanned in 38.97 seconds
