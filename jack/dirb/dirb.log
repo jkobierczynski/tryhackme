@@ -1,0 +1,30 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: dirb/dirb.log
+START_TIME: Tue Aug 11 00:16:50 2020
+URL_BASE: http://jack.thm/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://jack.thm/ ----
+==> DIRECTORY: http://jack.thm/0/
++ http://jack.thm/admin (CODE:302|SIZE:0)
++ http://jack.thm/dashboard (CODE:302|SIZE:0)
++ http://jack.thm/favicon.ico (CODE:200|SIZE:0)
++ http://jack.thm/index.php (CODE:301|SIZE:0)
+==> DIRECTORY: http://jack.thm/javascript/
++ http://jack.thm/login (CODE:302|SIZE:0)
+
+(!) FATAL: Too many errors connecting to host
+    (Possible cause: COULDNT CONNECT)
+
+-----------------
+END_TIME: Tue Aug 11 01:53:18 2020
+DOWNLOADED: 2567 - FOUND: 5
