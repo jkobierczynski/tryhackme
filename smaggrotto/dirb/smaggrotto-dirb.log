@@ -1,0 +1,21 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: dirb/smaggrotto-dirb.log
+START_TIME: Tue Aug 18 15:06:51 2020
+URL_BASE: http://10.10.110.193/mail/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.110.193/mail/ ----
++ http://10.10.110.193/mail/index.php (CODE:200|SIZE:2386)
+
+-----------------
+END_TIME: Tue Aug 18 15:10:28 2020
+DOWNLOADED: 4612 - FOUND: 1
