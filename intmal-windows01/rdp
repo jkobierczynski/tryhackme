@@ -1,0 +1,5 @@
+rdesktop -g 90% -u Analysis -p tryhackme -d ANALYSIS-PC 10.10.154.129
+
+xfreerdp /u:ANALYSIS-PC\\Analysis /p:tryhackme /v:10.10.154.129
+
+remmina
