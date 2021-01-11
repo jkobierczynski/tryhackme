@@ -1,0 +1,73 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: dirb/easyctf-dirb.log
+START_TIME: Tue Aug 18 13:32:44 2020
+URL_BASE: http://10.10.252.246/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.252.246/ ----
++ http://10.10.252.246/index.html (CODE:200|SIZE:11321)
++ http://10.10.252.246/robots.txt (CODE:200|SIZE:929)
++ http://10.10.252.246/server-status (CODE:403|SIZE:301)
+==> DIRECTORY: http://10.10.252.246/simple/
+
+---- Entering directory: http://10.10.252.246/simple/ ----
+==> DIRECTORY: http://10.10.252.246/simple/admin/
+==> DIRECTORY: http://10.10.252.246/simple/assets/
+==> DIRECTORY: http://10.10.252.246/simple/doc/
++ http://10.10.252.246/simple/index.php (CODE:200|SIZE:19993)
+==> DIRECTORY: http://10.10.252.246/simple/lib/
+==> DIRECTORY: http://10.10.252.246/simple/modules/
+==> DIRECTORY: http://10.10.252.246/simple/tmp/
+==> DIRECTORY: http://10.10.252.246/simple/uploads/
+
+---- Entering directory: http://10.10.252.246/simple/admin/ ----
++ http://10.10.252.246/simple/admin/index.php (CODE:302|SIZE:0)
+==> DIRECTORY: http://10.10.252.246/simple/admin/lang/
+==> DIRECTORY: http://10.10.252.246/simple/admin/plugins/
+==> DIRECTORY: http://10.10.252.246/simple/admin/templates/
+==> DIRECTORY: http://10.10.252.246/simple/admin/themes/
+
+---- Entering directory: http://10.10.252.246/simple/assets/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.
+    (Use mode '-w' if you want to scan it anyway)
+
+---- Entering directory: http://10.10.252.246/simple/doc/ ----
++ http://10.10.252.246/simple/doc/index.html (CODE:200|SIZE:24)
++ http://10.10.252.246/simple/doc/robots.txt (CODE:200|SIZE:121)
+
+---- Entering directory: http://10.10.252.246/simple/lib/ ----
+==> DIRECTORY: http://10.10.252.246/simple/lib/assets/
+==> DIRECTORY: http://10.10.252.246/simple/lib/classes/
++ http://10.10.252.246/simple/lib/index.html (CODE:200|SIZE:24)
+==> DIRECTORY: http://10.10.252.246/simple/lib/jquery/
+==> DIRECTORY: http://10.10.252.246/simple/lib/lang/
+==> DIRECTORY: http://10.10.252.246/simple/lib/phpmailer/
+==> DIRECTORY: http://10.10.252.246/simple/lib/plugins/
+==> DIRECTORY: http://10.10.252.246/simple/lib/smarty/
+==> DIRECTORY: http://10.10.252.246/simple/lib/tasks/
+
+---- Entering directory: http://10.10.252.246/simple/modules/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.
+    (Use mode '-w' if you want to scan it anyway)
+
+---- Entering directory: http://10.10.252.246/simple/tmp/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.
+    (Use mode '-w' if you want to scan it anyway)
+
+---- Entering directory: http://10.10.252.246/simple/uploads/ ----
+==> DIRECTORY: http://10.10.252.246/simple/uploads/images/
++ http://10.10.252.246/simple/uploads/index.html (CODE:200|SIZE:0)
+
+---- Entering directory: http://10.10.252.246/simple/admin/lang/ ----
++ http://10.10.252.246/simple/admin/lang/index.html (CODE:200|SIZE:24)
+
+---- Entering directory: http://10.10.252.246/simple/admin/plugins/ ----
