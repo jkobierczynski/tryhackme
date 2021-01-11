@@ -1,0 +1,28 @@
+# Nmap 7.80 scan initiated Sun Aug 30 01:06:09 2020 as: nmap -sS -sV -oN nmap/plethora-initial 10.10.135.23
+Nmap scan report for 10.10.135.23
+Host is up (0.040s latency).
+Not shown: 981 closed ports
+PORT      STATE SERVICE     VERSION
+21/tcp    open  ftp         ProFTPD 1.3.5
+22/tcp    open  ssh         OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13 (Ubuntu Linux; protocol 2.0)
+23/tcp    open  telnet      Linux telnetd
+25/tcp    open  smtp        Postfix smtpd
+53/tcp    open  domain      ISC BIND 9.9.5-3ubuntu0.19 (Ubuntu Linux)
+80/tcp    open  http        Apache httpd 2.4.7 ((Ubuntu))
+110/tcp   open  pop3        Dovecot pop3d
+111/tcp   open  rpcbind     2-4 (RPC #100000)
+139/tcp   open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+143/tcp   open  imap        Dovecot imapd (Ubuntu)
+445/tcp   open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+993/tcp   open  ssl/imaps?
+995/tcp   open  ssl/pop3s?
+2049/tcp  open  nfs_acl     2-3 (RPC #100227)
+3306/tcp  open  mysql       MySQL 5.5.62-0ubuntu0.14.04.1
+8080/tcp  open  http        Apache Tomcat/Coyote JSP engine 1.1
+8090/tcp  open  http        Apache httpd 2.4.25 ((Debian))
+8093/tcp  open  http        Apache httpd 2.4.7 ((Ubuntu))
+10000/tcp open  http        MiniServ 1.920 (Webmin httpd)
+Service Info: Hosts:  plethora, PLETHORA; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Aug 30 01:06:55 2020 -- 1 IP address (1 host up) scanned in 46.13 seconds
