@@ -1,0 +1,4 @@
+# Nmap 7.80 scan initiated Sat May  9 15:31:21 2020 as: nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount -oA nfs 10.10.176.254
+Host: 10.10.176.254 ()	Status: Up
+Host: 10.10.176.254 ()	Ports: 111/open/tcp//rpcbind///
+# Nmap done at Sat May  9 15:31:21 2020 -- 1 IP address (1 host up) scanned in 0.77 seconds
