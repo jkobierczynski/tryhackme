@@ -1,0 +1,17 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: dirb/tartarus-dirb.log
+START_TIME: Tue Aug 18 18:59:30 2020
+URL_BASE: http://10.10.244.232/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.244.232/ ----
++ http://10.10.244.232/index.html (CODE:200|SIZE:11321)
