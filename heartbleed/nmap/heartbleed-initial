@@ -1,0 +1,34 @@
+# Nmap 7.80 scan initiated Tue Aug 18 14:01:53 2020 as: nmap -sC -sV -oN nmap/heartbleed-initial 34.243.83.123
+Nmap scan report for ec2-34-243-83-123.eu-west-1.compute.amazonaws.com (34.243.83.123)
+Host is up (0.043s latency).
+Not shown: 996 closed ports
+PORT    STATE    SERVICE  VERSION
+22/tcp  open     ssh      OpenSSH 7.4 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 c1:71:eb:8b:ff:75:99:37:2c:f0:20:ed:96:76:a4:65 (RSA)
+|   256 66:81:cb:e3:8a:69:7e:19:7f:32:d3:7a:a8:13:5d:42 (ECDSA)
+|_  256 2a:db:e5:e4:4e:67:0d:13:1b:21:50:db:f9:d1:29:df (ED25519)
+25/tcp  filtered smtp
+111/tcp open     rpcbind  2-4 (RPC #100000)
+| rpcinfo: 
+|   program version    port/proto  service
+|   100000  2,3,4        111/tcp   rpcbind
+|   100000  2,3,4        111/udp   rpcbind
+|   100000  3,4          111/tcp6  rpcbind
+|   100000  3,4          111/udp6  rpcbind
+|   100024  1          34295/tcp   status
+|   100024  1          37213/tcp6  status
+|   100024  1          42331/udp   status
+|_  100024  1          58933/udp6  status
+443/tcp open     ssl/http nginx 1.15.7
+|_http-server-header: nginx/1.15.7
+|_http-title: What are you looking for?
+| ssl-cert: Subject: commonName=localhost/organizationName=TryHackMe/stateOrProvinceName=London/countryName=UK
+| Not valid before: 2019-02-16T10:41:14
+|_Not valid after:  2020-02-16T10:41:14
+|_ssl-date: TLS randomness does not represent time
+| tls-nextprotoneg: 
+|_  http/1.1
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue Aug 18 14:02:18 2020 -- 1 IP address (1 host up) scanned in 24.79 seconds
