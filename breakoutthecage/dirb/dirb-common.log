@@ -1,0 +1,42 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: dirb/dirb-common.log
+START_TIME: Wed Jul 22 15:27:58 2020
+URL_BASE: http://10.10.160.6/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.160.6/ ----
+==> DIRECTORY: http://10.10.160.6/contracts/
+==> DIRECTORY: http://10.10.160.6/html/
+==> DIRECTORY: http://10.10.160.6/images/
++ http://10.10.160.6/index.html (CODE:200|SIZE:2453)
+==> DIRECTORY: http://10.10.160.6/scripts/
++ http://10.10.160.6/server-status (CODE:403|SIZE:276)
+
+---- Entering directory: http://10.10.160.6/contracts/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.
+    (Use mode '-w' if you want to scan it anyway)
+
+---- Entering directory: http://10.10.160.6/html/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.
+    (Use mode '-w' if you want to scan it anyway)
+
+---- Entering directory: http://10.10.160.6/images/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.
+    (Use mode '-w' if you want to scan it anyway)
+
+---- Entering directory: http://10.10.160.6/scripts/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.
+    (Use mode '-w' if you want to scan it anyway)
+
+-----------------
+END_TIME: Wed Jul 22 15:31:06 2020
+DOWNLOADED: 4612 - FOUND: 2
