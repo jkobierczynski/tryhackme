@@ -1,0 +1,18 @@
+<manifest xmlns="http://schemas.microsoft.com/wlw/manifest/weblog">
+  <options>
+    <clientType>Metaweblog</clientType>
+    <supportsNewCategories>Yes</supportsNewCategories>
+    <supportsPostAsDraft>Yes</supportsPostAsDraft>
+    <supportsCustomDate>Yes</supportsCustomDate>
+    <supportsCategories>Yes</supportsCategories>
+    <supportsCategoriesInline>Yes</supportsCategoriesInline>
+    <supportsMultipleCategories>Yes</supportsMultipleCategories>
+    <supportsNewCategoriesInline>Yes</supportsNewCategoriesInline>
+    <supportsKeywords>Yes</supportsKeywords>
+    <supportsGetTags>Yes</supportsGetTags>
+    <supportsCommentPolicy>Yes</supportsCommentPolicy>
+    <supportsSlug>Yes</supportsSlug>
+    <supportsExcerpt>Yes</supportsExcerpt>
+    <requiresHtmlTitles>No</requiresHtmlTitles>
+  </options>
+</manifest>

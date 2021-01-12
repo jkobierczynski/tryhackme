@@ -1,0 +1,41 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: dirb.log
+START_TIME: Fri Jul 17 18:07:01 2020
+URL_BASE: http://10.10.217.246/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.217.246/ ----
++ http://10.10.217.246/archive (CODE:301|SIZE:118)
++ http://10.10.217.246/Archive (CODE:301|SIZE:118)
++ http://10.10.217.246/authors (CODE:200|SIZE:4075)
++ http://10.10.217.246/blog (CODE:200|SIZE:5399)
++ http://10.10.217.246/Blog (CODE:200|SIZE:5399)
++ http://10.10.217.246/categories (CODE:200|SIZE:3546)
++ http://10.10.217.246/install (CODE:302|SIZE:126)
++ http://10.10.217.246/newattachment (CODE:503|SIZE:326)
++ http://10.10.217.246/newposts (CODE:503|SIZE:326)
++ http://10.10.217.246/newreply (CODE:503|SIZE:326)
++ http://10.10.217.246/news (CODE:503|SIZE:326)
++ http://10.10.217.246/News (CODE:503|SIZE:326)
++ http://10.10.217.246/news_insert (CODE:503|SIZE:326)
++ http://10.10.217.246/newsadmin (CODE:503|SIZE:326)
++ http://10.10.217.246/newsite (CODE:503|SIZE:326)
++ http://10.10.217.246/newsletter (CODE:503|SIZE:326)
++ http://10.10.217.246/newsletters (CODE:503|SIZE:326)
++ http://10.10.217.246/newsline (CODE:503|SIZE:326)
+
+(!) FATAL: Too many errors connecting to host
+    (Possible cause: COULDNT CONNECT)
+
+-----------------
+END_TIME: Fri Jul 17 18:23:52 2020
+DOWNLOADED: 2673 - FOUND: 18

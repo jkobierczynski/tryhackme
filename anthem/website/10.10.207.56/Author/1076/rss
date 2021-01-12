@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="http://10.10.207.56/rss/xslt"?>
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Anthem.com</title>
+    <link>http://10.10.207.56/</link>
+    <description>Welcome to our blog</description>
+    <generator>Articulate, blogging built on Umbraco</generator>
+    <item>
+      <guid isPermaLink="false">1078</guid>
+      <link>http://10.10.207.56/archive/we-are-hiring/</link>
+      <title>We are hiring</title>
+      <description>&lt;p&gt;Hi fellow readers,&lt;/p&gt;
+&lt;p&gt;We are currently hiring. We are looking for young talented to join a good cause and keep this community alive!&lt;/p&gt;
+&lt;p&gt;If you have an interest in being a part of the movement send me your CV at JD@anthem.com&lt;/p&gt;</description>
+      <pubDate>Mon, 20 Jan 2020 20:07:16 Z</pubDate>
+      <a10:updated>2020-01-20T20:07:16Z</a10:updated>
+    </item>
+  </channel>
+</rss>
