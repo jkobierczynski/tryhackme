@@ -1,0 +1,14 @@
+POST /auth HTTP/1.1
+Host: 10.10.248.104
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://10.10.248.104/portal
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 27
+Connection: close
+Cookie: connect.sid=s%3AFf_Y8zLdJrbRX2erYva4NvKHbp45VlKJ.Ulus%2BkQkWXdCjAN6yPpaPP5YB0S%2FXbc7I8KK9tEr9X0; flag1=cookie_secrets
+Upgrade-Insecure-Requests: 1
+
+username=user&password=pass
