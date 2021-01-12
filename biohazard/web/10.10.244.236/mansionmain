@@ -1,0 +1,19 @@
+<!doctype html>
+        <head>
+                <title>Main hall</title>
+                <h1 align="center">Main hall</h1>
+        </head>
+
+        <body>
+        <img alt="mainhall" src="../images/Mainhall12.jpg" style="display: block;margin-left: auto;margin-right: auto; width: 50%;"/>
+
+        <p>The team reach the mansion safe and sound. However, it appear that Chris is missing</p>
+	<p>Jill try to open the door but stopped by Weasker</p>
+        <p>Suddenly, a gunshot can be heard in the nearby room. Weaker order Jill to make an investigate on the gunshot. Where is the room?</p>
+	<!-- It is in the /diningRoom/ -->
+        </body>
+
+</html>
+
+
+
