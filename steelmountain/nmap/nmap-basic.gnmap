@@ -1,0 +1,4 @@
+# Nmap 7.80 scan initiated Wed Jul  1 19:08:29 2020 as: nmap -sV -oA nmap-basic 10.10.211.71
+Host: 10.10.211.71 ()	Status: Up
+Host: 10.10.211.71 ()	Ports: 80/open/tcp//http//Microsoft IIS httpd 8.5/, 135/open/tcp//msrpc//Microsoft Windows RPC/, 139/open/tcp//netbios-ssn//Microsoft Windows netbios-ssn/, 445/open/tcp//microsoft-ds//Microsoft Windows Server 2008 R2 - 2012 microsoft-ds/, 3389/open/tcp//ssl|ms-wbt-server?///, 8080/open/tcp//http//HttpFileServer httpd 2.3/, 49152/open/tcp//msrpc//Microsoft Windows RPC/, 49153/open/tcp//msrpc//Microsoft Windows RPC/, 49154/open/tcp//msrpc//Microsoft Windows RPC/, 49155/open/tcp//msrpc//Microsoft Windows RPC/, 49161/open/tcp//msrpc//Microsoft Windows RPC/, 49163/open/tcp//msrpc//Microsoft Windows RPC/	Ignored State: closed (988)
+# Nmap done at Wed Jul  1 19:09:32 2020 -- 1 IP address (1 host up) scanned in 63.42 seconds
