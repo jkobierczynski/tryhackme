@@ -1,0 +1,4 @@
+# Nmap 7.80 scan initiated Mon Jul 13 17:15:44 2020 as: nmap -sC -sV -oA nmap/nmap-basic 10.10.123.94
+Host: 10.10.123.94 ()	Status: Up
+Host: 10.10.123.94 ()	Ports: 80/open/tcp//http//Apache httpd 2.4.18 ((Ubuntu))/	Ignored State: closed (999)
+# Nmap done at Mon Jul 13 17:15:56 2020 -- 1 IP address (1 host up) scanned in 11.78 seconds
