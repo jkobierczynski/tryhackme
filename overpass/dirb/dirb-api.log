@@ -1,0 +1,16 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: dirb/dirb-api.log
+START_TIME: Thu Aug 20 17:11:22 2020
+URL_BASE: http://10.10.199.38/api/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.199.38/api/ ----

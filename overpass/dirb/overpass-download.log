@@ -1,0 +1,21 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: dirb/overpass-download.log
+START_TIME: Wed Aug 19 07:43:08 2020
+URL_BASE: http://10.10.207.231/download/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.207.231/download/ ----
++ http://10.10.207.231/download/index.html (CODE:301|SIZE:0)
+
+-----------------
+END_TIME: Wed Aug 19 07:46:20 2020
+DOWNLOADED: 4612 - FOUND: 1
