@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width"><title>http://10.10.109.188/</title><link rel="stylesheet" type="text/css" href="resource://content-accessible/viewsource.css"></head><body id="viewsource" class="wrap highlight" style="-moz-tab-size: 4" contextmenu="actions"><pre id="line1"><span>
+<span id="line2"></span></span><span class="error doctype" title="Almost standards mode doctype. Expected “&lt;!DOCTYPE html&gt;”.">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span><span>
+<span id="line3"></span></span><span>&lt;<span class="start-tag">html</span> <span class="attribute-name">xmlns</span>="<a class="attribute-value">http://www.w3.org/1999/xhtml</a>"&gt;</span><span>
+<span id="line4"></span>  </span><span class="comment">&lt;!--
+<span id="line5"></span>    Modified from the Debian original for Ubuntu
+<span id="line6"></span>    Last updated: 2014-03-19
+<span id="line7"></span>    See: https://launchpad.net/bugs/1288690
+<span id="line8"></span>  --&gt;</span><span>
+<span id="line9"></span>  </span><span>&lt;<span class="start-tag">head</span>&gt;</span><span>
+<span id="line10"></span>    </span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">http-equiv</span>="<a class="attribute-value">Content-Type</a>" <span class="attribute-name">content</span>="<a class="attribute-value">text/html; charset=UTF-8</a>" <span>/</span>&gt;</span><span>
+<span id="line11"></span>    </span><span>&lt;<span class="start-tag">title</span>&gt;</span><span>Apache2 Ubuntu Default Page: It works</span><span>&lt;/<span class="end-tag">title</span>&gt;</span><span>
+<span id="line12"></span>    </span><span>&lt;<span class="start-tag">style</span> <span class="attribute-name">type</span>="<a class="attribute-value">text/css</a>" <span class="attribute-name">media</span>="<a class="attribute-value">screen</a>"&gt;</span><span>
+<span id="line13"></span>  * {
+<span id="line14"></span>    margin: 0px 0px 0px 0px;
+<span id="line15"></span>    padding: 0px 0px 0px 0px;
+<span id="line16"></span>  }
+<span id="line17"></span>
+<span id="line18"></span>  body, html {
+<span id="line19"></span>    padding: 3px 3px 3px 3px;
+<span id="line20"></span>
+<span id="line21"></span>    background-color: #D8DBE2;
+<span id="line22"></span>
+<span id="line23"></span>    font-family: Verdana, sans-serif;
+<span id="line24"></span>    font-size: 11pt;
+<span id="line25"></span>    text-align: center;
+<span id="line26"></span>  }
+<span id="line27"></span>
+<span id="line28"></span>  div.main_page {
+<span id="line29"></span>    position: relative;
+<span id="line30"></span>    display: table;
+<span id="line31"></span>
+<span id="line32"></span>    width: 800px;
+<span id="line33"></span>
+<span id="line34"></span>    margin-bottom: 3px;
+<span id="line35"></span>    margin-left: auto;
+<span id="line36"></span>    margin-right: auto;
+<span id="line37"></span>    padding: 0px 0px 0px 0px;
+<span id="line38"></span>
+<span id="line39"></span>    border-width: 2px;
+<span id="line40"></span>    border-color: #212738;
+<span id="line41"></span>    border-style: solid;
+<span id="line42"></span>
+<span id="line43"></span>    background-color: #FFFFFF;
+<span id="line44"></span>
+<span id="line45"></span>    text-align: center;
+<span id="line46"></span>  }
+<span id="line47"></span>
+<span id="line48"></span>  div.page_header {
+<span id="line49"></span>    height: 99px;
+<span id="line50"></span>    width: 100%;
+<span id="line51"></span>
+<span id="line52"></span>    background-color: #F5F6F7;
+<span id="line53"></span>  }
+<span id="line54"></span>
+<span id="line55"></span>  div.page_header span {
+<span id="line56"></span>    margin: 15px 0px 0px 50px;
+<span id="line57"></span>
+<span id="line58"></span>    font-size: 180%;
+<span id="line59"></span>    font-weight: bold;
+<span id="line60"></span>  }
+<span id="line61"></span>
+<span id="line62"></span>  div.page_header img {
+<span id="line63"></span>    margin: 3px 0px 0px 40px;
+<span id="line64"></span>
+<span id="line65"></span>    border: 0px 0px 0px;
+<span id="line66"></span>  }
+<span id="line67"></span>
+<span id="line68"></span>  div.table_of_contents {
+<span id="line69"></span>    clear: left;
+<span id="line70"></span>
+<span id="line71"></span>    min-width: 200px;
+<span id="line72"></span>
+<span id="line73"></span>    margin: 3px 3px 3px 3px;
+<span id="line74"></span>
+<span id="line75"></span>    background-color: #FFFFFF;
+<span id="line76"></span>
+<span id="line77"></span>    text-align: left;
+<span id="line78"></span>  }
+<span id="line79"></span>
+<span id="line80"></span>  div.table_of_contents_item {
+<span id="line81"></span>    clear: left;
+<span id="line82"></span>
+<span id="line83"></span>    width: 100%;
+<span id="line84"></span>
+<span id="line85"></span>    margin: 4px 0px 0px 0px;
+<span id="line86"></span>
+<span id="line87"></span>    background-color: #FFFFFF;
+<span id="line88"></span>
+<span id="line89"></span>    color: #000000;
+<span id="line90"></span>    text-align: left;
+<span id="line91"></span>  }
+<span id="line92"></span>
+<span id="line93"></span>  div.table_of_contents_item a {
+<span id="line94"></span>    margin: 6px 0px 0px 6px;
+<span id="line95"></span>  }
+<span id="line96"></span>
+<span id="line97"></span>  div.content_section {
+<span id="line98"></span>    margin: 3px 3px 3px 3px;
+<span id="line99"></span>
+<span id="line100"></span>    background-color: #FFFFFF;
+<span id="line101"></span>
+<span id="line102"></span>    text-align: left;
+<span id="line103"></span>  }
+<span id="line104"></span>
+<span id="line105"></span>  div.content_section_text {
+<span id="line106"></span>    padding: 4px 8px 4px 8px;
+<span id="line107"></span>
+<span id="line108"></span>    color: #000000;
+<span id="line109"></span>    font-size: 100%;
+<span id="line110"></span>  }
+<span id="line111"></span>
+<span id="line112"></span>  div.content_section_text pre {
+<span id="line113"></span>    margin: 8px 0px 8px 0px;
+<span id="line114"></span>    padding: 8px 8px 8px 8px;
+<span id="line115"></span>
+<span id="line116"></span>    border-width: 1px;
+<span id="line117"></span>    border-style: dotted;
+<span id="line118"></span>    border-color: #000000;
+<span id="line119"></span>
+<span id="line120"></span>    background-color: #F5F6F7;
+<span id="line121"></span>
+<span id="line122"></span>    font-style: italic;
+<span id="line123"></span>  }
+<span id="line124"></span>
+<span id="line125"></span>  div.content_section_text p {
+<span id="line126"></span>    margin-bottom: 6px;
+<span id="line127"></span>  }
+<span id="line128"></span>
+<span id="line129"></span>  div.content_section_text ul, div.content_section_text li {
+<span id="line130"></span>    padding: 4px 8px 4px 16px;
+<span id="line131"></span>  }
+<span id="line132"></span>
+<span id="line133"></span>  div.section_header {
+<span id="line134"></span>    padding: 3px 6px 3px 6px;
+<span id="line135"></span>
+<span id="line136"></span>    background-color: #8E9CB2;
+<span id="line137"></span>
+<span id="line138"></span>    color: #FFFFFF;
+<span id="line139"></span>    font-weight: bold;
+<span id="line140"></span>    font-size: 112%;
+<span id="line141"></span>    text-align: center;
+<span id="line142"></span>  }
+<span id="line143"></span>
+<span id="line144"></span>  div.section_header_red {
+<span id="line145"></span>    background-color: #CD214F;
+<span id="line146"></span>  }
+<span id="line147"></span>
+<span id="line148"></span>  div.section_header_grey {
+<span id="line149"></span>    background-color: #9F9386;
+<span id="line150"></span>  }
+<span id="line151"></span>
+<span id="line152"></span>  .floating_element {
+<span id="line153"></span>    position: relative;
+<span id="line154"></span>    float: left;
+<span id="line155"></span>  }
+<span id="line156"></span>
+<span id="line157"></span>  div.table_of_contents_item a,
+<span id="line158"></span>  div.content_section_text a {
+<span id="line159"></span>    text-decoration: none;
+<span id="line160"></span>    font-weight: bold;
+<span id="line161"></span>  }
+<span id="line162"></span>
+<span id="line163"></span>  div.table_of_contents_item a:link,
+<span id="line164"></span>  div.table_of_contents_item a:visited,
+<span id="line165"></span>  div.table_of_contents_item a:active {
+<span id="line166"></span>    color: #000000;
+<span id="line167"></span>  }
+<span id="line168"></span>
+<span id="line169"></span>  div.table_of_contents_item a:hover {
+<span id="line170"></span>    background-color: #000000;
+<span id="line171"></span>
+<span id="line172"></span>    color: #FFFFFF;
+<span id="line173"></span>  }
+<span id="line174"></span>
+<span id="line175"></span>  div.content_section_text a:link,
+<span id="line176"></span>  div.content_section_text a:visited,
+<span id="line177"></span>   div.content_section_text a:active {
+<span id="line178"></span>    background-color: #DCDFE6;
+<span id="line179"></span>
+<span id="line180"></span>    color: #000000;
+<span id="line181"></span>  }
+<span id="line182"></span>
+<span id="line183"></span>  div.content_section_text a:hover {
+<span id="line184"></span>    background-color: #000000;
+<span id="line185"></span>
+<span id="line186"></span>    color: #DCDFE6;
+<span id="line187"></span>  }
+<span id="line188"></span>
+<span id="line189"></span>  div.validator {
+<span id="line190"></span>  }
+<span id="line191"></span>    </span><span>&lt;/<span class="end-tag">style</span>&gt;</span><span>
+<span id="line192"></span>  </span><span>&lt;/<span class="end-tag">head</span>&gt;</span><span>
+<span id="line193"></span>  </span><span>&lt;<span class="start-tag">body</span>&gt;</span><span>
+<span id="line194"></span>    </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">main_page</a>"&gt;</span><span>
+<span id="line195"></span>      </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">page_header floating_element</a>"&gt;</span><span>
+<span id="line196"></span>        </span><span>&lt;<span class="start-tag">img</span> <span class="attribute-name">src</span>="<a class="attribute-value" href="view-source:http://10.10.109.188/thm.jpg">thm.jpg</a>" <span class="attribute-name">class</span>="<a class="attribute-value">floating_element</a>"<span>/</span>&gt;</span><span>
+<span id="line197"></span></span><span class="comment">&lt;!-- They will never find me--&gt;</span><span>
+<span id="line198"></span>        </span><span>&lt;<span class="start-tag">span</span> <span class="attribute-name">class</span>="<a class="attribute-value">floating_element</a>"&gt;</span><span>
+<span id="line199"></span>          Apache2 Ubuntu Default Page
+<span id="line200"></span>        </span><span>&lt;/<span class="end-tag">span</span>&gt;</span><span>
+<span id="line201"></span>      </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line202"></span></span><span class="comment">&lt;!--      &lt;div class="table_of_contents floating_element"&gt;
+<span id="line203"></span>        &lt;div class="section_header section_header_grey"&gt;
+<span id="line204"></span>          TABLE OF CONTENTS
+<span id="line205"></span>        &lt;/div&gt;
+<span id="line206"></span>        &lt;div class="table_of_contents_item floating_element"&gt;
+<span id="line207"></span>          &lt;a href="#about"&gt;About&lt;/a&gt;
+<span id="line208"></span>        &lt;/div&gt;
+<span id="line209"></span>        &lt;div class="table_of_contents_item floating_element"&gt;
+<span id="line210"></span>          &lt;a href="#changes"&gt;Changes&lt;/a&gt;
+<span id="line211"></span>        &lt;/div&gt;
+<span id="line212"></span>        &lt;div class="table_of_contents_item floating_element"&gt;
+<span id="line213"></span>          &lt;a href="#scope"&gt;Scope&lt;/a&gt;
+<span id="line214"></span>        &lt;/div&gt;
+<span id="line215"></span>        &lt;div class="table_of_contents_item floating_element"&gt;
+<span id="line216"></span>          &lt;a href="#files"&gt;Config files&lt;/a&gt;
+<span id="line217"></span>        &lt;/div&gt;
+<span id="line218"></span>      &lt;/div&gt;
+<span id="line219"></span>--&gt;</span><span>
+<span id="line220"></span>      </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">content_section floating_element</a>"&gt;</span><span>
+<span id="line221"></span>
+<span id="line222"></span>
+<span id="line223"></span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">section_header section_header_red</a>"&gt;</span><span>
+<span id="line224"></span>          </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">id</span>="<a class="attribute-value">about</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line225"></span>          It works!
+<span id="line226"></span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line227"></span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">content_section_text</a>"&gt;</span><span>
+<span id="line228"></span>          </span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>
+<span id="line229"></span>                This is the default welcome page used to test the correct 
+<span id="line230"></span>                operation of the Apache2 server after installation on Ubuntu systems.
+<span id="line231"></span>                It is based on the equivalent page on Debian, from which the Ubuntu Apache
+<span id="line232"></span>                packaging is derived.
+<span id="line233"></span>                If you can read this page, it means that the Apache HTTP server installed at
+<span id="line234"></span>                this site is working properly. You should </span><span>&lt;<span class="start-tag">b</span>&gt;</span><span>replace this file</span><span>&lt;/<span class="end-tag">b</span>&gt;</span><span> (located at
+<span id="line235"></span>                </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>/var/www/html/index.html</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span>) before continuing to operate your HTTP server.
+<span id="line236"></span>          </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+<span id="line237"></span>
+<span id="line238"></span>
+<span id="line239"></span>          </span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>
+<span id="line240"></span>                If you are a normal user of this web site and don't know what this page is
+<span id="line241"></span>                about, this probably means that the site is currently unavailable due to
+<span id="line242"></span>                maintenance.
+<span id="line243"></span>                If the problem persists, please contact the site's administrator.
+<span id="line244"></span>          </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+<span id="line245"></span>
+<span id="line246"></span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line247"></span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">section_header</a>"&gt;</span><span>
+<span id="line248"></span>          </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">id</span>="<a class="attribute-value">changes</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line249"></span>                Configuration Overview
+<span id="line250"></span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line251"></span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">content_section_text</a>"&gt;</span><span>
+<span id="line252"></span>          </span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>
+<span id="line253"></span>                Ubuntu's Apache2 default configuration is different from the
+<span id="line254"></span>                upstream default configuration, and split into several files optimized for
+<span id="line255"></span>                interaction with Ubuntu tools. The configuration system is
+<span id="line256"></span>                </span><span>&lt;<span class="start-tag">b</span>&gt;</span><span>fully documented in
+<span id="line257"></span>                /usr/share/doc/apache2/README.Debian.gz</span><span>&lt;/<span class="end-tag">b</span>&gt;</span><span>. Refer to this for the full
+<span id="line258"></span>                documentation. Documentation for the web server itself can be
+<span id="line259"></span>                found by accessing the </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://10.10.109.188/manual">/manual</a>"&gt;</span><span>manual</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span> if the </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>apache2-doc</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span>
+<span id="line260"></span>                package was installed on this server.
+<span id="line261"></span>
+<span id="line262"></span>          </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+<span id="line263"></span>          </span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>
+<span id="line264"></span>                The configuration layout for an Apache2 web server installation on Ubuntu systems is as follows:
+<span id="line265"></span>          </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+<span id="line266"></span>          </span><span>&lt;<span class="start-tag">pre</span>&gt;</span><span>
+<span id="line267"></span>/etc/apache2/
+<span id="line268"></span>|-- apache2.conf
+<span id="line269"></span>|       `--  ports.conf
+<span id="line270"></span>|-- mods-enabled
+<span id="line271"></span>|       |-- *.load
+<span id="line272"></span>|       `-- *.conf
+<span id="line273"></span>|-- conf-enabled
+<span id="line274"></span>|       `-- *.conf
+<span id="line275"></span>|-- sites-enabled
+<span id="line276"></span>|       `-- *.conf
+<span id="line277"></span>          </span><span>&lt;/<span class="end-tag">pre</span>&gt;</span><span>
+<span id="line278"></span>          </span><span>&lt;<span class="start-tag">ul</span>&gt;</span><span>
+<span id="line279"></span>                        </span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+<span id="line280"></span>                           </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>apache2.conf</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span> is the main configuration
+<span id="line281"></span>                           file. It puts the pieces together by including all remaining configuration
+<span id="line282"></span>                           files when starting up the web server.
+<span id="line283"></span>                        </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+<span id="line284"></span>
+<span id="line285"></span>                        </span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+<span id="line286"></span>                           </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>ports.conf</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span> is always included from the
+<span id="line287"></span>                           main configuration file. It is used to determine the listening ports for
+<span id="line288"></span>                           incoming connections, and this file can be customized anytime.
+<span id="line289"></span>                        </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+<span id="line290"></span>
+<span id="line291"></span>                        </span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+<span id="line292"></span>                           Configuration files in the </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>mods-enabled/</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span>,
+<span id="line293"></span>                           </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>conf-enabled/</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span> and </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>sites-enabled/</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span> directories contain
+<span id="line294"></span>                           particular configuration snippets which manage modules, global configuration
+<span id="line295"></span>                           fragments, or virtual host configurations, respectively.
+<span id="line296"></span>                        </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+<span id="line297"></span>
+<span id="line298"></span>                        </span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+<span id="line299"></span>                           They are activated by symlinking available
+<span id="line300"></span>                           configuration files from their respective
+<span id="line301"></span>                           *-available/ counterparts. These should be managed
+<span id="line302"></span>                           by using our helpers
+<span id="line303"></span>                           </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>
+<span id="line304"></span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://manpages.debian.org/cgi-bin/man.cgi?query=a2enmod">http://manpages.debian.org/cgi-bin/man.cgi?query=a2enmod</a>"&gt;</span><span>a2enmod</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>,
+<span id="line305"></span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://manpages.debian.org/cgi-bin/man.cgi?query=a2dismod">http://manpages.debian.org/cgi-bin/man.cgi?query=a2dismod</a>"&gt;</span><span>a2dismod</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>,
+<span id="line306"></span>                           </span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span>
+<span id="line307"></span>                           </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>
+<span id="line308"></span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://manpages.debian.org/cgi-bin/man.cgi?query=a2ensite">http://manpages.debian.org/cgi-bin/man.cgi?query=a2ensite</a>"&gt;</span><span>a2ensite</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>,
+<span id="line309"></span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://manpages.debian.org/cgi-bin/man.cgi?query=a2dissite">http://manpages.debian.org/cgi-bin/man.cgi?query=a2dissite</a>"&gt;</span><span>a2dissite</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>,
+<span id="line310"></span>                            </span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span>
+<span id="line311"></span>                                and
+<span id="line312"></span>                           </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>
+<span id="line313"></span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://manpages.debian.org/cgi-bin/man.cgi?query=a2enconf">http://manpages.debian.org/cgi-bin/man.cgi?query=a2enconf</a>"&gt;</span><span>a2enconf</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>,
+<span id="line314"></span>                                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://manpages.debian.org/cgi-bin/man.cgi?query=a2disconf">http://manpages.debian.org/cgi-bin/man.cgi?query=a2disconf</a>"&gt;</span><span>a2disconf</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+<span id="line315"></span>                           </span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span>. See their respective man pages for detailed information.
+<span id="line316"></span>                        </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+<span id="line317"></span>
+<span id="line318"></span>                        </span><span>&lt;<span class="start-tag">li</span>&gt;</span><span>
+<span id="line319"></span>                           The binary is called apache2. Due to the use of
+<span id="line320"></span>                           environment variables, in the default configuration, apache2 needs to be
+<span id="line321"></span>                           started/stopped with </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>/etc/init.d/apache2</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span> or </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>apache2ctl</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span>.
+<span id="line322"></span>                           </span><span>&lt;<span class="start-tag">b</span>&gt;</span><span>Calling </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>/usr/bin/apache2</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span> directly will not work</span><span>&lt;/<span class="end-tag">b</span>&gt;</span><span> with the
+<span id="line323"></span>                           default configuration.
+<span id="line324"></span>                        </span><span>&lt;/<span class="end-tag">li</span>&gt;</span><span>
+<span id="line325"></span>          </span><span>&lt;/<span class="end-tag">ul</span>&gt;</span><span>
+<span id="line326"></span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line327"></span>
+<span id="line328"></span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">section_header</a>"&gt;</span><span>
+<span id="line329"></span>            </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">id</span>="<a class="attribute-value">docroot</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line330"></span>                Document Roots
+<span id="line331"></span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line332"></span>
+<span id="line333"></span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">content_section_text</a>"&gt;</span><span>
+<span id="line334"></span>            </span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>
+<span id="line335"></span>                By default, Ubuntu does not allow access through the web browser to
+<span id="line336"></span>                </span><span>&lt;<span class="start-tag">em</span>&gt;</span><span>any</span><span>&lt;/<span class="end-tag">em</span>&gt;</span><span> file apart of those located in </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>/var/www</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span>,
+<span id="line337"></span>                </span><span>&lt;<span class="start-tag">a</span> <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://httpd.apache.org/docs/2.4/mod/mod_userdir.html">http://httpd.apache.org/docs/2.4/mod/mod_userdir.html</a>"&gt;</span><span>public_html</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span>
+<span id="line338"></span>                directories (when enabled) and </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>/usr/share</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span> (for web
+<span id="line339"></span>                applications). If your site is using a web document root
+<span id="line340"></span>                located elsewhere (such as in </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>/srv</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span>) you may need to whitelist your
+<span id="line341"></span>                document root directory in </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>/etc/apache2/apache2.conf</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span>.
+<span id="line342"></span>            </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+<span id="line343"></span>            </span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>
+<span id="line344"></span>                The default Ubuntu document root is </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>/var/www/html</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span>. You
+<span id="line345"></span>                can make your own virtual hosts under /var/www. This is different
+<span id="line346"></span>                to previous releases which provides better security out of the box.
+<span id="line347"></span>            </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+<span id="line348"></span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line349"></span>
+<span id="line350"></span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">section_header</a>"&gt;</span><span>
+<span id="line351"></span>          </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">id</span>="<a class="attribute-value">bugs</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line352"></span>                Reporting Problems
+<span id="line353"></span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line354"></span>        </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">content_section_text</a>"&gt;</span><span>
+<span id="line355"></span>          </span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>
+<span id="line356"></span>                Please use the </span><span>&lt;<span class="start-tag">tt</span>&gt;</span><span>ubuntu-bug</span><span>&lt;/<span class="end-tag">tt</span>&gt;</span><span> tool to report bugs in the
+<span id="line357"></span>                Apache2 package with Ubuntu. However, check </span><span>&lt;<span class="start-tag">a</span>
+<span id="line358"></span>                <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:https://bugs.launchpad.net/ubuntu/+source/apache2">https://bugs.launchpad.net/ubuntu/+source/apache2</a>"&gt;</span><span>existing
+<span id="line359"></span>                bug reports</span><span>&lt;/<span class="end-tag">a</span>&gt;</span><span> before reporting a new bug.
+<span id="line360"></span>          </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+<span id="line361"></span>          </span><span>&lt;<span class="start-tag">p</span>&gt;</span><span>
+<span id="line362"></span>                Please report bugs specific to modules (such as PHP and others)
+<span id="line363"></span>                to respective packages, not to the web server itself.
+<span id="line364"></span>          </span><span>&lt;/<span class="end-tag">p</span>&gt;</span><span>
+<span id="line365"></span>        </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line366"></span>
+<span id="line367"></span>
+<span id="line368"></span>
+<span id="line369"></span>
+<span id="line370"></span>      </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line371"></span>    </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line372"></span>    </span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">class</span>="<a class="attribute-value">validator</a>"&gt;</span><span>
+<span id="line373"></span>    </span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line374"></span>  </span><span>&lt;/<span class="end-tag">body</span>&gt;</span><span>
+<span id="line375"></span></span><span>&lt;/<span class="end-tag">html</span>&gt;</span><span>
+<span id="line376"></span>
+<span id="line377"></span></span></pre><menu type="context" id="actions"><menuitem id="goToLine" label="Go to Line…" accesskey="L"></menuitem><menuitem id="wrapLongLines" label="Wrap Long Lines" type="checkbox" checked="true"></menuitem><menuitem id="highlightSyntax" label="Syntax Highlighting" type="checkbox" checked="true"></menuitem></menu><menu type="context" id="actions"><menuitem id="goToLine" label="Go to Line…" accesskey="L"></menuitem><menuitem id="wrapLongLines" label="Wrap Long Lines" type="checkbox"></menuitem><menuitem id="highlightSyntax" label="Syntax Highlighting" type="checkbox"></menuitem></menu></body></html>

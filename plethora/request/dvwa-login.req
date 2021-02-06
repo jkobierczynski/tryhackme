@@ -1,0 +1,14 @@
+POST /login.php HTTP/1.1
+Host: 10.10.135.23:8090
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://10.10.135.23:8090/login.php
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 105
+Connection: close
+Cookie: PHPSESSID=oftviueemhe7r6s2vp4ofrli81; security=low
+Upgrade-Insecure-Requests: 1
+
+username=admin&password=password&Login=Login&user_token=8792f57562484d4a016ca115f1c8f984

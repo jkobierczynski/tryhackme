@@ -1,0 +1,39 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: dirb/dirb.log
+START_TIME: Wed Aug 12 11:25:13 2020
+URL_BASE: http://10.10.20.185/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.20.185/ ----
+==> DIRECTORY: http://10.10.20.185/aboutus/
++ http://10.10.20.185/admin (CODE:301|SIZE:42)
+==> DIRECTORY: http://10.10.20.185/css/
+==> DIRECTORY: http://10.10.20.185/downloads/
+==> DIRECTORY: http://10.10.20.185/img/
++ http://10.10.20.185/index.html (CODE:301|SIZE:0)
+
+---- Entering directory: http://10.10.20.185/aboutus/ ----
++ http://10.10.20.185/aboutus/index.html (CODE:301|SIZE:0)
+
+---- Entering directory: http://10.10.20.185/css/ ----
++ http://10.10.20.185/css/index.html (CODE:301|SIZE:0)
+
+---- Entering directory: http://10.10.20.185/downloads/ ----
++ http://10.10.20.185/downloads/index.html (CODE:301|SIZE:0)
++ http://10.10.20.185/downloads/src (CODE:301|SIZE:0)
+
+---- Entering directory: http://10.10.20.185/img/ ----
++ http://10.10.20.185/img/index.html (CODE:301|SIZE:0)
+
+-----------------
+END_TIME: Wed Aug 12 11:40:46 2020
+DOWNLOADED: 23060 - FOUND: 7

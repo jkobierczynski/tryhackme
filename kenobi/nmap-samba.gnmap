@@ -1,0 +1,4 @@
+# Nmap 7.80 scan initiated Sat May  9 15:24:41 2020 as: nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse -oA nmap-samba 10.10.176.254
+Host: 10.10.176.254 ()	Status: Up
+Host: 10.10.176.254 ()	Ports: 445/open/tcp//microsoft-ds///
+# Nmap done at Sat May  9 15:24:47 2020 -- 1 IP address (1 host up) scanned in 6.31 seconds

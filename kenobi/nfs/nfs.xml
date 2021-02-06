@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.80 scan initiated Sat May  9 15:31:21 2020 as: nmap -p 111 -&#45;script=nfs-ls,nfs-statfs,nfs-showmount -oA nfs 10.10.176.254 -->
+<nmaprun scanner="nmap" args="nmap -p 111 -&#45;script=nfs-ls,nfs-statfs,nfs-showmount -oA nfs 10.10.176.254" start="1589031081" startstr="Sat May  9 15:31:21 2020" version="7.80" xmloutputversion="1.04">
+<scaninfo type="connect" protocol="tcp" numservices="1" services="111"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1589031081" endtime="1589031081"><status state="up" reason="syn-ack" reason_ttl="0"/>
+<address addr="10.10.176.254" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="111"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="rpcbind" method="table" conf="3"/><script id="nfs-showmount" output="&#xa;  /var *&#xa;"/></port>
+</ports>
+<times srtt="42343" rttvar="34947" to="182131"/>
+</host>
+<runstats><finished time="1589031081" timestr="Sat May  9 15:31:21 2020" elapsed="0.77" summary="Nmap done at Sat May  9 15:31:21 2020; 1 IP address (1 host up) scanned in 0.77 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

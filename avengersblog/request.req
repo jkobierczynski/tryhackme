@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE items [
+<!ELEMENT items (item*)>
+<!ATTLIST items burpVersion CDATA "">
+<!ATTLIST items exportTime CDATA "">
+<!ELEMENT item (time, url, host, port, protocol, method, path, extension, request, status, responselength, mimetype, response, comment)>
+<!ELEMENT time (#PCDATA)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT host (#PCDATA)>
+<!ATTLIST host ip CDATA "">
+<!ELEMENT port (#PCDATA)>
+<!ELEMENT protocol (#PCDATA)>
+<!ELEMENT method (#PCDATA)>
+<!ELEMENT path (#PCDATA)>
+<!ELEMENT extension (#PCDATA)>
+<!ELEMENT request (#PCDATA)>
+<!ATTLIST request base64 (true|false) "false">
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT responselength (#PCDATA)>
+<!ELEMENT mimetype (#PCDATA)>
+<!ELEMENT response (#PCDATA)>
+<!ATTLIST response base64 (true|false) "false">
+<!ELEMENT comment (#PCDATA)>
+]>
+<items burpVersion="2020.6" exportTime="Mon Aug 03 18:44:25 CEST 2020">
+  <item>
+    <time>Mon Aug 03 18:43:52 CEST 2020</time>
+    <url><![CDATA[http://10.10.202.45/auth]]></url>
+    <host ip="10.10.202.45">10.10.202.45</host>
+    <port>80</port>
+    <protocol>http</protocol>
+    <method><![CDATA[POST]]></method>
+    <path><![CDATA[/auth]]></path>
+    <extension>null</extension>
+    <request base64="true"><![CDATA[UE9TVCAvYXV0aCBIVFRQLzEuMQ0KSG9zdDogMTAuMTAuMjAyLjQ1DQpVc2VyLUFnZW50OiBNb3ppbGxhLzUuMCAoWDExOyBMaW51eCB4ODZfNjQ7IHJ2OjY4LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvNjguMA0KQWNjZXB0OiB0ZXh0L2h0bWwsYXBwbGljYXRpb24veGh0bWwreG1sLGFwcGxpY2F0aW9uL3htbDtxPTAuOSwqLyo7cT0wLjgNCkFjY2VwdC1MYW5ndWFnZTogZW4tVVMsZW47cT0wLjUNCkFjY2VwdC1FbmNvZGluZzogZ3ppcCwgZGVmbGF0ZQ0KUmVmZXJlcjogaHR0cDovLzEwLjEwLjIwMi40NS9wb3J0YWwNCkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkDQpDb250ZW50LUxlbmd0aDogMzINCkNvbm5lY3Rpb246IGNsb3NlDQpDb29raWU6IGNvbm5lY3Quc2lkPXMlM0FJS0RBUm5rM1ZqMnhua0dPS2RCcXVzNGQ1UXowaWhJZC5obk12UjQ0MjhHZmNvcEx1Qms0WkVOdzBOSFQlMkYwVXJjZk92S3BYNTRkMHc7IGZsYWcxPWNvb2tpZV9zZWNyZXRzDQpVcGdyYWRlLUluc2VjdXJlLVJlcXVlc3RzOiAxDQoNCnVzZXJuYW1lPWFkbWluJnBhc3N3b3JkPXBhc3N3b3Jk]]></request>
+    <status>302</status>
+    <responselength>252</responselength>
+    <mimetype>HTML</mimetype>
+    <response base64="true"><![CDATA[SFRUUC8xLjEgMzAyIEZvdW5kDQpYLVBvd2VyZWQtQnk6IEV4cHJlc3MNCkxvY2F0aW9uOiAvcG9ydGFsDQpWYXJ5OiBBY2NlcHQNCkNvbnRlbnQtVHlwZTogdGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04DQpDb250ZW50LUxlbmd0aDogNTgNCkRhdGU6IE1vbiwgMDMgQXVnIDIwMjAgMTY6NDM6NTMgR01UDQpDb25uZWN0aW9uOiBjbG9zZQ0KDQo8cD5Gb3VuZC4gUmVkaXJlY3RpbmcgdG8gPGEgaHJlZj0iL3BvcnRhbCI+L3BvcnRhbDwvYT48L3A+]]></response>
+    <comment></comment>
+  </item>
+</items>

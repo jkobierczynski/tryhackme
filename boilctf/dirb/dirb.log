@@ -1,0 +1,80 @@
+user@kali:~/tryhackme/boilctf$ dirb http://10.10.176.80
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+START_TIME: Mon Aug 24 20:15:18 2020
+URL_BASE: http://10.10.176.80/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612                                                          
+
+---- Scanning URL: http://10.10.176.80/ ----
++ http://10.10.176.80/index.html (CODE:200|SIZE:11321)                                                                                                     
+==> DIRECTORY: http://10.10.176.80/joomla/                                                                                                                 
+==> DIRECTORY: http://10.10.176.80/manual/                                                                                                                 
++ http://10.10.176.80/robots.txt (CODE:200|SIZE:257)                                                                                                       
++ http://10.10.176.80/server-status (CODE:403|SIZE:300)                                                                                                    
+                                                                                                                                                           
+---- Entering directory: http://10.10.176.80/joomla/ ----
+==> DIRECTORY: http://10.10.176.80/joomla/_archive/                                                                                                        
+==> DIRECTORY: http://10.10.176.80/joomla/_database/                                                                                                       
+==> DIRECTORY: http://10.10.176.80/joomla/_files/                                                                                                          
+==> DIRECTORY: http://10.10.176.80/joomla/_test/                                                                                                           
+==> DIRECTORY: http://10.10.176.80/joomla/~www/                                                                                                            
+==> DIRECTORY: http://10.10.176.80/joomla/administrator/                                                                                                   
+==> DIRECTORY: http://10.10.176.80/joomla/bin/                                                                                                             
+==> DIRECTORY: http://10.10.176.80/joomla/build/                                                                                                           
+==> DIRECTORY: http://10.10.176.80/joomla/cache/                                                                                                           
+==> DIRECTORY: http://10.10.176.80/joomla/components/                                                                                                      
+==> DIRECTORY: http://10.10.176.80/joomla/images/                                                                                                          
+==> DIRECTORY: http://10.10.176.80/joomla/includes/                                                                                                        
++ http://10.10.176.80/joomla/index.php (CODE:200|SIZE:12478)                                                                                               
+==> DIRECTORY: http://10.10.176.80/joomla/installation/                                                                                                    
+==> DIRECTORY: http://10.10.176.80/joomla/language/                                                                                                        
+==> DIRECTORY: http://10.10.176.80/joomla/layouts/                                                                                                         
+==> DIRECTORY: http://10.10.176.80/joomla/libraries/                                                                                                       
+==> DIRECTORY: http://10.10.176.80/joomla/media/                                                                                                           
+==> DIRECTORY: http://10.10.176.80/joomla/modules/                                                                                                         
+==> DIRECTORY: http://10.10.176.80/joomla/plugins/                                                                                                         
+==> DIRECTORY: http://10.10.176.80/joomla/templates/                                                                                                       
+==> DIRECTORY: http://10.10.176.80/joomla/tests/                                                                                                           
+==> DIRECTORY: http://10.10.176.80/joomla/tmp/                                                                                                             
+                                                                                                                                                           
+---- Entering directory: http://10.10.176.80/manual/ ----
+==> DIRECTORY: http://10.10.176.80/manual/da/                                                                                                              
+==> DIRECTORY: http://10.10.176.80/manual/de/                                                                                                              
+==> DIRECTORY: http://10.10.176.80/manual/en/                                                                                                              
+==> DIRECTORY: http://10.10.176.80/manual/es/                                                                                                              
+==> DIRECTORY: http://10.10.176.80/manual/fr/                                                                                                              
+==> DIRECTORY: http://10.10.176.80/manual/images/                                                                                                          
++ http://10.10.176.80/manual/index.html (CODE:200|SIZE:626)                                                                                                
+==> DIRECTORY: http://10.10.176.80/manual/ja/                                                                                                              
+==> DIRECTORY: http://10.10.176.80/manual/ko/                                                                                                              
+==> DIRECTORY: http://10.10.176.80/manual/style/                                                                                                           
+==> DIRECTORY: http://10.10.176.80/manual/tr/                                                                                                              
+==> DIRECTORY: http://10.10.176.80/manual/zh-cn/                                                                                                           
+                                                                                                                                                           
+---- Entering directory: http://10.10.176.80/joomla/_archive/ ----
++ http://10.10.176.80/joomla/_archive/index.html (CODE:200|SIZE:162)                                                                                       
+                                                                                                                                                           
+---- Entering directory: http://10.10.176.80/joomla/_database/ ----
++ http://10.10.176.80/joomla/_database/index.html (CODE:200|SIZE:160)                                                                                      
+                                                                                                                                                           
+---- Entering directory: http://10.10.176.80/joomla/_files/ ----
++ http://10.10.176.80/joomla/_files/index.html (CODE:200|SIZE:168)  
+                                                                                                                                                           
+---- Entering directory: http://10.10.176.80/joomla/_test/ ----
++ http://10.10.176.80/joomla/_test/index.php (CODE:200|SIZE:4802)                                                                                          
+                                                                                                                                                           
+---- Entering directory: http://10.10.176.80/joomla/~www/ ----
++ http://10.10.176.80/joomla/~www/index.html (CODE:200|SIZE:162)                                                                                           
+                                                                                                                                                           
+---- Entering directory: http://10.10.176.80/joomla/administrator/ ----
+==> DIRECTORY: http://10.10.176.80/joomla/administrator/cache/                                                                                             
+==> DIRECTORY: http://10.10.176.80/joomla/administrator/components/                                                                                        
+==> DIRECTORY: http://10.10.176.80/joomla/administrator/help/          

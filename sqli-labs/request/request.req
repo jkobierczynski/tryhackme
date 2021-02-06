@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE items [
+<!ELEMENT items (item*)>
+<!ATTLIST items burpVersion CDATA "">
+<!ATTLIST items exportTime CDATA "">
+<!ELEMENT item (time, url, host, port, protocol, method, path, extension, request, status, responselength, mimetype, response, comment)>
+<!ELEMENT time (#PCDATA)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT host (#PCDATA)>
+<!ATTLIST host ip CDATA "">
+<!ELEMENT port (#PCDATA)>
+<!ELEMENT protocol (#PCDATA)>
+<!ELEMENT method (#PCDATA)>
+<!ELEMENT path (#PCDATA)>
+<!ELEMENT extension (#PCDATA)>
+<!ELEMENT request (#PCDATA)>
+<!ATTLIST request base64 (true|false) "false">
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT responselength (#PCDATA)>
+<!ELEMENT mimetype (#PCDATA)>
+<!ELEMENT response (#PCDATA)>
+<!ATTLIST response base64 (true|false) "false">
+<!ELEMENT comment (#PCDATA)>
+]>
+<items burpVersion="2020.9.1" exportTime="Fri Oct 23 00:05:05 CEST 2020">
+  <item>
+    <time>Fri Oct 23 00:04:01 CEST 2020</time>
+    <url><![CDATA[http://10.10.224.242/sqli-labs/Less-1/index.php?id=]]></url>
+    <host ip="10.10.224.242">10.10.224.242</host>
+    <port>80</port>
+    <protocol>http</protocol>
+    <method><![CDATA[GET]]></method>
+    <path><![CDATA[/sqli-labs/Less-1/index.php?id=]]></path>
+    <extension>php</extension>
+    <request base64="true"><![CDATA[R0VUIC9zcWxpLWxhYnMvTGVzcy0xL2luZGV4LnBocD9pZD0gSFRUUC8xLjENCkhvc3Q6IDEwLjEwLjIyNC4yNDINClVzZXItQWdlbnQ6IE1vemlsbGEvNS4wIChYMTE7IExpbnV4IHg4Nl82NDsgcnY6NzguMCkgR2Vja28vMjAxMDAxMDEgRmlyZWZveC83OC4wDQpBY2NlcHQ6IHRleHQvaHRtbCxhcHBsaWNhdGlvbi94aHRtbCt4bWwsYXBwbGljYXRpb24veG1sO3E9MC45LGltYWdlL3dlYnAsKi8qO3E9MC44DQpBY2NlcHQtTGFuZ3VhZ2U6IGVuLVVTLGVuO3E9MC41DQpBY2NlcHQtRW5jb2Rpbmc6IGd6aXAsIGRlZmxhdGUNCkNvbm5lY3Rpb246IGNsb3NlDQpVcGdyYWRlLUluc2VjdXJlLVJlcXVlc3RzOiAxDQpDYWNoZS1Db250cm9sOiBtYXgtYWdlPTANCg0K]]></request>
+    <status>200</status>
+    <responselength>861</responselength>
+    <mimetype>HTML</mimetype>
+    <response base64="true"><![CDATA[SFRUUC8xLjEgMjAwIE9LDQpEYXRlOiBUaHUsIDIyIE9jdCAyMDIwIDIyOjA0OjAyIEdNVA0KU2VydmVyOiBBcGFjaGUvMi40LjE4IChVYnVudHUpDQpWYXJ5OiBBY2NlcHQtRW5jb2RpbmcNCkNvbnRlbnQtTGVuZ3RoOiA2NzANCkNvbm5lY3Rpb246IGNsb3NlDQpDb250ZW50LVR5cGU6IHRleHQvaHRtbDsgY2hhcnNldD1VVEYtOA0KDQo8IURPQ1RZUEUgaHRtbCBQVUJMSUMgIi0vL1czQy8vRFREIFhIVE1MIDEuMCBUcmFuc2l0aW9uYWwvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvVFIveGh0bWwxL0RURC94aHRtbDEtdHJhbnNpdGlvbmFsLmR0ZCI+DQo8aHRtbCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04IiAvPg0KPHRpdGxlPkxlc3MtMSAqKkVycm9yIEJhc2VkLSBTdHJpbmcqKjwvdGl0bGU+DQo8L2hlYWQ+DQoNCjxib2R5IGJnY29sb3I9IiMwMDAwMDAiPg0KPGRpdiBzdHlsZT0iIG1hcmdpbi10b3A6NzBweDtjb2xvcjojRkZGOyBmb250LXNpemU6MjNweDsgdGV4dC1hbGlnbjpjZW50ZXIiPldlbGNvbWUmbmJzcDsmbmJzcDsmbmJzcDs8Zm9udCBjb2xvcj0iI0ZGMDAwMCI+IERoYWtrYW4gPC9mb250Pjxicj4NCjxmb250IHNpemU9IjMiIGNvbG9yPSIjRkZGRjAwIj4NCg0KDQoKDQoNCg0KDQogDQo8Zm9udCBjb2xvcj0gIiNGRkZGMDAiPjwvZm9udD48L2ZvbnQ+IDwvZGl2PjwvYnI+PC9icj48L2JyPjxjZW50ZXI+DQo8aW1nIHNyYz0iLi4vaW1hZ2VzL0xlc3MtMS5qcGciIC8+PC9jZW50ZXI+DQo8L2JvZHk+DQo8L2h0bWw+DQoNCg0KDQoNCg0KIA0K]]></response>
+    <comment></comment>
+  </item>
+</items>

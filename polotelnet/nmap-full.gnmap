@@ -1,0 +1,5 @@
+# Nmap 7.80 scan initiated Tue May 26 18:13:10 2020 as: nmap -v -p- -oA nmap-full 10.10.173.242
+# Ports scanned: TCP(65535;1-65535) UDP(0;) SCTP(0;) PROTOCOLS(0;)
+Host: 10.10.173.242 ()	Status: Up
+Host: 10.10.173.242 ()	Ports: 8012/open/tcp/////	Ignored State: closed (65534)
+# Nmap done at Tue May 26 18:13:40 2020 -- 1 IP address (1 host up) scanned in 30.55 seconds

@@ -1,0 +1,4 @@
+# Nmap 7.80 scan initiated Thu Jul  9 15:05:06 2020 as: nmap -sC -sV -p 80 -script vuln -oA nmap-http-vuln 10.10.37.46
+Host: 10.10.37.46 ()	Status: Up
+Host: 10.10.37.46 ()	Ports: 80/open/tcp//http//Apache httpd 2.4.18 ((Ubuntu))/
+# Nmap done at Thu Jul  9 15:10:35 2020 -- 1 IP address (1 host up) scanned in 328.67 seconds

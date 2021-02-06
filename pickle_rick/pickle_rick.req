@@ -1,0 +1,15 @@
+POST /login.php HTTP/1.1
+Host: 10.10.37.46
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://10.10.37.46/login.php
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 45
+Connection: close
+Cookie: PHPSESSID=52tr46ttuatvssrtuts1ekfll1
+Upgrade-Insecure-Requests: 1
+Cache-Control: max-age=0
+
+username=R1ckRul3s&password=Sanchez&sub=Login

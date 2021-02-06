@@ -1,0 +1,157 @@
+meterpreter > load powershell                                                 
+Loading extension powershell...Success.                                       
+meterpreter > powershell_shell   
+PS > get-service                                                              
+ERROR: -service : The term '-service' is not recognized as the name of a cmdlet, function, script file, or operable program.
+EERROR: + -service                    
+ERROR: + ~~~~~~~~                                                             
+ERROR:     + CategoryInfo          : ObjectNotFound: (-service:String) [], CommandNotFoundException
+ERROR:     + FullyQualifiedErrorId : CommandNotFoundException
+ERROR:                                                                        
+PS > Get-Service                                                              
+                                                                              
+Status   Name               DisplayName                
+------   ----               -----------                     
+Stopped  AeLookupSvc        Application Experience               
+Stopped  ALG                Application Layer Gateway Service
+Running  AmazonSSMAgent     Amazon SSM Agent
+Running  AppHostSvc         Application Host Helper Service      
+Stopped  AppIDSvc           Application Identity
+Stopped  Appinfo            Application Information  
+Stopped  AppMgmt            Application Management
+Stopped  AppReadiness       App Readiness                    
+Stopped  AppXSvc            AppX Deployment Service (AppXSVC)
+Stopped  aspnet_state       ASP.NET State Service            
+Stopped  AudioEndpointBu... Windows Audio Endpoint Builder
+Stopped  Audiosrv           Windows Audio               
+Running  AWSLiteAgent       AWS Lite Guest Agent
+Running  BFE                Base Filtering Engine
+Stopped  BITS               Background Intelligent Transfer Ser...
+Running  BrokerInfrastru... Background Tasks Infrastructure Ser...
+Stopped  Browser            Computer Browser
+Running  CertPropSvc        Certificate Propagation               
+Stopped  COMSysApp          COM+ System Application
+Running  CryptSvc           Cryptographic Services
+Running  DcomLaunch         DCOM Server Process Launcher
+Stopped  defragsvc          Optimize drives        
+Stopped  DeviceAssociati... Device Association Service
+Stopped  DeviceInstall      Device Install Service
+Running  Dhcp               DHCP Client             
+Running  Dnscache           DNS Client                                        
+Stopped  dot3svc            Wired AutoConfig         
+Running  DPS                Diagnostic Policy Service  
+Running  DsmSvc             Device Setup Manager          
+Stopped  Eaphost            Extensible Authentication Protocol    
+Running  Ec2Config          Ec2Config                                         
+Stopped  EFS                Encrypting File System (EFS)
+Running  EventLog           Windows Event Log              
+Running  EventSystem        COM+ Event System        
+Stopped  fdPHost            Function Discovery Provider Host
+Stopped  FDResPub           Function Discovery Resource Publica...
+Running  FontCache          Windows Font Cache Service    
+Running  gpsvc              Group Policy Client                 
+Stopped  hidserv            Human Interface Device Service      
+Stopped  hkmsvc             Health Key and Certificate Management
+Stopped  IEEtwCollectorS... Internet Explorer ETW Collector Ser...
+Stopped  IKEEXT             IKE and AuthIP IPsec Keying Modules
+Running  iphlpsvc           IP Helper                                         
+Stopped  KeyIso             CNG Key Isolation                 
+Stopped  KPSSVC             KDC Proxy Server service (KPS)
+Stopped  KtmRm              KtmRm for Distributed Transaction C...
+Running  LanmanServer       Server                                            
+Running  LanmanWorkstation  Workstation           
+Stopped  lltdsvc            Link-Layer Topology Discovery Mapper
+Running  lmhosts            TCP/IP NetBIOS Helper                 
+Running  LSM                Local Session Manager                 
+Stopped  MMCSS              Multimedia Class Scheduler     
+Running  MpsSvc             Windows Firewall        
+Running  MSDTC              Distributed Transaction Coordinator   
+Stopped  MSiSCSI            Microsoft iSCSI Initiator Service 
+Stopped  msiserver          Windows Installer                     
+Stopped  napagent           Network Access Protection Agent     
+Stopped  NcaSvc             Network Connectivity Assistant
+Stopped  Netlogon           Netlogon                                          
+Stopped  Netman             Network Connections              
+Running  netprofm           Network List Service
+Stopped  NetTcpPortSharing  Net.Tcp Port Sharing Service          
+Running  NlaSvc             Network Location Awareness
+Running  nsi                Network Store Interface Service
+Stopped  PerfHost           Performance Counter DLL Host
+Stopped  pla                Performance Logs & Alerts
+Running  PlugPlay           Plug and Play
+Stopped  PolicyAgent        IPsec Policy Agent
+Running  Power              Power
+Stopped  PrintNotify        Printer Extensions and Notifications
+Running  ProfSvc            User Profile Service
+Stopped  PsShutdownSvc      PsShutdown
+Stopped  RasAuto            Remote Access Auto Connection Manager
+Stopped  RasMan             Remote Access Connection Manager
+Stopped  RemoteAccess       Routing and Remote Access
+Stopped  RemoteRegistry     Remote Registry
+Running  RpcEptMapper       RPC Endpoint Mapper
+Stopped  RpcLocator         Remote Procedure Call (RPC) Locator
+Running  RpcSs              Remote Procedure Call (RPC)
+Stopped  RSoPProv           Resultant Set of Policy Provider
+Stopped  sacsvr             Special Administration Console Helper
+Running  SamSs              Security Accounts Manager
+Stopped  SCardSvr           Smart Card
+Stopped  ScDeviceEnum       Smart Card Device Enumeration Service
+Running  Schedule           Task Scheduler
+Stopped  SCPolicySvc        Smart Card Removal Policy
+Stopped  seclogon           Secondary Logon
+Running  SENS               System Event Notification Service
+Running  SessionEnv         Remote Desktop Configuration
+Stopped  SharedAccess       Internet Connection Sharing (ICS)
+Running  ShellHWDetection   Shell Hardware Detection
+Stopped  smphost            Microsoft Storage Spaces SMP
+Stopped  SNMPTRAP           SNMP Trap
+Running  Spooler            Print Spooler
+Running  sppsvc             Software Protection
+Stopped  SstpSvc            Secure Socket Tunneling Protocol Se...
+Stopped  svsvc              Spot Verifier
+Stopped  swprv              Microsoft Software Shadow Copy Prov...
+Stopped  SysMain            Superfetch
+Running  SystemEventsBroker System Events Broker
+Stopped  TapiSrv            Telephony
+Running  TermService        Remote Desktop Services
+Running  Themes             Themes
+Stopped  THREADORDER        Thread Ordering Server
+Stopped  TieringEngineSe... Storage Tiers Management
+Running  TrkWks             Distributed Link Tracking Client
+Stopped  TrustedInstaller   Windows Modules Installer
+Running  UALSVC             User Access Logging Service
+Stopped  UI0Detect          Interactive Services Detection
+Running  UmRdpService       Remote Desktop Services UserMode Po...
+Stopped  VaultSvc           Credential Manager
+Stopped  vds                Virtual Disk
+Stopped  vmicguestinterface Hyper-V Guest Service Interface
+Stopped  vmicheartbeat      Hyper-V Heartbeat Service
+Stopped  vmickvpexchange    Hyper-V Data Exchange Service
+Stopped  vmicrdv            Hyper-V Remote Desktop Virtualizati...
+Stopped  vmicshutdown       Hyper-V Guest Shutdown Service
+Stopped  vmictimesync       Hyper-V Time Synchronization Service
+Stopped  vmicvss            Hyper-V Volume Shadow Copy Requestor
+Stopped  VSS                Volume Shadow Copy
+Running  W32Time            Windows Time
+Stopped  w3logsvc           W3C Logging Service
+Running  W3SVC              World Wide Web Publishing Service
+Running  WAS                Windows Process Activation Service
+Running  Wcmsvc             Windows Connection Manager
+Stopped  WcsPlugInService   Windows Color System
+Stopped  WdiServiceHost     Diagnostic Service Host
+Stopped  WdiSystemHost      Diagnostic System Host
+Stopped  Wecsvc             Windows Event Collector
+Stopped  WEPHOSTSVC         Windows Encryption Provider Host Se...
+Stopped  wercplsupport      Problem Reports and Solutions Contr...
+Stopped  WerSvc             Windows Error Reporting Service
+Running  WindowsScheduler   System Scheduler Service
+Running  WinHttpAutoProx... WinHTTP Web Proxy Auto-Discovery Se...
+Running  Winmgmt            Windows Management Instrumentation
+Running  WinRM              Windows Remote Management (WS-Manag...
+Running  WLMS               Windows Licensing Monitoring Service
+Stopped  wmiApSrv           WMI Performance Adapter
+Stopped  WPDBusEnum         Portable Device Enumerator Service
+Stopped  WSService          Windows Store Service (WSService)
+Stopped  wuauserv           Windows Update
+Stopped  wudfsvc            Windows Driver Foundation - User-mo...
+

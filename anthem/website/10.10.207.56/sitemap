@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemalocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url>
+    <loc>http://10.10.207.56/</loc>
+    <lastmod>2020-04-05T20:37:17+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://10.10.207.56/archive/</loc>
+    <lastmod>2020-04-05T19:11:38+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://10.10.207.56/archive/we-are-hiring/</loc>
+    <lastmod>2020-04-05T21:01:02+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://10.10.207.56/archive/a-cheers-to-our-it-department/</loc>
+    <lastmod>2020-04-05T21:02:29+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://10.10.207.56/authors/</loc>
+    <lastmod>2020-04-05T23:13:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://10.10.207.56/authors/jane-doe/</loc>
+    <lastmod>2020-04-05T21:11:16+00:00</lastmod>
+  </url>
+</urlset>

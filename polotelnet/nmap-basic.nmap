@@ -1,0 +1,7 @@
+# Nmap 7.80 scan initiated Tue May 26 18:07:35 2020 as: nmap -v -oA nmap-basic 10.10.173.242
+Nmap scan report for 10.10.173.242
+Host is up (0.043s latency).
+All 1000 scanned ports on 10.10.173.242 are closed
+
+Read data files from: /usr/bin/../share/nmap
+# Nmap done at Tue May 26 18:07:37 2020 -- 1 IP address (1 host up) scanned in 2.08 seconds

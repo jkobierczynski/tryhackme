@@ -1,0 +1,26 @@
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: dirb/smaggrotto-smagthm.log
+START_TIME: Tue Aug 18 15:12:35 2020
+URL_BASE: http://smag.thm/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://smag.thm/ ----
++ http://smag.thm/index.php (CODE:200|SIZE:402)
+==> DIRECTORY: http://smag.thm/mail/
++ http://smag.thm/server-status (CODE:403|SIZE:273)
+
+---- Entering directory: http://smag.thm/mail/ ----
++ http://smag.thm/mail/index.php (CODE:200|SIZE:2386)
+
+-----------------
+END_TIME: Tue Aug 18 15:19:41 2020
+DOWNLOADED: 9224 - FOUND: 3

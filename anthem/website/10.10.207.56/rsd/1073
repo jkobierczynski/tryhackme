@@ -1,0 +1,10 @@
+<rsd version="1.0">
+  <service>
+    <engineName>Articulate, powered by Umbraco</engineName>
+    <engineLink>http://github.com/shandem/articulate</engineLink>
+    <homePageLink>http://10.10.207.56/</homePageLink>
+  </service>
+  <apis>
+    <api name="MetaWeblog" preferred="true" apiLink="http://10.10.207.56/metaweblog/1073" blogID="http://10.10.207.56/" />
+  </apis>
+</rsd>

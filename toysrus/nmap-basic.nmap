@@ -1,0 +1,23 @@
+# Nmap 7.80 scan initiated Mon May 25 17:43:49 2020 as: nmap -sV -sC -oA nmap-basic 10.10.127.211
+Nmap scan report for 10.10.127.211
+Host is up (0.041s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 b6:cb:12:40:74:87:b2:d6:c5:59:d4:39:e6:ec:82:8e (RSA)
+|   256 0f:b2:0f:59:ff:3c:f2:00:49:04:67:31:f1:4e:d0:91 (ECDSA)
+|_  256 5b:19:11:2f:42:e4:6f:d3:af:24:0d:01:0b:0c:62:33 (ED25519)
+80/tcp   open  http    Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Site doesn't have a title (text/html).
+1234/tcp open  http    Apache Tomcat/Coyote JSP engine 1.1
+|_http-favicon: Apache Tomcat
+|_http-server-header: Apache-Coyote/1.1
+|_http-title: Apache Tomcat/7.0.88
+8009/tcp open  ajp13   Apache Jserv (Protocol v1.3)
+|_ajp-methods: Failed to get a valid response for the OPTION request
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon May 25 17:43:58 2020 -- 1 IP address (1 host up) scanned in 9.59 seconds

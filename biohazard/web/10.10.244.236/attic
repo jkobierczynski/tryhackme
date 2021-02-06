@@ -1,0 +1,22 @@
+<html>
+        <head>
+                <title>Attic entrance</title>
+                <h1 align="center">Attic entrance</h1>
+        </head>
+
+        <body>
+        <img alt="door" src="../images/16-Image33-1.jpg" style="display: block;margin-left: auto;margin-right: auto; width: 50%;"/>
+
+        <p>Look like the door has been locked</p>
+	<p>A <b>shield symbol</b> is embedded on the door </p>
+	<form action=unlock_door.php method="POST">
+		<input type="text" col="100" name="door_flag" placeholder="Enter flag"/>
+		<input type="submit" value="submit"/>
+	</form>
+        </body>
+
+</html>
+
+
+
+

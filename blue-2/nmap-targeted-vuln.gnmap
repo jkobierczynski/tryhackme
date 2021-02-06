@@ -1,0 +1,4 @@
+# Nmap 7.80 scan initiated Sun Jun 28 21:09:00 2020 as: nmap -sC -sV -p 135,139,445,3389,49152,49153,49154,49160 --script vuln -oA nmap-targeted-vuln 10.10.234.178
+Host: 10.10.234.178 ()	Status: Up
+Host: 10.10.234.178 ()	Ports: 135/open/tcp//msrpc//Microsoft Windows RPC/, 139/open/tcp//netbios-ssn//Microsoft Windows netbios-ssn/, 445/open/tcp//microsoft-ds//Microsoft Windows 7 - 10 microsoft-ds (workgroup: WORKGROUP)/, 3389/open/tcp//ms-wbt-server?///, 49152/open/tcp//msrpc//Microsoft Windows RPC/, 49153/open/tcp//msrpc//Microsoft Windows RPC/, 49154/open/tcp//msrpc//Microsoft Windows RPC/, 49160/open/tcp//msrpc//Microsoft Windows RPC/
+# Nmap done at Sun Jun 28 21:11:37 2020 -- 1 IP address (1 host up) scanned in 156.91 seconds

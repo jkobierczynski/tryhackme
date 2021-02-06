@@ -1,0 +1,17 @@
+# Nmap 7.80 scan initiated Mon Aug  3 18:33:23 2020 as: nmap -sC -sV -oN nmap/nmap-basic 10.10.202.45
+Nmap scan report for 10.10.202.45
+Host is up (0.042s latency).
+Not shown: 997 closed ports
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 52:54:48:81:c6:fa:01:3c:3d:5f:55:b6:30:46:b9:5c (RSA)
+|   256 88:83:45:4c:6d:67:d2:a3:6a:0b:b9:08:04:95:31:ea (ECDSA)
+|_  256 77:e6:39:e8:26:e1:11:80:a0:ef:dc:6a:28:c2:0f:76 (ED25519)
+80/tcp open  http    Node.js Express framework
+|_http-title: Avengers! Assemble!
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon Aug  3 18:33:33 2020 -- 1 IP address (1 host up) scanned in 9.92 seconds
