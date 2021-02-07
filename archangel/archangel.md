@@ -1,7 +1,7 @@
 ---
 title: "Report - TryHackMe - Archangel"
 author: ["jurgen.kobierczynski@telenet.be", ""]
-date: "2021-01-05"
+date: "2021-02-07"
 subject: "Markdown"
 keywords: [Markdown, Example]
 subtitle: "tryhackme - archangel"
