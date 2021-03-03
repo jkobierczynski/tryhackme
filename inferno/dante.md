@@ -202,7 +202,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 Connecting on each of these ports however show nothing usefull :
 
-![ImgPlaceholder](screenshots/useless-ports.png)
+![ImgPlaceholder](screenshots/useless_ports.png)
 
 We can however visit the webpage of the host:
 
