@@ -1,4 +1,4 @@
 # tryhackme
 in preparation of writeups.
 
-Writeup completed for Archangel
+Writeup completed for Archangel, Inferno
